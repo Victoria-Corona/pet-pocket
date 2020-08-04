@@ -21,7 +21,7 @@ app.get('/api/health-check', (req, res, next) => {
 
 app.get('/api/petProfile', (req, res, next) => {
   const sql = `
- select "imgUrl", "name"
+ select "petId", "imgUrl", "name"
  from "petProfile"
  `;
   db.query(sql)
