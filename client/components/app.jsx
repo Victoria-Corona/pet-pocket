@@ -1,5 +1,6 @@
 import React from 'react';
 import ProfileDetails from './profile';
+import ProfileList from './profile-list';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -26,13 +27,12 @@ export default class App extends React.Component {
   render() {
     if (this.state.view.name === 'list') {
       return (
-        null
+        <ProfileList/>
       );
     } else {
       return (
-        <ProfileDetails></ProfileDetails>
+        <ProfileDetails/>
       );
     }
-
   }
 }

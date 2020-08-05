@@ -1,3 +1,4 @@
+
 .background {
   background-color: #F7FFF7;
 }
@@ -6,4 +7,17 @@
   border-radius: 50%;
   height: 155px;
   width: 155px;
+}
+
+.profilePicture {
+  width:50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.profileListItem{
+  background-color: white;
+  border: solid 2px;
+  width:100%;
+
 }
