@@ -19,7 +19,6 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
-
 app.get('/api/petProfile', (req, res, next) => {
   const sql = `
  select "petId", "imgUrl", "name"
@@ -28,7 +27,8 @@ app.get('/api/petProfile', (req, res, next) => {
   db.query(sql)
     .then(result => res.json(result.rows))
     .catch(err => next(err));
-  
+});
+
 app.get('/api/petProfile/:petId', (req, res, next) => {
   const id = parseInt(req.params.petId, 10);
   if (!Number.isInteger(id) || id <= 0) {
@@ -64,7 +64,6 @@ app.get('/api/petProfile/:petId', (req, res, next) => {
         error: 'An unexpected error occured.'
       });
     });
-
 });
 
 app.use('/api', (req, res, next) => {
