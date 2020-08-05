@@ -28,7 +28,11 @@ app.get('/api/petProfile/:petId', (req, res, next) => {
   }
 
   const sql = `
-  select *
+  select "name",
+         "imgUrl",
+         "breed",
+         "dateOfBirth",
+         "description"
     from "petProfile"
     where "petId" = $1
   `;
@@ -39,7 +43,7 @@ app.get('/api/petProfile/:petId', (req, res, next) => {
     .then(result => {
       const pets = result.rows[0];
       if (!pets) {
-        next(new ClientError(`Cannot find product with id of ${id}`, 404));
+        next(new ClientError(`Cannot find pet with id of ${id}`, 404));
       } else {
         res.status(200).json(pets);
       }
