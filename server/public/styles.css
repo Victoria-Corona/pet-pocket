@@ -1,0 +1,9 @@
+.background {
+  background-color: #F7FFF7;
+}
+
+.profilePictureDetail {
+  border-radius: 50%;
+  height: 155px;
+  width: 155px;
+}

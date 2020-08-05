@@ -1,11 +1,14 @@
 import React from 'react';
+import ProfileDetails from './profile';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: null,
-      isLoading: true
+      view: {
+        name: 'details',
+        params: {}
+      }
     };
   }
 
@@ -17,9 +20,19 @@ export default class App extends React.Component {
       .finally(() => this.setState({ isLoading: false }));
   }
 
+  setView(name, params) {
+  }
+
   render() {
-    return this.state.isLoading
-      ? <h1>Testing connections...</h1>
-      : <h1>{this.state.message.toUpperCase()}</h1>;
+    if (this.state.view.name === 'list') {
+      return (
+        null
+      );
+    } else {
+      return (
+        <ProfileDetails></ProfileDetails>
+      );
+    }
+
   }
 }
