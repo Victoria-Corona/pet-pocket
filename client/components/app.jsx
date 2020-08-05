@@ -1,5 +1,6 @@
 import React from 'react';
-import Homepage from './homepage';
+//import Homepage from './homepage';
+import MainMenu from './mainMenu';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-        <Homepage />
+        <MainMenu />
       </>
     );
   }
