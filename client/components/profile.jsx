@@ -14,7 +14,7 @@ class ProfileDetails extends React.Component {
   }
 
   getProfile(petId) {
-    fetch('/api/petProfile/1', {
+    fetch(`/api/petProfile/${petId}`, {
       method: 'GET'
     })
       .then(res => res.json()).then(data => {
