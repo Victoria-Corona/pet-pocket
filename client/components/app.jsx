@@ -1,9 +1,8 @@
 import React from 'react';
-import ProfileDetails from './profile';
-//import Homepage from './homepage';
-import MainMenu from './mainMenu';
+import ProfileDetails from './profile-details';
+// import Homepage from './homepage';
+// import MainMenu from './mainMenu';
 import ProfileList from './profile-list';
-
 
 export default class App extends React.Component {
   constructor(props) {
@@ -43,4 +42,5 @@ export default class App extends React.Component {
         <ProfileDetails params={this.state.view.params} setView={this.setView}/>
       );
     }
+  }
 }
