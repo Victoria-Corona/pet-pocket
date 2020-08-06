@@ -68,12 +68,12 @@ CREATE TABLE public."petProfile" (
     breed text NOT NULL,
     "dateOfBirth" date NOT NULL,
     description text NOT NULL,
-    "bloodType" text NOT NULL,
+    "bloodType" text,
     allergies text,
     medication text,
-    vaccines text NOT NULL,
+    vaccines text,
     "specializedDiet" text,
-    "lastVetVisit" text NOT NULL
+    "lastVetVisit" text
 );
 
 
@@ -125,6 +125,8 @@ COPY public."petProfile" ("petId", "userId", name, "imgUrl", breed, "dateOfBirth
 1	1	Buddy	/images/buddy.jpg	Pug	2016-01-04	very friendly, enjoys head pats, snores	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	 Gluten Free	10/10/19
 2	1	CK	/images/ck.jpg	Bombay	2018-11-20	picky eater, loves to cuddle, eats shoelaces	B-	N/A	N/A	FVRCP FELV FIP Rabies	Outdoor Forumla	05/04/20
 3	1	Twix	/images/twix.png	Maltese Poodle Mix	2015-09-01	loves friends and people	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	N/A	10/10/19
+4	1	Daisy	daisy.jpg	Pomeranian	2018-11-04	friendly	\N	\N	\N	\N	\N	\N
+5	1	Daisy	/images/petImage/daisy.jpg	Pomeranian	2018-11-04	friendly	\N	\N	\N	\N	\N	\N
 \.
 
 
