@@ -1,6 +1,9 @@
 import React from 'react';
 import ProfileDetails from './profile';
+//import Homepage from './homepage';
+import MainMenu from './mainMenu';
 import ProfileList from './profile-list';
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,11 +20,6 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/health-check')
-      .then(res => res.json())
-      .then(data => this.setState({ message: data.message || data.error }))
-      .catch(err => this.setState({ message: err.message }))
-      .finally(() => this.setState({ isLoading: false }));
   }
 
   setView(name, params) {
@@ -45,5 +43,4 @@ export default class App extends React.Component {
         <ProfileDetails params={this.state.view.params} setView={this.setView}/>
       );
     }
-  }
 }
