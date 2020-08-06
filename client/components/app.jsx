@@ -1,4 +1,5 @@
 import React from 'react';
+import ProfileDetails from './profile';
 //import Homepage from './homepage';
 import MainMenu from './mainMenu';
 import ProfileList from './profile-list';
@@ -7,24 +8,39 @@ import ProfileList from './profile-list';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      message: null,
+      isLoading: true,
+      view: {
+        name: 'list',
+        params: {}
+      }
+    };
+    this.setView = this.setView.bind(this);
   }
 
   componentDidMount() {
   }
 
-  render() {
-    return (
-      <>
-        <MainMenu />
-      </>
-      //    return this.state.isLoading
-      // ? <h1>Testing connections...</h1>
-      // : <h1>{this.state.message.toUpperCase()}</h1>;
-      <div>
-        <ProfileList/>
-      </div>
+  setView(name, params) {
+    const newView = {
+      name: name,
+      params: params
+    };
 
-    );
+    this.setState({
+      view: newView
+    });
   }
+
+  render() {
+    if (this.state.view.name === 'list') {
+      return (
+        <ProfileList setView={this.setView} />
+      );
+    } else {
+      return (
+        <ProfileDetails params={this.state.view.params} setView={this.setView}/>
+      );
+    }
 }
