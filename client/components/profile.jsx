@@ -29,11 +29,11 @@ class ProfileDetails extends React.Component {
 
     return (
       <div>
-        <div className="p-4 header-background d-flex justify-content-between align-items-center">
+        {/* <div className="p-4 header-background d-flex justify-content-between align-items-center">
           <i className="fas fa-edit fa-lg"></i>
           <span className="title text-uppercase">PET POCKET</span>
           <i className="fas fa-undo-alt fa-lg" onClick={() => this.props.setView('list', {})}></i>
-        </div>
+        </div> */}
         <div>
           <img src={this.state.pet.imgUrl} className="profilePictureDetail mx-auto d-block" alt="image of pet"/>
         </div>

@@ -32,11 +32,6 @@ export default class ProfileList extends React.Component {
         setView={this.props.setView}/>);
     return (
       <>
-        <div className="p-4 header-background d-flex justify-content-between align-items-center">
-          <i className="fas fa-edit fa-lg hidden"></i>
-          <span className="title">PET POCKET</span>
-          <i className="fas fa-undo-alt fa-lg"></i>
-        </div>
         <div className="p-2 mt-4">
           <div className="d-flex justify-content-center">
             <h5 style={{ fontWeight: 'bold' }}><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>ADD PROFILE</h5>
