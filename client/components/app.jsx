@@ -1,6 +1,8 @@
 import React from 'react';
 //import Homepage from './homepage';
 import MainMenu from './mainMenu';
+import ProfileList from './profile-list';
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,6 +18,13 @@ export default class App extends React.Component {
       <>
         <MainMenu />
       </>
+      //    return this.state.isLoading
+      // ? <h1>Testing connections...</h1>
+      // : <h1>{this.state.message.toUpperCase()}</h1>;
+      <div>
+        <ProfileList/>
+      </div>
+
     );
   }
 }
