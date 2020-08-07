@@ -5,7 +5,7 @@ const db = require('./database');
 const ClientError = require('./client-error');
 const staticMiddleware = require('./static-middleware');
 const sessionMiddleware = require('./session-middleware');
-
+const multer = require('multer');
 const app = express();
 
 app.use(staticMiddleware);
@@ -29,6 +29,7 @@ app.get('/api/petProfile', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// User can GET EVERYTHING by pet:Id
 app.get('/api/petProfile/:petId', (req, res, next) => {
   const id = parseInt(req.params.petId, 10);
   if (!Number.isInteger(id) || id <= 0) {
@@ -38,11 +39,7 @@ app.get('/api/petProfile/:petId', (req, res, next) => {
   }
 
   const sql = `
-  select "name",
-         "imgUrl",
-         "breed",
-         "dateOfBirth",
-         "description"
+  select *
     from "petProfile"
     where "petId" = $1
   `;
@@ -64,6 +61,66 @@ app.get('/api/petProfile/:petId', (req, res, next) => {
         error: 'An unexpected error occured.'
       });
     });
+});
+
+// USER CAN ADD PROFILE
+app.post('/api/petProfile', (req, res, next) => {
+
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './server/public/images/petImage');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  });
+  const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+      cb(null, true);
+    } else {
+      cb(new Error('File uploaded is not in correct format'), false);
+    }
+  };
+  const upload = multer({
+    storage: storage,
+    limit: {
+      fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+  }).single('image');
+  upload(req, res, function (err) {
+    if (err) {
+      console.error(err);
+      res.status(400).json({
+        error: 'Failed to upload the image'
+      });
+    } else {
+      const name = req.body.name;
+      const imgUrl = req.body.imgUrl;
+      const description = req.body.description;
+      const breed = req.body.breed;
+      const dateOfBirth = req.body.dateOfBirth;
+      const petId = req.body.petId;
+      const userId = req.body.userId;
+      const sql = `
+insert into "petProfile" ("petId","userId","imgUrl","name","breed","dateOfBirth","description")
+values ($1, $2, $3, $4, $5, $6, $7)
+returning *
+`;
+      const params = [petId, userId, imgUrl, name, breed, dateOfBirth, description];
+      db.query(sql, params)
+        .then(result => {
+          const profile = result.rows[0];
+          res.status(201).json(profile);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500).json({
+            error: 'An unexpected error occured'
+          });
+        });
+    }
+  });
 });
 
 app.use('/api', (req, res, next) => {

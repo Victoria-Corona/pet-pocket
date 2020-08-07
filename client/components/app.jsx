@@ -1,12 +1,16 @@
 import React from 'react';
 import Homepage from './homepage';
 import MainMenu from './mainMenu';
+import Header from './header';
+import ProfileDetails from './profile-details';
 import ProfileList from './profile-list';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      message: null,
+      isLoading: true,
       view: {
         name: 'homepage',
         params: {}
@@ -19,11 +23,13 @@ export default class App extends React.Component {
   }
 
   setView(name, params) {
+    const newView = {
+      name: name,
+      params: params
+    };
+
     this.setState({
-      view: {
-        name: name,
-        params: params
-      }
+      view: newView
     });
   }
 
@@ -36,9 +42,12 @@ export default class App extends React.Component {
       renderPage = <MainMenu setView={this.setView} />;
     } else if (view === 'profileList') {
       renderPage = <ProfileList setView={this.setView} />;
+    } else {
+      renderPage = <ProfileDetails params={this.state.view.params} setView={this.setView} />;
     }
     return (
       <>
+        <Header/>
         <div className="container">
           {renderPage}
         </div>

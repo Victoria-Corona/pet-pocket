@@ -5,6 +5,7 @@ export default class ProfileList extends React.Component {
   constructor(props) {
     super(props);
     this.state = { profiles: [] };
+    this.getProfiles = this.getProfiles.bind(this);
   }
 
   getProfiles() {
@@ -41,18 +42,22 @@ export default class ProfileList extends React.Component {
     const listOfProfiles = this.state.profiles.map(profile =>
       <ProfileListItem
         key={profile.petId}
+        petId={profile.petId}
         img={profile.imgUrl}
-        name={profile.name} />);
+        name={profile.name}
+        setView={this.props.setView}/>);
     return (
-      <div className="p-2 mt-4">
-        <div className="d-flex justify-content-center">
-          <h5 style={{ fontWeight: 'bold' }}><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>ADD PROFILE</h5>
+      <>
+        <div className="p-2 mt-4">
+          <div className="d-flex justify-content-center">
+            <h5 style={{ fontWeight: 'bold' }}><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>ADD PROFILE</h5>
+          </div>
+          <div className = "mt-4">
+            <h6 style={{ fontWeight: 'bold' }}>PETS IN YOUR POCKET</h6>
+            <div className="d-flex justify-content-center flex-wrap">{listOfProfiles}</div>
+          </div>
         </div>
-        <div className = "mt-4">
-          <h5 style={{ fontWeight: 'bold' }}>PETS IN YOUR POCKET</h5>
-          <div className="d-flex justify-content-center flex-wrap">{listOfProfiles}</div>
-        </div>
-      </div>
+      </>
     );
   }
 }
