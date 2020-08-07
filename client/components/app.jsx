@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './header';
 import ProfileDetails from './profile-details';
 // import Homepage from './homepage';
 // import MainMenu from './mainMenu';
@@ -35,11 +36,17 @@ export default class App extends React.Component {
   render() {
     if (this.state.view.name === 'list') {
       return (
-        <ProfileList setView={this.setView} />
+        <>
+          <Header/>
+          <ProfileList setView={this.setView} />
+        </>
       );
     } else {
       return (
-        <ProfileDetails params={this.state.view.params} setView={this.setView}/>
+        <>
+          <Header />
+          <ProfileDetails params={this.state.view.params} setView={this.setView}/>
+        </>
       );
     }
   }
