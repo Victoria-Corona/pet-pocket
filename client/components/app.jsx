@@ -4,6 +4,7 @@ import MainMenu from './mainMenu';
 import Header from './header';
 import ProfileDetails from './profile-details';
 import ProfileList from './profile-list';
+import ProfileForm from './profileForm';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -42,6 +43,8 @@ export default class App extends React.Component {
       renderPage = <MainMenu setView={this.setView} />;
     } else if (view === 'profileList') {
       renderPage = <ProfileList setView={this.setView} />;
+    } else if (view === 'profileForm') {
+      renderPage = <ProfileForm setView = {this.setView}/>;
     } else {
       renderPage = <ProfileDetails params={this.state.view.params} setView={this.setView} />;
     }
