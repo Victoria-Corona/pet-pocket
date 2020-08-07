@@ -1,3 +1,4 @@
+* {
 .background {
   background-color: #F7FFF7;
 }
@@ -18,73 +19,18 @@ body {
   font-style: normal;
   font-weight: 100;
   line-height: 32px;
-}
-
-.mainMenu{
-  width: 375px;
-  height: 667px;
-  background-image: url('images/BackgroundV2.png');
-}
-
-.navBar{
-  position: absolute;
-  padding: 1.75rem 0rem 0rem 1.75rem;
-  width: 375px;
-  height: 85px;
-  font-size: 24px;
-  left: 0px;
-  top: 0px;
-  background-color: #6CA6C1;
-}
-
-.heading{
-  margin: 4rem;
-}
-
-.navMenu{
-  position: absolute;
-  top: 85px;
-  left: 0px;
-  width: 375px;
-  height: 582px;
-}
-
-p{
-  position: relative;
-  top:-55px;
-  left:125px;
-}
-
-.petProfiles, .todoList, .addAPet, .alertMe{
-  width: 346px;
-  height: 83px;
-  font-size: 22px;
-  background-color: #FFFFFF;
-  border-radius: 20px;
-  margin-top: 3rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
-.blueSquare{
-  position: relative;
-  padding: 1.25rem;
-  top: 0px;
-  left: 0px;
-  width: 83.13px;
-  height: 83.13px;
-  background: #6CA6C1;
-  border-radius: 20px;
-}
-
-.blueSquare2{
-  padding-left: 1.5rem;
+  overflow: hidden;
 }
 
 .homepage {
-  width: 375px;
-  height: 667px;
+  position:absolute;
+  width:375px;
+  height:667px;
+  margin: 0px;
+  top:0px;
+  left:0px;
   background-image: url('images/Background.png');
+  background-size: cover;
 }
 
 .logo {
@@ -93,9 +39,9 @@ p{
   top: 110px;
 }
 
-.logoImage{
+.logoImage {
   width: 223px;
-  height: 232px;
+  height: 223px;
 }
 
 .homepageNav {
@@ -117,15 +63,84 @@ p{
   cursor: pointer;
 }
 
-.petOwner:focus, .petSitter:focus{
+.petOwner:focus,
+.petSitter:focus {
   outline: none;
 }
 
-.profilePicture{
-  width:50px;
+.mainMenu {
+  position: absolute;
+  width: 100%;
+  height: 667px;
+  background-image: url('images/BackgroundV2.png');
+  background-size: cover;
+  top:0px;
+  left:0px;
+}
+
+.navBar {
+  position: absolute;
+  padding: 1.75rem 0rem 0rem 1.75rem;
+  width: 375px;
+  height: 85px;
+  font-size: 24px;
+  left: 0px;
+  top: 0px;
+  background-color: #6CA6C1;
+}
+
+.heading {
+  margin: 4rem;
+}
+
+.navMenu {
+  position: absolute;
+  top: 85px;
+  left: 0px;
+}
+
+p {
+  position: relative;
+  top: -55px;
+  left: 125px;
+  width: 175px;
+}
+
+.petProfiles,
+.todoList,
+.addAPet,
+.alertMe {
+  width: 346px;
+  height: 83px;
+  font-size: 22px;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  margin-top: 3rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.blueSquare {
+  position: relative;
+  padding: 1.25rem;
+  top: 0px;
+  left: 0px;
+  width: 83.13px;
+  height: 83.13px;
+  background: #6CA6C1;
+  border-radius: 20px;
+}
+
+.blueSquare2 {
+  padding-left: 1.5rem;
+}
+
+.profilePicture {
+  width: 50px;
   height: 50px;
   border-radius: 50%;
 }
+
 
 .profileListItem, .medicalListItem {
   width:100%;
@@ -134,7 +149,7 @@ p{
 .profileListItem {
   background-color: white;
   border: solid 2px;
-}
+
 
 .title {
   font-family: 'Red Hat Display', sans-serif;
