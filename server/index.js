@@ -29,6 +29,7 @@ app.get('/api/petProfile', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// User can GET EVERYTHING by pet:Id
 app.get('/api/petProfile/:petId', (req, res, next) => {
   const id = parseInt(req.params.petId, 10);
   if (!Number.isInteger(id) || id <= 0) {
@@ -38,11 +39,7 @@ app.get('/api/petProfile/:petId', (req, res, next) => {
   }
 
   const sql = `
-  select "name",
-         "imgUrl",
-         "breed",
-         "dateOfBirth",
-         "description"
+  select *
     from "petProfile"
     where "petId" = $1
   `;
@@ -125,6 +122,7 @@ returning *
     }
   });
 });
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });

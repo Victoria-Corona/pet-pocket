@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './header';
-import ProfileDetails from './profile';
+import ProfileDetails from './profile-details';
 // import Homepage from './homepage';
 // import MainMenu from './mainMenu';
 import ProfileList from './profile-list';
