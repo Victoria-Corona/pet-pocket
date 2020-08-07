@@ -3,12 +3,21 @@
   background-color: #F7FFF7;
 }
 
-.profilePictureDetail {
+.profilePictureDetail,
+.emptyImage {
   border-radius: 50%;
   height: 150px;
   width: 150px;
 }
-
+.emptyImage{
+  background-color: #f4f4f4;
+}
+.nextButton{
+  background-color: #6CA6C1;
+  border-radius: 50px;
+  padding:0.3rem 2.3rem;
+  margin: 5px;
+}
 body {
   width: 375px;
   height: 667px;
@@ -18,8 +27,8 @@ body {
   font-family: 'Red Hat Text', sans-serif;
   font-style: normal;
   font-weight: 100;
-  line-height: 32px;
-  overflow: hidden;
+  /* line-height: 32px;
+  overflow: hidden; */
 }
 
 .homepage {

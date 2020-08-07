@@ -13,7 +13,7 @@ export default class App extends React.Component {
       message: null,
       isLoading: true,
       view: {
-        name: 'homepage',
+        name: 'profileForm',
         params: {}
       }
     };
