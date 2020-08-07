@@ -18,6 +18,22 @@ export default class ProfileList extends React.Component {
       .catch(err => console.error(err.message));
   }
 
+  updateProfiles() {
+    fetch('api/petProfile', {
+      method: 'PATCH',
+      headers: {
+        'Content- type': 'application/ json; charset = UTF - 8'
+      },
+      body: JSON.stringify()
+    })
+      .then(res => res.json())
+      .then(profiles =>
+        this.setState({
+          profiles: profiles
+        }))
+      .catch(err => console.error(err.message));
+  }
+
   componentDidMount() {
     this.getProfiles();
   }

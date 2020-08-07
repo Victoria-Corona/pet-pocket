@@ -1,8 +1,8 @@
 import React from 'react';
+import Homepage from './homepage';
+import MainMenu from './mainMenu';
 import Header from './header';
 import ProfileDetails from './profile-details';
-// import Homepage from './homepage';
-// import MainMenu from './mainMenu';
 import ProfileList from './profile-list';
 
 export default class App extends React.Component {
@@ -12,7 +12,7 @@ export default class App extends React.Component {
       message: null,
       isLoading: true,
       view: {
-        name: 'list',
+        name: 'homepage',
         params: {}
       }
     };
@@ -34,20 +34,24 @@ export default class App extends React.Component {
   }
 
   render() {
-    if (this.state.view.name === 'list') {
-      return (
-        <>
-          <Header/>
-          <ProfileList setView={this.setView} />
-        </>
-      );
+    const view = this.state.view.name;
+    let renderPage;
+    if (view === 'homepage') {
+      renderPage = <Homepage setView={this.setView} />;
+    } else if (view === 'mainMenu') {
+      renderPage = <MainMenu setView={this.setView} />;
+    } else if (view === 'profileList') {
+      renderPage = <ProfileList setView={this.setView} />;
     } else {
-      return (
-        <>
-          <Header />
-          <ProfileDetails params={this.state.view.params} setView={this.setView}/>
-        </>
-      );
+      renderPage = <ProfileDetails params={this.state.view.params} setView={this.setView} />;
     }
+    return (
+      <>
+        <Header/>
+        <div className="container">
+          {renderPage}
+        </div>
+      </>
+    );
   }
 }
