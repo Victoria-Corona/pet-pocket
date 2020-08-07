@@ -3,6 +3,7 @@ import Header from './header';
 import ProfileDetails from './profile-details';
 // import Homepage from './homepage';
 // import MainMenu from './mainMenu';
+// import MedicalDetails from './medical-detail';
 import ProfileList from './profile-list';
 
 export default class App extends React.Component {
