@@ -11,13 +11,14 @@ export default class MainMenu extends React.Component {
   render() {
     const setView = this.props.setView;
     return (
-      <div className="mainMenu">
-        <div className="navBar">
-          <i className="fas fa-bars"></i>
-          <span className="heading">PET POCKET</span>
-          <i className="fas fa-undo-alt" onClick={() => setView('homepage', {})}></i>
+      <div>
+        <div className="p-4 header-background d-flex justify-content-between align-items-center">
+          <i className="fas fa-bars fa-2x"></i>
+          <span className="title">PET POCKET</span>
+          <i className="fas fa-undo-alt fa-2x" onClick={() => setView('homepage', {})}></i>
         </div>
-        <div className="navMenu">
+
+        <div>
           <div className="petProfiles" onClick={() => setView('profileList', {})}>
             <div className="blueSquare">
               <i className="fa fa-paw fa-2x" aria-hidden="true"></i>

@@ -66,8 +66,7 @@ class ProfileDetails extends React.Component {
         </div>
       );
     } else if (this.state.currentView === 'medical') {
-      return <MedicalDetails showMedical={this.showMedical}
-        params={this.state.pet}
+      return <MedicalDetails params={this.state.pet}
       />;
     }
 

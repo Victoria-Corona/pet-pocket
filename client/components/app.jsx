@@ -42,14 +42,21 @@ export default class App extends React.Component {
     } else if (view === 'mainMenu') {
       renderPage = <MainMenu setView={this.setView} />;
     } else if (view === 'profileList') {
-      renderPage = <ProfileList setView={this.setView} />;
+      renderPage =
+      <>
+        <Header />
+        <ProfileList setView={this.setView} />
+      </>;
     } else {
-      renderPage = <ProfileDetails params={this.state.view.params} setView={this.setView} />;
+      renderPage =
+      <>
+        <Header />
+        <ProfileDetails params={this.state.view.params} setView={this.setView} />
+      </>;
     }
     return (
       <>
-        <Header/>
-        <div className="container">
+        <div>
           {renderPage}
         </div>
       </>

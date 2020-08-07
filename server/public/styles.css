@@ -1,6 +1,19 @@
-* {
+body{
+  margin: 0;
+  height: 100vh
+}
+
 .background {
-  background-color: #F7FFF7;
+  background: linear-gradient(#F7FFF7,#a3c9d6);
+  height: 100%;
+  overflow: scroll;
+}
+
+.background-1{
+  height: 100%;
+  min-height: 100%;
+  overflow: scroll;
+  width: 100%;
 }
 
 .profilePictureDetail {
@@ -19,18 +32,18 @@ body {
   font-style: normal;
   font-weight: 100;
   line-height: 32px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .homepage {
-  position:absolute;
+  /* position:absolute;
   width:375px;
   height:667px;
   margin: 0px;
   top:0px;
   left:0px;
   background-image: url('images/Background.png');
-  background-size: cover;
+  background-size: cover; */
 }
 
 .logo {
@@ -68,17 +81,7 @@ body {
   outline: none;
 }
 
-.mainMenu {
-  position: absolute;
-  width: 100%;
-  height: 667px;
-  background-image: url('images/BackgroundV2.png');
-  background-size: cover;
-  top:0px;
-  left:0px;
-}
-
-.navBar {
+/* .navBar {
   position: absolute;
   padding: 1.75rem 0rem 0rem 1.75rem;
   width: 375px;
@@ -87,11 +90,11 @@ body {
   left: 0px;
   top: 0px;
   background-color: #6CA6C1;
-}
-
+} */
+/*
 .heading {
   margin: 4rem;
-}
+} */
 
 .navMenu {
   position: absolute;
@@ -149,7 +152,7 @@ p {
 .profileListItem {
   background-color: white;
   border: solid 2px;
-
+}
 
 .title {
   font-family: 'Red Hat Display', sans-serif;
