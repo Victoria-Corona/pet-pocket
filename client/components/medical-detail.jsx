@@ -41,27 +41,27 @@ class MedicalDetails extends React.Component {
             </li>
           </ul>
           <div className="d-flex flex-wrap">
-            <h5 className="ml-2 mb-1">Name of Pet:</h5>
+            <p className="ml-2 mb-1 font-weight-bold">Name of Pet:</p>
             <div className="mb-2 medicalListItem text-uppercase bg-white">
               <div className="d-flex flex-wrap p-1 pl-4">{this.state.medical.name}</div>
             </div>
-            <h5 className="ml-2 mb-1">Pet Blood Type:</h5>
+            <p className="ml-2 mb-1 font-weight-bold">Pet Blood Type:</p>
             <div className="mb-2 medicalListItem bg-white">
               <div className="d-flex flex-wrap p-1 pl-4">{this.state.medical.bloodType}</div>
             </div>
-            <h5 className="ml-2 mb-1">Allergies:</h5>
+            <p className="ml-2 mb-1 font-weight-bold">Allergies:</p>
             <div className="mb-2 medicalListItem bg-white">
               <div className="d-flex flex-wrap p-1 pl-4">{this.state.medical.allergies}</div>
             </div>
-            <h5 className="ml-2 mb-1">Medication:</h5>
+            <p className="ml-2 mb-1 font-weight-bold">Medication:</p>
             <div className="mb-2 medicalListItem bg-white">
               <div className="d-flex flex-wrap p-1 pl-4">{this.state.medical.medication}</div>
             </div>
-            <h5 className="ml-2 mb-1">Vaccines:</h5>
+            <p className="ml-2 mb-1 font-weight-bold">Vaccines:</p>
             <div className="mb-2 medicalListItem bg-white">
               <div className="d-flex flex-wrap p-1 pl-4">{this.state.medical.vaccines}</div>
             </div>
-            <h5 className="ml-2 mb-1">Specialized Diet:</h5>
+            <p className="ml-2 mb-1 font-weight-bold">Specialized Diet:</p>
             <div className="mb-2 medicalListItem bg-white">
               <div className="d-flex flex-wrap p-1 pl-4">{this.state.medical.specializedDiet}</div>
             </div>
