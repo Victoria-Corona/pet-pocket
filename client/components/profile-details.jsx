@@ -38,13 +38,13 @@ class ProfileDetails extends React.Component {
       return (
         <div>
           <ul className="nav my-4 d-flex justify-content-between text-uppercase text-white text-center">
-            <li className="navButton active p-2 ml-3">
+            <li className="navButton active p-2 ml-2">
               <a>Profile</a>
             </li>
             <li className="navButton p-2">
               <a onClick={this.showMedical}>Medical</a>
             </li>
-            <li className="navButton p-2 mr-3">
+            <li className="navButton p-2 mr-2">
               <a>Vet</a>
             </li>
           </ul>
@@ -54,20 +54,19 @@ class ProfileDetails extends React.Component {
           <h5 className="text-center text-uppercase font-weight-bold mt-2">
             {this.state.pet.name}
           </h5>
-          <div className="bg-white my-5 text-uppercase">
+          <div className="bg-white mt-3 mb-4 text-uppercase">
             <div className="p-1"><i className="fas fa-paw ml-2 fa-lg p-3"></i> {this.state.pet.breed}</div>
           </div>
-          <div className="bg-white my-5">
+          <div className="bg-white mb-4">
             <div className="p-1"><i className="fas fa-birthday-cake ml-2 fa-lg p-3"></i> {birthdayDate}</div>
           </div>
-          <div className="bg-white my-5">
+          <div className="bg-white mb-4">
             <div className="p-1"><i className="fas fa-pencil-alt ml-2 fa-lg p-3"></i> {this.state.pet.description}</div>
           </div>
         </div>
       );
     } else if (this.state.currentView === 'medical') {
-      return <MedicalDetails showMedical={this.showMedical}
-        params={this.state.pet}
+      return <MedicalDetails params={this.state.pet}
       />;
     }
 
