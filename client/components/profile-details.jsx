@@ -12,7 +12,7 @@ class ProfileDetails extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/petProfile/${this.props.params.petId}`)
+    fetch(`/api/pets/${this.props.params.petId}`)
       .then(res => res.json())
       .then(data => this.setState({ pet: data }))
       .catch(err => console.error(err.message));

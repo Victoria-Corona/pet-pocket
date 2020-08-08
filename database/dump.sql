@@ -17,14 +17,14 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 ALTER TABLE ONLY public."vetVisits" DROP CONSTRAINT "vetVisits_pkey";
-ALTER TABLE ONLY public.reminder DROP CONSTRAINT reminder_pkey;
+ALTER TABLE ONLY public.pets DROP CONSTRAINT pets_pkey;
 ALTER TABLE ONLY public."petProfile" DROP CONSTRAINT "petProfile_pkey";
 ALTER TABLE public."vetVisits" ALTER COLUMN "vetVisitId" DROP DEFAULT;
-ALTER TABLE public.reminder ALTER COLUMN "petId" DROP DEFAULT;
+ALTER TABLE public.pets ALTER COLUMN "petId" DROP DEFAULT;
 DROP SEQUENCE public."vetVisits_vetVisitId_seq";
 DROP TABLE public."vetVisits";
-DROP SEQUENCE public."reminder_petId_seq";
-DROP TABLE public.reminder;
+DROP SEQUENCE public."pets_petId_seq";
+DROP TABLE public.pets;
 DROP TABLE public."petProfile";
 DROP EXTENSION plpgsql;
 DROP SCHEMA public;
@@ -82,25 +82,30 @@ CREATE TABLE public."petProfile" (
 
 
 --
--- Name: reminder; Type: TABLE; Schema: public; Owner: -
+-- Name: pets; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.reminder (
+CREATE TABLE public.pets (
     "petId" integer NOT NULL,
+    "userId" integer NOT NULL,
     name text NOT NULL,
-    type text NOT NULL,
+    "imgUrl" text NOT NULL,
+    breed text NOT NULL,
+    "dateOfBirth" date NOT NULL,
     description text NOT NULL,
-    date date NOT NULL,
-    "time" time without time zone NOT NULL,
-    repeat text NOT NULL
+    "bloodType" text,
+    allergies text,
+    medication text,
+    vaccines text,
+    "specializedDiet" text
 );
 
 
 --
--- Name: reminder_petId_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: pets_petId_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public."reminder_petId_seq"
+CREATE SEQUENCE public."pets_petId_seq"
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -110,10 +115,10 @@ CREATE SEQUENCE public."reminder_petId_seq"
 
 
 --
--- Name: reminder_petId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: pets_petId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public."reminder_petId_seq" OWNED BY public.reminder."petId";
+ALTER SEQUENCE public."pets_petId_seq" OWNED BY public.pets."petId";
 
 
 --
@@ -150,10 +155,10 @@ ALTER SEQUENCE public."vetVisits_vetVisitId_seq" OWNED BY public."vetVisits"."ve
 
 
 --
--- Name: reminder petId; Type: DEFAULT; Schema: public; Owner: -
+-- Name: pets petId; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.reminder ALTER COLUMN "petId" SET DEFAULT nextval('public."reminder_petId_seq"'::regclass);
+ALTER TABLE ONLY public.pets ALTER COLUMN "petId" SET DEFAULT nextval('public."pets_petId_seq"'::regclass);
 
 
 --
@@ -175,13 +180,13 @@ COPY public."petProfile" ("petId", "userId", name, "imgUrl", breed, "dateOfBirth
 
 
 --
--- Data for Name: reminder; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: pets; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.reminder ("petId", name, type, description, date, "time", repeat) FROM stdin;
-2	CK	Hygiene	Change litter box	2020-08-12	12:00:00	Tuesdays.
-3	Twix	Feeding	Feed three scoops of kibble & one scoop of chicken	2020-08-15	08:00:00	Daily.
-1	Buddy	Medication	1 tablet of Prednisone for allergies	2020-08-07	18:00:00	Daily.
+COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", description, "bloodType", allergies, medication, vaccines, "specializedDiet") FROM stdin;
+1	1	Buddy	/images/buddy.jpg	Pug	2016-01-04	very friendly, enjoys head pats, snores	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	Gluten Free
+2	1	CK	/images/ck.jpg	Bombay	2018-11-20	picky eater, loves to cuddle, eats shoelaces	B-	N/A	N/A	FVRCP FELV FIP Rabies	Outdoor Forumla
+3	1	Twix	/images/twix.png	Maltese Poodle Mix	2015-09-01	loves friends and people	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	\N
 \.
 
 
@@ -197,10 +202,10 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 
 
 --
--- Name: reminder_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: pets_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."reminder_petId_seq"', 1, false);
+SELECT pg_catalog.setval('public."pets_petId_seq"', 1, false);
 
 
 --
@@ -219,11 +224,11 @@ ALTER TABLE ONLY public."petProfile"
 
 
 --
--- Name: reminder reminder_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: pets pets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.reminder
-    ADD CONSTRAINT reminder_pkey PRIMARY KEY ("petId");
+ALTER TABLE ONLY public.pets
+    ADD CONSTRAINT pets_pkey PRIMARY KEY ("petId");
 
 
 --
