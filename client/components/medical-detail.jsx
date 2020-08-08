@@ -12,7 +12,7 @@ class MedicalDetails extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/petProfile/${this.props.params.petId}`)
+    fetch(`/api/pets/${this.props.params.petId}`)
       .then(res => res.json())
       .then(data => this.setState({ medical: data }))
       .catch(err => console.error(err.message));

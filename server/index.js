@@ -19,10 +19,10 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/petProfile', (req, res, next) => {
+app.get('/api/pets', (req, res, next) => {
   const sql = `
  select "petId", "imgUrl", "name"
- from "petProfile"
+ from "pets"
  `;
   db.query(sql)
     .then(result => res.json(result.rows))
@@ -41,7 +41,7 @@ app.get('/api/reminder', (req, res, next) => {
 });
 
 // User can GET EVERYTHING by pet:Id
-app.get('/api/petProfile/:petId', (req, res, next) => {
+app.get('/api/pets/:petId', (req, res, next) => {
   const id = parseInt(req.params.petId, 10);
   if (!Number.isInteger(id) || id <= 0) {
     return res.status(400).json({
@@ -51,7 +51,7 @@ app.get('/api/petProfile/:petId', (req, res, next) => {
 
   const sql = `
   select *
-    from "petProfile"
+    from "pets"
     where "petId" = $1
   `;
 
@@ -109,7 +109,7 @@ app.get('/api/vetVisits/:petId', (req, res, next) => {
 });
 
 // USER CAN ADD PROFILE
-app.post('/api/petProfile', (req, res, next) => {
+app.post('/api/pets', (req, res, next) => {
 
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -148,7 +148,7 @@ app.post('/api/petProfile', (req, res, next) => {
       const petId = req.body.petId;
       const userId = req.body.userId;
       const sql = `
-insert into "petProfile" ("petId","userId","imgUrl","name","breed","dateOfBirth","description")
+insert into "pets" ("petId","userId","imgUrl","name","breed","dateOfBirth","description")
 values ($1, $2, $3, $4, $5, $6, $7)
 returning *
 `;
