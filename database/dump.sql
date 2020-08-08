@@ -18,13 +18,17 @@ SET row_security = off;
 
 ALTER TABLE ONLY public."vetVisits" DROP CONSTRAINT "vetVisits_pkey";
 ALTER TABLE ONLY public.reminder DROP CONSTRAINT reminder_pkey;
+ALTER TABLE ONLY public.pets DROP CONSTRAINT pets_pkey;
 ALTER TABLE ONLY public."petProfile" DROP CONSTRAINT "petProfile_pkey";
 ALTER TABLE public."vetVisits" ALTER COLUMN "vetVisitId" DROP DEFAULT;
 ALTER TABLE public.reminder ALTER COLUMN "petId" DROP DEFAULT;
+ALTER TABLE public.pets ALTER COLUMN "petId" DROP DEFAULT;
 DROP SEQUENCE public."vetVisits_vetVisitId_seq";
 DROP TABLE public."vetVisits";
 DROP SEQUENCE public."reminder_petId_seq";
 DROP TABLE public.reminder;
+DROP SEQUENCE public."pets_petId_seq";
+DROP TABLE public.pets;
 DROP TABLE public."petProfile";
 DROP EXTENSION plpgsql;
 DROP SCHEMA public;
@@ -79,6 +83,46 @@ CREATE TABLE public."petProfile" (
     "specializedDiet" text,
     "lastVetVisit" text NOT NULL
 );
+
+
+--
+-- Name: pets; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pets (
+    "petId" integer NOT NULL,
+    "userId" integer NOT NULL,
+    name text NOT NULL,
+    "imgUrl" text NOT NULL,
+    breed text NOT NULL,
+    "dateOfBirth" date NOT NULL,
+    description text NOT NULL,
+    "bloodType" text,
+    allergies text,
+    medication text,
+    vaccines text,
+    "specializedDiet" text
+);
+
+
+--
+-- Name: pets_petId_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public."pets_petId_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pets_petId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public."pets_petId_seq" OWNED BY public.pets."petId";
 
 
 --
@@ -150,6 +194,13 @@ ALTER SEQUENCE public."vetVisits_vetVisitId_seq" OWNED BY public."vetVisits"."ve
 
 
 --
+-- Name: pets petId; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pets ALTER COLUMN "petId" SET DEFAULT nextval('public."pets_petId_seq"'::regclass);
+
+
+--
 -- Name: reminder petId; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -171,6 +222,17 @@ COPY public."petProfile" ("petId", "userId", name, "imgUrl", breed, "dateOfBirth
 1	1	Buddy	/images/buddy.jpg	Pug	2016-01-04	very friendly, enjoys head pats, snores	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	 Gluten Free	10/10/19
 2	1	CK	/images/ck.jpg	Bombay	2018-11-20	picky eater, loves to cuddle, eats shoelaces	B-	N/A	N/A	FVRCP FELV FIP Rabies	Outdoor Forumla	05/04/20
 3	1	Twix	/images/twix.png	Maltese Poodle Mix	2015-09-01	loves friends and people	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	N/A	10/10/19
+\.
+
+
+--
+-- Data for Name: pets; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", description, "bloodType", allergies, medication, vaccines, "specializedDiet") FROM stdin;
+1	1	Buddy	/images/buddy.jpg	Pug	2016-01-04	very friendly, enjoys head pats, snores	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	Gluten Free
+2	1	CK	/images/ck.jpg	Bombay	2018-11-20	picky eater, loves to cuddle, eats shoelaces	B-	N/A	N/A	FVRCP FELV FIP Rabies	Outdoor Forumla
+3	1	Twix	/images/twix.png	Maltese Poodle Mix	2015-09-01	loves friends and people	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	\N
 \.
 
 
@@ -197,6 +259,13 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 
 
 --
+-- Name: pets_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public."pets_petId_seq"', 1, false);
+
+
+--
 -- Name: reminder_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -216,6 +285,14 @@ SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 1, false);
 
 ALTER TABLE ONLY public."petProfile"
     ADD CONSTRAINT "petProfile_pkey" PRIMARY KEY ("petId");
+
+
+--
+-- Name: pets pets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pets
+    ADD CONSTRAINT pets_pkey PRIMARY KEY ("petId");
 
 
 --
