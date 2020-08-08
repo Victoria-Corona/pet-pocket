@@ -29,6 +29,17 @@ app.get('/api/petProfile', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// User can get a list of reminders
+app.get('/api/reminder', (req, res, next) => {
+  const sql = `
+  select "petId", "name", "type", "description", "date", "time", "repeat"
+  from "reminder"
+  `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
 // User can GET EVERYTHING by pet:Id
 app.get('/api/petProfile/:petId', (req, res, next) => {
   const id = parseInt(req.params.petId, 10);
