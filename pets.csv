@@ -1,0 +1,4 @@
+petId,userId,name,imgUrl,breed,dateOfBirth,description,bloodType,allergies,medication,vaccines,specializedDiet
+1,1,Buddy,/images/buddy.jpg,Pug,01/04/2016,"very friendly, enjoys head pats, snores","A+","Bees","Nexxguard","Bordatella Distemper Hepatitis Rabies","Gluten Free"
+2,1,CK,/images/ck.jpg,Bombay,11/20/2018,"picky eater, loves to cuddle, eats shoelaces","B-","N/A","N/A","FVRCP FELV FIP Rabies","Outdoor Forumla"
+3,1,Twix,/images/twix.png,Maltese Poodle Mix,09/01/2015,"loves friends and people","A+","Bees","Nexxguard","Bordatella Distemper Hepatitis Rabies",

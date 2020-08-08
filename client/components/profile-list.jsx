@@ -14,12 +14,11 @@ export default class ProfileList extends React.Component {
   }
 
   getProfiles() {
-    fetch('/api/petProfile')
+    fetch('/api/pets')
       .then(res => res.json())
       .then(profiles =>
         this.setState({
           profiles: profiles
-
         }))
       .catch(err => console.error(err.message));
   }

@@ -3,6 +3,7 @@ import Homepage from './homepage';
 import MainMenu from './mainMenu';
 import Header from './header';
 import ProfileDetails from './profile-details';
+// import MedicalDetails from './medical-detail';
 import ProfileList from './profile-list';
 import ProfileForm from './profileForm';
 
@@ -46,12 +47,15 @@ export default class App extends React.Component {
     } else if (view === 'profileForm') {
       renderPage = <ProfileForm setView={this.setView} profile={this.state.profiles}/>;
     } else {
-      renderPage = <ProfileDetails params={this.state.view.params} setView={this.setView} />;
+      renderPage =
+      <>
+        <Header />
+        <ProfileDetails params={this.state.view.params} setView={this.setView} />
+      </>;
     }
     return (
       <>
-        <Header/>
-        <div className="container">
+        <div>
           {renderPage}
         </div>
       </>
