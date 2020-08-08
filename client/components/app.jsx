@@ -13,7 +13,7 @@ export default class App extends React.Component {
       message: null,
       isLoading: true,
       view: {
-        name: 'profileForm',
+        name: 'homepage',
         params: {}
       }
     };
@@ -44,7 +44,7 @@ export default class App extends React.Component {
     } else if (view === 'profileList') {
       renderPage = <ProfileList setView={this.setView} />;
     } else if (view === 'profileForm') {
-      renderPage = <ProfileForm setView = {this.setView}/>;
+      renderPage = <ProfileForm setView={this.setView} profile={this.state.profiles}/>;
     } else {
       renderPage = <ProfileDetails params={this.state.view.params} setView={this.setView} />;
     }
