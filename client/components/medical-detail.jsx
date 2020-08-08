@@ -30,13 +30,13 @@ class MedicalDetails extends React.Component {
       return (
         <>
           <ul className="nav my-4 d-flex justify-content-between text-uppercase text-white text-center">
-            <li className="navButton p-2 ml-3">
+            <li className="navButton p-2 ml-2">
               <a onClick={this.showDetails}>Profile</a>
             </li>
             <li className="navButton active p-2">
               <a>Medical</a>
             </li>
-            <li className="navButton p-2 mr-3">
+            <li className="navButton p-2 mr-2">
               <a>Vet</a>
             </li>
           </ul>
