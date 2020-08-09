@@ -1,14 +1,12 @@
 import React from 'react';
-import MedicalDetails from './medical-detail';
+// import MedicalDetails from './medical-detail';
 
 class ProfileDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pet: null,
-      currentView: 'details'
+      pet: null
     };
-    this.showMedical = this.showMedical.bind(this);
   }
 
   componentDidMount() {
@@ -18,14 +16,10 @@ class ProfileDetails extends React.Component {
       .catch(err => console.error(err.message));
   }
 
-  showMedical() {
-    this.setState({ currentView: 'medical' });
-  }
-
   render() {
     if (!this.state.pet) {
       return null;
-    } else if (this.state.currentView === 'details') {
+    } else {
       const birthday = this.state.pet.dateOfBirth;
       const date = new Date(birthday);
       const options = {
@@ -42,10 +36,10 @@ class ProfileDetails extends React.Component {
               <a>Profile</a>
             </li>
             <li className="navButton p-2">
-              <a onClick={this.showMedical}>Medical</a>
+              <a onClick={() => this.props.showMedical('medical')}>Medical</a>
             </li>
             <li className="navButton p-2 mr-2">
-              <a>Vet</a>
+              <a onClick={() => this.props.showVisits('visits')}>Vet</a>
             </li>
           </ul>
           <div>
@@ -65,11 +59,7 @@ class ProfileDetails extends React.Component {
           </div>
         </div>
       );
-    } else if (this.state.currentView === 'medical') {
-      return <MedicalDetails params={this.state.pet}
-      />;
     }
-
   }
 }
 
