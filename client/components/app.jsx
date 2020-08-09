@@ -2,7 +2,8 @@ import React from 'react';
 import Homepage from './homepage';
 import MainMenu from './mainMenu';
 import Header from './header';
-import ProfileDetails from './profile-details';
+import Profile from './profile';
+// import ProfileDetails from './profile-details';
 // import MedicalDetails from './medical-detail';
 import ProfileList from './profile-list';
 import ProfileForm from './profileForm';
@@ -54,16 +55,14 @@ export default class App extends React.Component {
       </>;
     } else {
       renderPage =
-          <>
-            <Header />
-            <ProfileDetails params={this.state.view.params} setView={this.setView} />
-          </>;
+      <>
+        <Header />
+        <Profile params={this.state.view.params}/>
+      </>;
     }
     return (
       <>
-        <div>
-          {renderPage}
-        </div>
+        {renderPage}
       </>
     );
   }
