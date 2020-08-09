@@ -33,8 +33,7 @@ export default class MainMenu extends React.Component {
             </div>
             <p className="control navName">TODO LIST</p>
           </div>
-
-          <div className="addAPet">
+          <div className="addAPet" onClick={() => setView('profileForm', {})}>
             <div className="blueSquare">
               <i className="fas fa-plus-circle fa-2x"></i>
             </div>
