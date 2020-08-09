@@ -76,7 +76,9 @@ export default class ProfileForm extends React.Component {
         <form action="api/pets" method="post" encType="multipart/form-data" >
           <div className="form-group">
             <input name="image" type="file" accept="image/*" className="form-control-file ml-5 mt-3" ref={this.imageFileInput} onChange={this.handleImgChange} style={{ display: 'none' }} />
-            <div><img className="filledImage mx-auto d-block mt-3" onClick={this.handleImgClick} src={this.state.imgFilePreview} ></img><i className="fa fa-plus-circle fa-2x d-flex justify-content-center" aria-hidden="true"></i></div>
+            <div className="img-container">
+              <img className="filledImage mx-auto d-block mt-3" onClick={this.handleImgClick} src={this.state.imgFilePreview} ></img>
+              <i className="fa fa-plus-circle fa-2x img-icon" aria-hidden="true"></i></div>
             <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Name</label>
             <input name="name" type="text" className="form-control" placeholder="Enter Name" onChange={this.handleChange} />
             <label htmlFor="" style={{ fontWeight: 'bold' }} className="ml-2">Type of Breed</label>
