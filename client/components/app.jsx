@@ -7,6 +7,8 @@ import Profile from './profile';
 // import MedicalDetails from './medical-detail';
 import ProfileList from './profile-list';
 import ProfileForm from './profileForm';
+import TodoList from './todo-list';
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,7 @@ export default class App extends React.Component {
       message: null,
       isLoading: true,
       view: {
-        name: 'homepage',
+        name: 'todoList',
         params: {}
       }
     };
@@ -52,6 +54,12 @@ export default class App extends React.Component {
       <>
         <Header/>
         <ProfileForm setView={this.setView}/>
+      </>;
+    } else if (view === 'todoList') {
+      renderPage =
+      <>
+        <Header/>
+        <TodoList/>
       </>;
     } else {
       renderPage =
