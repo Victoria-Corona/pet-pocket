@@ -167,6 +167,24 @@ returning *
     }
   });
 });
+// USER CAN VIEW THEIR TODO LIST
+app.get('/api/todo', (req, res, next) => {
+  const sql = `
+  select "todoId","todo","isCompleted"
+  from "todo"
+  `;
+  db.query(sql)
+    .then(result => {
+      const todo = result.rows;
+      res.status(200).json(todo);
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).json({
+        error: 'An unexpected error occured.'
+      });
+    });
+});
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
