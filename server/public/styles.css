@@ -152,7 +152,7 @@ body {
   background-color: white;
   position: relative;
 }
-.profileListItem, .medicalListItem {
+.profileListItem, .medicalListItem, .todoListItem {
   width:100%;
 }
 .profilePicture {
@@ -161,7 +161,7 @@ body {
   border-radius: 50%;
 }
 
-.profileListItem {
+.profileListItem, .todoListItem {
   background-color: white;
   border: solid 2px;
 }
