@@ -6,7 +6,6 @@ import ProfileDetails from './profile-details';
 // import MedicalDetails from './medical-detail';
 import ProfileList from './profile-list';
 import ProfileForm from './profileForm';
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +28,6 @@ export default class App extends React.Component {
       name: name,
       params: params
     };
-
     this.setState({
       view: newView
     });
@@ -43,14 +41,22 @@ export default class App extends React.Component {
     } else if (view === 'mainMenu') {
       renderPage = <MainMenu setView={this.setView} />;
     } else if (view === 'profileList') {
-      renderPage = <ProfileList setView={this.setView} />;
-    } else if (view === 'profileForm') {
-      renderPage = <ProfileForm setView={this.setView} profile={this.state.profiles}/>;
+      renderPage =
+        <>
+          <Header />
+          <ProfileList setView={this.setView} />
+        </>;
+    } else if (view === 'profileDetails') {
+      renderPage =
+        <>
+          <Header />
+          <ProfileDetails params={this.state.view.params} setView={this.setView} />
+        </>;
     } else {
       renderPage =
       <>
         <Header />
-        <ProfileDetails params={this.state.view.params} setView={this.setView} />
+        <ProfileForm params={this.state.view.params} setView={this.setView} profile={this.state.profiles} />
       </>;
     }
     return (
