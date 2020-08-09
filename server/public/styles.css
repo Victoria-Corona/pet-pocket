@@ -178,6 +178,11 @@ body {
   background-color: #6CA6C1;
 }
 
+.text{
+  margin: 0;
+  font-size: 14px;
+}
+
 .hidden {
   visibility: hidden;
 }
