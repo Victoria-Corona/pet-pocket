@@ -17,14 +17,18 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 ALTER TABLE ONLY public."vetVisits" DROP CONSTRAINT "vetVisits_pkey";
+ALTER TABLE ONLY public.todo DROP CONSTRAINT todo_pkey;
 ALTER TABLE ONLY public.reminder DROP CONSTRAINT reminder_pkey;
 ALTER TABLE ONLY public.pets DROP CONSTRAINT pets_pkey;
 ALTER TABLE ONLY public."petProfile" DROP CONSTRAINT "petProfile_pkey";
 ALTER TABLE public."vetVisits" ALTER COLUMN "vetVisitId" DROP DEFAULT;
+ALTER TABLE public.todo ALTER COLUMN "todoId" DROP DEFAULT;
 ALTER TABLE public.reminder ALTER COLUMN "petId" DROP DEFAULT;
 ALTER TABLE public.pets ALTER COLUMN "petId" DROP DEFAULT;
 DROP SEQUENCE public."vetVisits_vetVisitId_seq";
 DROP TABLE public."vetVisits";
+DROP SEQUENCE public."todo_todoId_seq";
+DROP TABLE public.todo;
 DROP SEQUENCE public."reminder_petId_seq";
 DROP TABLE public.reminder;
 DROP SEQUENCE public."pets_petId_seq";
@@ -161,6 +165,38 @@ ALTER SEQUENCE public."reminder_petId_seq" OWNED BY public.reminder."petId";
 
 
 --
+-- Name: todo; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.todo (
+    "todoId" integer NOT NULL,
+    "userId" integer NOT NULL,
+    todo text NOT NULL,
+    "isCompleted" boolean NOT NULL
+);
+
+
+--
+-- Name: todo_todoId_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public."todo_todoId_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: todo_todoId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public."todo_todoId_seq" OWNED BY public.todo."todoId";
+
+
+--
 -- Name: vetVisits; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -208,6 +244,13 @@ ALTER TABLE ONLY public.reminder ALTER COLUMN "petId" SET DEFAULT nextval('publi
 
 
 --
+-- Name: todo todoId; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.todo ALTER COLUMN "todoId" SET DEFAULT nextval('public."todo_todoId_seq"'::regclass);
+
+
+--
 -- Name: vetVisits vetVisitId; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -251,6 +294,17 @@ COPY public.reminder ("petId", name, type, description, date, "time", repeat) FR
 
 
 --
+-- Data for Name: todo; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.todo ("todoId", "userId", todo, "isCompleted") FROM stdin;
+1	1	Give medicine	f
+2	1	Chane litter box	f
+3	1	Fresh water for Daisy	t
+\.
+
+
+--
 -- Data for Name: vetVisits; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -273,6 +327,13 @@ SELECT pg_catalog.setval('public."pets_petId_seq"', 17, true);
 --
 
 SELECT pg_catalog.setval('public."reminder_petId_seq"', 1, false);
+
+
+--
+-- Name: todo_todoId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public."todo_todoId_seq"', 1, false);
 
 
 --
@@ -304,6 +365,14 @@ ALTER TABLE ONLY public.pets
 
 ALTER TABLE ONLY public.reminder
     ADD CONSTRAINT reminder_pkey PRIMARY KEY ("petId");
+
+
+--
+-- Name: todo todo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.todo
+    ADD CONSTRAINT todo_pkey PRIMARY KEY ("todoId");
 
 
 --
