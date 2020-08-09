@@ -16,13 +16,13 @@ body{
 }
 
 .profilePictureDetail,
-.emptyImage,
+
 .filledImage {
   border-radius: 50%;
   height: 150px;
   width: 150px;
 }
-.emptyImage{
+.filledImage{
   background-color: #f4f4f4;
 }
 .nextButton{

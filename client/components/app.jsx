@@ -46,18 +46,18 @@ export default class App extends React.Component {
           <Header />
           <ProfileList setView={this.setView} />
         </>;
-    } else if (view === 'profileDetails') {
-      renderPage =
-        <>
-          <Header />
-          <ProfileDetails params={this.state.view.params} setView={this.setView} />
-        </>;
-    } else {
+    } else if (view === 'profileForm') {
       renderPage =
       <>
-        <Header />
-        <ProfileForm params={this.state.view.params} setView={this.setView} profile={this.state.profiles} />
+        <Header/>
+        <ProfileForm setView={this.setView}/>
       </>;
+    } else {
+      renderPage =
+          <>
+            <Header />
+            <ProfileDetails params={this.state.view.params} setView={this.setView} />
+          </>;
     }
     return (
       <>

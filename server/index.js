@@ -141,18 +141,18 @@ app.post('/api/pets', (req, res, next) => {
       });
     } else {
       const name = req.body.name;
-      const imgUrl = req.body.imgUrl;
+      const imgUrl = `/images/petImage/${req.file.originalname}`;
       const description = req.body.description;
       const breed = req.body.breed;
       const dateOfBirth = req.body.dateOfBirth;
-      const petId = req.body.petId;
-      const userId = req.body.userId;
+      // const petId = req.body.petId;
+      const userId = 1;
       const sql = `
-insert into "pets" ("petId","userId","imgUrl","name","breed","dateOfBirth","description")
-values ($1, $2, $3, $4, $5, $6, $7)
+insert into "pets" ("userId","imgUrl","name","breed","dateOfBirth","description")
+values ($1, $2, $3, $4, $5, $6)
 returning *
 `;
-      const params = [petId, userId, imgUrl, name, breed, dateOfBirth, description];
+      const params = [userId, imgUrl, name, breed, dateOfBirth, description];
       db.query(sql, params)
         .then(result => {
           const profile = result.rows[0];
