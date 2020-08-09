@@ -21,15 +21,15 @@ class MedicalDetails extends React.Component {
     } else {
       return (
         <>
-          <ul className="nav my-4 d-flex justify-content-between text-uppercase text-white text-center">
+          <ul className="nav my-3 d-flex justify-content-between text-uppercase text-white text-center">
             <li className="navButton p-2 ml-2">
-              <a onClick={() => this.props.showDetails('details')}>Profile</a>
+              <span onClick={() => this.props.showDetails('details')}>Profile</span>
             </li>
             <li className="navButton active p-2">
-              <a>Medical</a>
+              <span>Medical</span>
             </li>
-            <li className="navButton p-2 mr-2" onClick={() => this.props.showVisits('visits')}>
-              <a>Vet</a>
+            <li className="navButton p-2 mr-2">
+              <span onClick={() => this.props.showVisits('visits')}>Vet</span>
             </li>
           </ul>
           <div className="d-flex flex-wrap">

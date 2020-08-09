@@ -53,14 +53,11 @@ export default class App extends React.Component {
       <>
         <Header />
         <Profile params={this.state.view.params}/>
-        {/* <ProfileDetails params={this.state.view.params} setView={this.setView} /> */}
       </>;
     }
     return (
       <>
-        <div>
-          {renderPage}
-        </div>
+        {renderPage}
       </>
     );
   }

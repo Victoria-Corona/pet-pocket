@@ -31,15 +31,15 @@ class ProfileDetails extends React.Component {
 
       return (
         <div>
-          <ul className="nav my-4 d-flex justify-content-between text-uppercase text-white text-center">
+          <ul className="nav my-3 d-flex justify-content-between text-uppercase text-white text-center">
             <li className="navButton active p-2 ml-2">
-              <a>Profile</a>
+              <span>Profile</span>
             </li>
             <li className="navButton p-2">
-              <a onClick={() => this.props.showMedical('medical')}>Medical</a>
+              <span onClick={() => this.props.showMedical('medical')}>Medical</span>
             </li>
             <li className="navButton p-2 mr-2">
-              <a onClick={() => this.props.showVisits('visits')}>Vet</a>
+              <span onClick={() => this.props.showVisits('visits')}>Vet</span>
             </li>
           </ul>
           <div>

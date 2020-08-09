@@ -29,10 +29,28 @@ class VetVisits extends React.Component {
       const lastAppointment = (new Intl.DateTimeFormat('en-US', options).format(date));
 
       return (
-        <div>
-          <div>{this.state.vet.date}</div>
-          <div>{lastAppointment}</div>
-        </div>
+        <>
+          <ul className="nav my-3 d-flex justify-content-between text-uppercase text-white text-center">
+            <li className="navButton p-2 ml-2">
+              <span onClick={() => this.props.showDetails('details')}>Profile</span>
+            </li>
+            <li className="navButton p-2">
+              <span onClick={() => this.props.showMedical('medical')}>Medical</span>
+            </li>
+            <li className="navButton p-2 mr-2 active">
+              <span>Vet</span>
+            </li>
+          </ul>
+          <div className="font-weight-bold pl-3">{lastAppointment}</div>
+          <div className="bg-white mt-3 h-25 p-3">
+            <p className="font-weight-bold text">Reason for visit:</p>
+            <p className="text">{this.state.vet.reason}</p>
+          </div>
+          <div className="bg-white mt-3 p-3">
+            <p className="font-weight-bold text">Notes:</p>
+            <p className="text">{this.state.vet.notes}</p>
+          </div>
+        </>
       );
     }
   }
