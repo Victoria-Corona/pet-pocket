@@ -5,6 +5,7 @@ import Header from './header';
 import ProfileDetails from './profile-details';
 // import MedicalDetails from './medical-detail';
 import ProfileList from './profile-list';
+import ReminderList from './reminder-list';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export default class App extends React.Component {
       message: null,
       isLoading: true,
       view: {
-        name: 'homepage',
+        name: 'reminderList',
         params: {}
       }
     };
@@ -47,11 +48,17 @@ export default class App extends React.Component {
         <Header />
         <ProfileList setView={this.setView} />
       </>;
-    } else {
+    } else if (view === 'profileDetails') {
       renderPage =
       <>
         <Header />
         <ProfileDetails params={this.state.view.params} setView={this.setView} />
+      </>;
+    } else if (view === 'reminderList') {
+      renderPage =
+      <>
+        <Header />
+        <ReminderList setView={this.setView} />
       </>;
     }
     return (
