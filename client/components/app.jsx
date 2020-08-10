@@ -6,6 +6,7 @@ import Profile from './profile';
 // import ProfileDetails from './profile-details';
 // import MedicalDetails from './medical-detail';
 import ProfileList from './profile-list';
+import ReminderList from './reminder-list';
 import ProfileForm from './profileForm';
 import TodoList from './todo-list';
 
@@ -61,11 +62,17 @@ export default class App extends React.Component {
         <Header/>
         <TodoList/>
       </>;
-    } else {
+    } else if (view === 'profileDetails') {
       renderPage =
       <>
         <Header />
         <Profile params={this.state.view.params}/>
+      </>;
+    } else if (view === 'reminderList') {
+      renderPage =
+      <>
+        <Header />
+        <ReminderList setView={this.setView} />
       </>;
     }
     return (

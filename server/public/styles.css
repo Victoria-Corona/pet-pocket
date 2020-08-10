@@ -25,13 +25,14 @@ body{
 }
 
 
-.nextButton{
+.nextButton {
   background-color: #6CA6C1;
   border-radius: 50px;
   padding:0.3rem 2.3rem;
   margin: 5px;
   border: solid 1px #6CA6C1;
 }
+
 /*
 body {
   width: 375px;
@@ -148,21 +149,24 @@ body {
 .blueSquare2 {
   padding-left: 1.5rem;
 }
+
 .petProfileView {
   width: 100%;
   background-color: white;
   position: relative;
 }
-.profileListItem, .medicalListItem, .todoListItem {
+
+.profileListItem, .medicalListItem, .reminderListItem, .todoListItem {
   width:100%;
 }
+
 .profilePicture {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
-.profileListItem, .todoListItem {
+.profileListItem, .reminderListItem, .todoListItem {
   background-color: white;
   border: solid 2px;
 }
@@ -171,6 +175,16 @@ body {
   border-top: 2px solid black;
   border-bottom: 2px solid black;
   width: 100%;
+}
+
+.reminderListItem{
+  padding-left: .5rem;
+  margin-bottom: 1rem;
+}
+
+.petTitle {
+  font-weight: bold;
+  width: 98%;
 }
 
 .title {
@@ -197,6 +211,7 @@ body {
   margin: 0;
   font-size: 14px;
 }
+
 .img-container {
   position: relative;
   text-align: center;
@@ -215,6 +230,7 @@ body {
   height: 150px;
   border-radius: 50%;
 }
+
 .hidden {
   visibility: hidden;
 }
