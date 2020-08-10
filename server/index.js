@@ -86,7 +86,52 @@ app.get('/api/vetVisits/:petId', (req, res, next) => {
   const sql = `
   select *
     from "vetVisits"
-    where "petId" = $1
+    where "vetVisitId" = $1
+  `;
+
+  const params = [id];
+
+  db.query(sql, params)
+    .then(result => {
+      const pets = result.rows[0];
+      if (!pets) {
+        next(new ClientError(`Cannot find pet with id of ${id}`, 404));
+      } else {
+        res.status(200).json(pets);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error occured.'
+      });
+    });
+});
+
+// Get all the vetVisits
+app.get('/api/vetVisits', (req, res, next) => {
+  const sql = `
+ select *
+ from "vetVisits"
+ `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+// User can GET vetVisit by ID
+app.get('/api/vetVisits/:vetVisitId', (req, res, next) => {
+  const id = parseInt(req.params.petId, 10);
+  if (!Number.isInteger(id) || id <= 0) {
+    return res.status(400).json({
+      error: '"id" must be a positive integer'
+    });
+  }
+
+  const sql = `
+  select *
+    from "vetVisits"
+    where "vetVisitId" = $1
   `;
 
   const params = [id];
@@ -120,7 +165,7 @@ app.post('/api/pets', (req, res, next) => {
     }
   });
   const fileFilter = (req, file, cb) => {
-    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/gif') {
       cb(null, true);
     } else {
       cb(new Error('File uploaded is not in correct format'), false);
@@ -145,7 +190,6 @@ app.post('/api/pets', (req, res, next) => {
       const description = req.body.description;
       const breed = req.body.breed;
       const dateOfBirth = req.body.dateOfBirth;
-      // const petId = req.body.petId;
       const userId = 1;
       const sql = `
 insert into "pets" ("userId","imgUrl","name","breed","dateOfBirth","description")
@@ -157,6 +201,69 @@ returning *
         .then(result => {
           const profile = result.rows[0];
           res.status(201).json(profile);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500).json({
+            error: 'An unexpected error occured'
+          });
+        });
+    }
+  });
+});
+// USER CAN EDIT THEIR PET PROFILE
+app.put('/api/pets/:petId', (req, res, next) => {
+  const petId = Number(req.params.petId);
+  if (!Number.isInteger(petId) || petId <= 0) {
+    return res.status(400).json({
+      error: '"petId" must be a positive integer'
+    });
+  }
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './server/public/images/petImage');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  });
+  const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/gif') {
+      cb(null, true);
+    } else {
+      cb(new Error('File uploaded is not in correct format'), false);
+    }
+  };
+  const upload = multer({
+    storage: storage,
+    limit: {
+      fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+  }).single('image');
+  upload(req, res, function (err) {
+    if (err) {
+      console.error(err);
+      res.status(400).json({
+        error: 'Failed to upload the image'
+      });
+    } else {
+      const name = req.body.name;
+      const imgUrl = `/images/petImage/${req.file.originalname}`;
+      const description = req.body.description;
+      const breed = req.body.breed;
+      const dateOfBirth = req.body.dateOfBirth;
+      const sql = `
+      update "pets"
+      set "imgUrl" = $1, "name" = $2, "breed" = $3, "dateOfBirth" = $4, "description" = $5
+      where "petId" = $6
+      returning *
+      `;
+      const params = [imgUrl, name, breed, dateOfBirth, description, petId];
+      db.query(sql, params)
+        .then(result => {
+          const profile = result.rows[0];
+          res.status(200).json(profile);
         })
         .catch(err => {
           console.error(err);
