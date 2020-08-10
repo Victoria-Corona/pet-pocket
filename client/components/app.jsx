@@ -2,10 +2,13 @@ import React from 'react';
 import Homepage from './homepage';
 import MainMenu from './mainMenu';
 import Header from './header';
-import ProfileDetails from './profile-details';
+import Profile from './profile';
+// import ProfileDetails from './profile-details';
 // import MedicalDetails from './medical-detail';
 import ProfileList from './profile-list';
 import ReminderList from './reminder-list';
+import ProfileForm from './profileForm';
+import TodoList from './todo-list';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,7 +17,7 @@ export default class App extends React.Component {
       message: null,
       isLoading: true,
       view: {
-        name: 'reminderList',
+        name: 'todoList',
         params: {}
       }
     };
@@ -29,7 +32,6 @@ export default class App extends React.Component {
       name: name,
       params: params
     };
-
     this.setState({
       view: newView
     });
@@ -44,15 +46,27 @@ export default class App extends React.Component {
       renderPage = <MainMenu setView={this.setView} />;
     } else if (view === 'profileList') {
       renderPage =
+        <>
+          <Header />
+          <ProfileList setView={this.setView} />
+        </>;
+    } else if (view === 'profileForm') {
+      renderPage =
       <>
-        <Header />
-        <ProfileList setView={this.setView} />
+        <Header/>
+        <ProfileForm setView={this.setView}/>
+      </>;
+    } else if (view === 'todoList') {
+      renderPage =
+      <>
+        <Header/>
+        <TodoList/>
       </>;
     } else if (view === 'profileDetails') {
       renderPage =
       <>
         <Header />
-        <ProfileDetails params={this.state.view.params} setView={this.setView} />
+        <Profile params={this.state.view.params}/>
       </>;
     } else if (view === 'reminderList') {
       renderPage =
@@ -63,9 +77,7 @@ export default class App extends React.Component {
     }
     return (
       <>
-        <div>
-          {renderPage}
-        </div>
+        {renderPage}
       </>
     );
   }

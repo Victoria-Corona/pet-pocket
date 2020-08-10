@@ -1,43 +1,35 @@
 import React from 'react';
-import ProfileDetails from './profile-details';
 
 class MedicalDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      medical: null,
-      currentView: 'medical'
+      medical: null
     };
-    this.showDetails = this.showDetails.bind(this);
   }
 
   componentDidMount() {
-    fetch(`/api/petProfile/${this.props.params.petId}`)
+    fetch(`/api/pets/${this.props.params.petId}`)
       .then(res => res.json())
       .then(data => this.setState({ medical: data }))
       .catch(err => console.error(err.message));
   }
 
-  showDetails(params) {
-    this.setState({ currentView: 'details' });
-  }
-
   render() {
-
     if (!this.state.medical) {
       return null;
-    } else if (this.state.currentView === 'medical') {
+    } else {
       return (
         <>
-          <ul className="nav my-4 d-flex justify-content-between text-uppercase text-white text-center">
+          <ul className="nav my-3 d-flex justify-content-between text-uppercase text-white text-center">
             <li className="navButton p-2 ml-2">
-              <a onClick={this.showDetails}>Profile</a>
+              <span onClick={() => this.props.showDetails('details')}>Profile</span>
             </li>
             <li className="navButton active p-2">
-              <a>Medical</a>
+              <span>Medical</span>
             </li>
             <li className="navButton p-2 mr-2">
-              <a>Vet</a>
+              <span onClick={() => this.props.showVisits('visits')}>Vet</span>
             </li>
           </ul>
           <div className="d-flex flex-wrap">
@@ -68,8 +60,6 @@ class MedicalDetails extends React.Component {
           </div>
         </>
       );
-    } else if (this.state.currentView === 'details') {
-      return <ProfileDetails params={this.state.medical}/>;
     }
   }
 }

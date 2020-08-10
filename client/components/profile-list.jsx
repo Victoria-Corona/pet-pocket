@@ -1,15 +1,20 @@
 import React from 'react';
 import ProfileListItem from './profile-list-item';
+import ProfileForm from './profileForm';
 
 export default class ProfileList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { profiles: [] };
+    this.state = {
+      profiles: [],
+      profileView: false
+    };
     this.getProfiles = this.getProfiles.bind(this);
+    this.checkProfileView = this.checkProfileView.bind(this);
   }
 
   getProfiles() {
-    fetch('/api/petProfile')
+    fetch('/api/pets')
       .then(res => res.json())
       .then(profiles =>
         this.setState({
@@ -22,7 +27,33 @@ export default class ProfileList extends React.Component {
     this.getProfiles();
   }
 
+  checkProfileView() {
+    if (this.state.profileView) {
+      this.setState({
+        profileView: false
+      });
+    } else {
+      this.setState({
+        profileView: true
+      });
+    }
+  }
+
   render() {
+    if (this.state.profileView === false) {
+      return this.renderProfileList();
+    } else {
+      return this.renderNewProfile();
+    }
+  }
+
+  renderNewProfile() {
+    return (
+      <ProfileForm profiles={this.state.profiles}/>
+    );
+  }
+
+  renderProfileList() {
     const listOfProfiles = this.state.profiles.map(profile =>
       <ProfileListItem
         key={profile.petId}
@@ -34,7 +65,7 @@ export default class ProfileList extends React.Component {
       <>
         <div className="p-2 mt-4">
           <div className="d-flex justify-content-center">
-            <h5 style={{ fontWeight: 'bold' }}><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>ADD PROFILE</h5>
+            <h5 style={{ fontWeight: 'bold' }} onClick={this.checkProfileView}><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>ADD PROFILE</h5>
           </div>
           <div className = "mt-4">
             <h6 style={{ fontWeight: 'bold' }}>PETS IN YOUR POCKET</h6>
