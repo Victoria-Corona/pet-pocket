@@ -25,7 +25,7 @@ body{
 }
 
 
-.nextButton{
+.nextButton {
   background-color: #6CA6C1;
   border-radius: 50px;
   padding:0.3rem 2.3rem;
@@ -149,6 +149,7 @@ body {
 .blueSquare2 {
   padding-left: 1.5rem;
 }
+
 .petProfileView {
   width: 100%;
   background-color: white;
@@ -158,6 +159,7 @@ body {
 .profileListItem, .medicalListItem, .reminderListItem, .todoListItem {
   width:100%;
 }
+
 .profilePicture {
   width: 50px;
   height: 50px;
@@ -169,12 +171,18 @@ body {
   border: solid 2px;
 }
 
+.vetVistListItem {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  width: 100%;
+}
+
 .reminderListItem{
   padding-left: .5rem;
   margin-bottom: 1rem;
 }
 
-.petTitle{
+.petTitle {
   font-weight: bold;
   width: 98%;
 }
@@ -203,6 +211,7 @@ body {
   margin: 0;
   font-size: 14px;
 }
+
 .img-container {
   position: relative;
   text-align: center;
@@ -221,6 +230,7 @@ body {
   height: 150px;
   border-radius: 50%;
 }
+
 .hidden {
   visibility: hidden;
 }
