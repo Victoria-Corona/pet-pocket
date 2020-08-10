@@ -1,7 +1,8 @@
 import React from 'react';
 import MedicalDetails from './medical-detail';
 import ProfileDetails from './profile-details';
-import VetVisits from './vet-visits';
+
+import VetVisitsList from './vet-visits-list';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Profile extends React.Component {
     this.showMedical = this.showMedical.bind(this);
     this.showDetails = this.showDetails.bind(this);
     this.showVisits = this.showVisits.bind(this);
+    this.showHistory = this.showHistory.bind(this);
   }
 
   componentDidMount() {
@@ -34,14 +36,18 @@ class Profile extends React.Component {
     this.setState({ currentView: params });
   }
 
+  showHistory(params) {
+    this.setState({ currentView: params });
+  }
+
   render() {
     if (!this.state.petInfo) {
       return null;
     } else if (this.state.currentView === 'medical') {
       return <MedicalDetails showDetails={this.showDetails} showVisits={this.showVisits} params={this.state.petInfo}/>;
     } else if (this.state.currentView === 'visits') {
-      return <VetVisits showDetails={this.showDetails} showMedical={this.showMedical} params={this.state.petInfo}/>;
-    } else {
+      return <VetVisitsList showDetails={this.showDetails} showMedical={this.showMedical} params={this.state.petInfo} showHistory={this.showHistory}/>;
+    } else if (this.state.currentView === 'details') {
       return <ProfileDetails showMedical={this.showMedical} showVisits={this.showVisits} params={this.state.petInfo}/>;
     }
   }
