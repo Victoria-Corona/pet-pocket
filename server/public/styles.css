@@ -32,6 +32,7 @@ body{
   margin: 5px;
   border: solid 1px #6CA6C1;
 }
+
 /*
 body {
   width: 375px;
@@ -153,7 +154,8 @@ body {
   background-color: white;
   position: relative;
 }
-.profileListItem, .medicalListItem, .todoListItem {
+
+.profileListItem, .medicalListItem, .reminderListItem, .todoListItem {
   width:100%;
 }
 .profilePicture {
@@ -162,9 +164,19 @@ body {
   border-radius: 50%;
 }
 
-.profileListItem, .todoListItem {
+.profileListItem, .reminderListItem, .todoListItem {
   background-color: white;
   border: solid 2px;
+}
+
+.reminderListItem{
+  padding-left: .5rem;
+  margin-bottom: 1rem;
+}
+
+.petTitle{
+  font-weight: bold;
+  width: 98%;
 }
 
 .title {
