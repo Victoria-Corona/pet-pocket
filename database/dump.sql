@@ -278,7 +278,7 @@ COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", descr
 3	1	Twix	/images/twix.png	Maltese Poodle Mix	2015-09-01	loves friends and people	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	\N
 15	1	Max	/images/petImage/max.jpg	Golden Retriever	2020-07-29	not potty trained yet	\N	\N	\N	\N	\N
 16	1	Daisy	/images/petImage/daisy.jpg	Pomeranian	2014-01-28	snores	\N	\N	\N	\N	\N
-17	1	max2	/images/petImage/max.jpg	Golden Retriever	2020-07-27	snores	\N	\N	\N	\N	\N
+17	1	max4	/images/petImage/max.jpg	Golden Retriever	2018-07-27	scared of people	\N	\N	\N	\N	\N
 \.
 
 
