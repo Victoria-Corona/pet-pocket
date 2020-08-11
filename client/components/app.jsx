@@ -52,10 +52,10 @@ export default class App extends React.Component {
         </>;
     } else if (view === 'profileForm') {
       renderPage =
-      <>
-        <Header/>
-        <ProfileForm setView={this.setView}/>
-      </>;
+        <>
+          <Header />
+          <ProfileForm setView={this.setView} />
+        </>;
     } else if (view === 'todoList') {
       renderPage =
       <>
