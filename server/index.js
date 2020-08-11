@@ -186,7 +186,9 @@ app.post('/api/pets', (req, res, next) => {
       });
     } else {
       const name = req.body.name;
-      const imgUrl = `/images/petImage/${req.file.originalname}`;
+      const imgUrl = req.file
+        ? `/images/petImage/${req.file.originalname}`
+        : null;
       const description = req.body.description;
       const breed = req.body.breed;
       const dateOfBirth = req.body.dateOfBirth;
@@ -219,7 +221,7 @@ returning *
   });
 });
 // USER CAN EDIT THEIR PET PROFILE
-app.put('/api/pets/:petId', (req, res, next) => {
+app.put('/api/pets/:petId', express.urlencoded({ extended: true }), (req, res, next) => {
   const petId = Number(req.params.petId);
   if (!Number.isInteger(petId) || petId <= 0) {
     return res.status(400).json({
@@ -256,13 +258,15 @@ app.put('/api/pets/:petId', (req, res, next) => {
       });
     } else {
       const name = req.body.name;
-      const imgUrl = `/images/petImage/${req.file.originalname}`;
       const description = req.body.description;
       const breed = req.body.breed;
       const dateOfBirth = req.body.dateOfBirth;
+      const imgUrl = req.file
+        ? `/images/petImage/${req.file.originalname}`
+        : null;
       const sql = `
       update "pets"
-      set "imgUrl" = $1, "name" = $2, "breed" = $3, "dateOfBirth" = $4, "description" = $5
+      set "imgUrl" = coalesce($1, "imgUrl"), "name" = $2, "breed" = $3, "dateOfBirth" = $4, "description" = $5
       where "petId" = $6
       returning *
       `;
