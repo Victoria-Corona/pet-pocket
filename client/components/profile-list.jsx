@@ -10,7 +10,6 @@ export default class ProfileList extends React.Component {
       profileView: false
     };
     this.getProfiles = this.getProfiles.bind(this);
-    this.deleteProfile = this.deleteProfile.bind(this);
     this.checkProfileView = this.checkProfileView.bind(this);
   }
 
@@ -22,17 +21,6 @@ export default class ProfileList extends React.Component {
           profiles: profiles
         }))
       .catch(err => console.error(err.message));
-  }
-
-  deleteProfile(id) {
-    fetch(`/api/pets/${id}`, {
-      method: 'DELETE'
-    }).then(response => {
-      const newProfiles = [...this.state.profiles];
-      const index = newProfiles.findIndex(profile => id === profile.id);
-      newProfiles.splice(index, 1);
-      this.setState({ profiles: newProfiles });
-    });
   }
 
   componentDidMount() {

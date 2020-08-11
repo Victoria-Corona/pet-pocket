@@ -17,6 +17,7 @@ class Profile extends React.Component {
     this.showDetails = this.showDetails.bind(this);
     this.showVisits = this.showVisits.bind(this);
     this.showHistory = this.showHistory.bind(this);
+    // this.deleteProfile = this.deleteProfile.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +30,18 @@ class Profile extends React.Component {
       .then(data => this.setState({ petInfo: data }))
       .catch(err => console.error(err.message));
   }
+
+  // user-can-delete-profile-frontend
+  // deleteProfile() {
+  //   fetch(`/api/pets/${this.props.params.petId}`, {
+  //     method: 'DELETE'
+  //   }).then(response => {
+  //     const newProfiles = [...this.state.profiles];
+  //     const index = newProfiles.findIndex(profile => this.props.params.petId === profile.petId);
+  //     newProfiles.splice(index, 1);
+  //     this.setState({ profiles: newProfiles });
+  //   });
+  // }
 
   showMedical(params) {
     this.setState({ currentView: params });
