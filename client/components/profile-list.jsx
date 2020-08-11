@@ -1,6 +1,5 @@
 import React from 'react';
 import ProfileListItem from './profile-list-item';
-// import ProfileDetails from './profile-details';
 import ProfileForm from './profileForm';
 
 export default class ProfileList extends React.Component {
