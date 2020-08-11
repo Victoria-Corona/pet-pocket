@@ -62,18 +62,18 @@ export default class App extends React.Component {
         <Header/>
         <TodoList/>
       </>;
-    } else if (view === 'profileDetails') {
-      renderPage =
-      <>
-        <Header />
-        <Profile params={this.state.view.params}/>
-      </>;
     } else if (view === 'reminderList') {
       renderPage =
       <>
         <Header />
         <ReminderList setView={this.setView} />
       </>;
+    } else {
+      renderPage =
+        <>
+          <Header />
+          <Profile params={this.state.view.params} />
+        </>;
     }
     return (
       <>

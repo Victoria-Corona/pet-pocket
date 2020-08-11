@@ -1,7 +1,6 @@
 import React from 'react';
 import MedicalDetails from './medical-detail';
 import ProfileDetails from './profile-details';
-
 import VetVisitsList from './vet-visits-list';
 
 class Profile extends React.Component {
