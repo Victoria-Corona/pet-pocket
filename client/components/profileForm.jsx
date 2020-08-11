@@ -73,7 +73,7 @@ export default class ProfileForm extends React.Component {
   render() {
     return (
       <div>
-        <form action="api/pets" method="post" encType="multipart/form-data" >
+        <form action="api/pets" method="post" encType="multipart/form-data" onSubmit={this.handleSubmit} >
           <div className="form-group">
             <input name="image" type="file" accept="image/*" className="form-control-file ml-5 mt-3" ref={this.imageFileInput} onChange={this.handleImgChange} style={{ display: 'none' }} />
             <div className="img-container">
@@ -87,7 +87,7 @@ export default class ProfileForm extends React.Component {
             <input name="dateOfBirth" type="date" className="form-control" placeholder="00/00/0000" onChange={this.handleChange} />
             <label htmlFor="description" style={{ fontWeight: 'bold' }} className="ml-2">Description</label>
             <input name="description" type="text" className="form-control" placeholder="very friendly, snores" onChange={this.handleChange} />
-            <div className="d-flex justify-content-center"><button type="submit" className="nextButton mt-3" onSubmit={this.handleSubmit} >NEXT</button></div>
+            <div className="d-flex justify-content-center"><button type="submit" className="nextButton mt-3">NEXT</button></div>
           </div>
         </form>
       </div>

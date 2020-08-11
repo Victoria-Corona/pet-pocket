@@ -300,38 +300,6 @@ app.get('/api/todo', (req, res, next) => {
     });
 });
 
-// User can ADD a Medical Page
-// app.post('/api/pets', (req, res) => {
-//   // const petReq = req.body;
-//   const vaccines = req.body.vaccines
-//   const bloodType = req.body.bloodType;
-//   const allergies = req.body.allergies;
-//   const medication = req.body.medication;
-//   const specializedDiet = req.body.specializedDiet;
-//   const userId = 1;
-//   const name = req.body.name;
-
-//   const sql = `
-//   insert into "pets" ("userId","name","bloodType","allergies","medication","vaccines","specializedDiet")
-//   values($1, $2, $3, $4, $5, $6, $7)
-//   returning *
-// `;
-//   const params = [userId, name, bloodType, allergies, medication, vaccines, specializedDiet];
-
-//   db.query(sql, params)
-//   .then(result => {
-//     const medical = result.rows[0];
-//     res.status(201).json(medical);
-//   })
-//   .catch(err => {
-//     console.error(err);
-//     res.status(500).json({
-//       error: 'An unexpected error occured'
-//     });
-//   });
-
-// });
-
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
