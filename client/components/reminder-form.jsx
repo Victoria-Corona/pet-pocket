@@ -25,35 +25,8 @@ export default class ReminderForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const newReminder = new FormData();
-    const name = this.state.name;
-    const type = this.state.type;
-    const description = this.state.description;
-    const date = this.state.date;
-    const time = this.state.time;
-    const repeat = this.state.repeat;
-
-    if (name) {
-      newReminder.append('name', name);
-    }
-    if (type) {
-      newReminder.append('type', type);
-    }
-    if (description) {
-      newReminder.append('description', description);
-    }
-    if (date) {
-      newReminder.append('date', date);
-    }
-    if (time) {
-      newReminder.append('time', time);
-    }
-    if (repeat) {
-      newReminder.append('repeat', repeat);
-    }
     fetch('/api/reminder', {
-      method: 'POST',
-      body: newReminder
+      method: 'POST'
     }).then(res => res.json())
       .then(reminders => this.setState({ reminder: this.props.reminder.concat(reminders) }))
       .catch(error => console.error(error.message));
