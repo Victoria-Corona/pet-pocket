@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default class ProfileDetails extends React.Component {
-  
+
   render() {
     const birthday = this.props.params.dateOfBirth;
     const date = new Date(birthday);
@@ -11,7 +11,6 @@ export default class ProfileDetails extends React.Component {
       day: '2-digit'
     };
     const birthdayDate = (new Intl.DateTimeFormat('en-US', options).format(date));
-
 
     return (
       <div>

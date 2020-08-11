@@ -6,7 +6,6 @@ import ProfileFormEdit from './profileForm-edit';
 
 import VetVisitsList from './vet-visits-list';
 
-
 class Profile extends React.Component {
   constructor(props) {
     super(props);

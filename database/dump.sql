@@ -273,12 +273,18 @@ COPY public."petProfile" ("petId", "userId", name, "imgUrl", breed, "dateOfBirth
 --
 
 COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", description, "bloodType", allergies, medication, vaccines, "specializedDiet") FROM stdin;
+<<<<<<< HEAD
+34	1	Max	/images/petImage/max.jpg	Pomeranian	2020-07-29	very friendly	\N	\N	\N	\N	\N
+35	1	Daisy	/images/petImage/daisy.jpg	Pomeranian	2018-01-30	snores	\N	\N	\N	\N	\N
+36	1	Dragon	/images/petImage/dragon.jpg	lizard	2020-08-06	very friendly	\N	\N	\N	\N	\N
+=======
 1	1	Buddy	/images/buddy.jpg	Pug	2016-01-04	very friendly, enjoys head pats, snores	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	Gluten Free
 2	1	CK	/images/ck.jpg	Bombay	2018-11-20	picky eater, loves to cuddle, eats shoelaces	B-	N/A	N/A	FVRCP FELV FIP Rabies	Outdoor Forumla
 3	1	Twix	/images/twix.png	Maltese Poodle Mix	2015-09-01	loves friends and people	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	\N
 15	1	Max	/images/petImage/max.jpg	Golden Retriever	2020-07-29	not potty trained yet	\N	\N	\N	\N	\N
 16	1	Daisy	/images/petImage/daisy.jpg	Pomeranian	2014-01-28	snores	\N	\N	\N	\N	\N
 17	1	max4	/images/petImage/max.jpg	Golden Retriever	2018-07-27	scared of people	\N	\N	\N	\N	\N
+>>>>>>> 03f23301bd2fab8ff1b778fbf29e849197595ebb
 \.
 
 
@@ -319,7 +325,7 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 -- Name: pets_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."pets_petId_seq"', 17, true);
+SELECT pg_catalog.setval('public."pets_petId_seq"', 36, true);
 
 
 --
