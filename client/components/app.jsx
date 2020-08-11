@@ -52,28 +52,28 @@ export default class App extends React.Component {
         </>;
     } else if (view === 'profileForm') {
       renderPage =
-      <>
-        <Header/>
-        <ProfileForm setView={this.setView}/>
-      </>;
+        <>
+          <Header />
+          <ProfileForm setView={this.setView} />
+        </>;
     } else if (view === 'todoList') {
       renderPage =
-      <>
-        <Header/>
-        <TodoList/>
-      </>;
-    } else if (view === 'profileDetails') {
-      renderPage =
-      <>
-        <Header />
-        <Profile params={this.state.view.params}/>
-      </>;
+        <>
+          <Header />
+          <TodoList />
+        </>;
     } else if (view === 'reminderList') {
       renderPage =
-      <>
-        <Header />
-        <ReminderList setView={this.setView} />
-      </>;
+        <>
+          <Header />
+          <ReminderList setView={this.setView} />
+        </>;
+    } else {
+      renderPage =
+        <>
+          <Header />
+          <Profile params={this.state.view.params} />
+        </>;
     }
     return (
       <>
