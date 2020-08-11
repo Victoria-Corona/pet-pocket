@@ -273,8 +273,12 @@ COPY public."petProfile" ("petId", "userId", name, "imgUrl", breed, "dateOfBirth
 --
 
 COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", description, "bloodType", allergies, medication, vaccines, "specializedDiet") FROM stdin;
+
+35	1	Daisy	/images/petImage/daisy.jpg	Pomeranian	2018-01-30	snores	\N	\N	\N	\N	\N
+36	1	Dragon	/images/petImage/dragon.jpg	lizard	2020-08-06	very friendly	\N	\N	\N	\N	\N
 37	1	Belvedere	/images/petImage/belvedere.jpg	corgi	2020-02-04	a pup	A	Fleas	Aspirin	Bordatella	soft food
-38	1	Leilani	/images/petImage/Leilani.jpg	dobermann	2020-02-04	a pup	A	Fleas	Aspirin	Bordatella	soft food
+38	1	Blue	/images/petImage/blue.jpg	bird	2020-07-01	sings well	\N	\N	\N	\N	\N
+34	1	Max	/images/petImage/max.jpg	Pomeranian	2020-07-29	very friendly	\N	\N	\N	\N	\N
 \.
 
 
@@ -318,7 +322,8 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 -- Name: pets_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."pets_petId_seq"', 38, true);
+
+SELECT pg_catalog.setval('public."pets_petId_seq"', 44, true);
 
 
 --

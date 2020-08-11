@@ -388,13 +388,18 @@ app.put('/api/pets/:petId', express.urlencoded({ extended: true }), (req, res, n
       const imgUrl = req.file
         ? `/images/petImage/${req.file.originalname}`
         : null;
+      const medication = req.body.medication;
+      const allergies = req.body.allergies;
+      const specializedDiet = req.body.specializedDiet;
+      const vaccines = req.body.vaccines;
+      const bloodType = req.body.bloodType;
       const sql = `
       update "pets"
-      set "imgUrl" = coalesce($1, "imgUrl"), "name" = $2, "breed" = $3, "dateOfBirth" = $4, "description" = $5
-      where "petId" = $6
+      set "imgUrl" = coalesce($1, "imgUrl"), "name" = $2, "breed" = $3, "dateOfBirth" = $4, "description" = $5, "medication" = $6, "allergies" = $7, "specializedDiet" = $8, "vaccines" = $9, "bloodType" = $10
+      where "petId" = $11
       returning *
       `;
-      const params = [imgUrl, name, breed, dateOfBirth, description, petId];
+      const params = [imgUrl, name, breed, dateOfBirth, description, medication, allergies, specializedDiet, vaccines, bloodType, petId];
       db.query(sql, params)
         .then(result => {
           const profile = result.rows[0];

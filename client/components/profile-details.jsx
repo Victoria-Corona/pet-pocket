@@ -12,7 +12,7 @@ export default class ProfileDetails extends React.Component {
     };
     const birthdayDate = (new Intl.DateTimeFormat('en-US', options).format(date));
 
-        return (
+    return (
       <div>
         <div>
           <ul className="nav my-3 d-flex justify-content-between text-uppercase text-white text-center">
@@ -27,7 +27,7 @@ export default class ProfileDetails extends React.Component {
             </li>
           </ul>
           <div>
-            <i className="fas fa-edit fa-2x d-flex justify-content-end" onClick={() => this.props.showVisits('edit')}></i>
+            <i className="fas fa-edit fa-2x d-flex justify-content-end" style={{ cursor: 'pointer' }} onClick={() => this.props.showVisits('edit')}></i>
             <img src={this.props.params.imgUrl} className="profilePictureDetail mx-auto d-block" alt="image of pet" />
           </div>
           <h5 className="text-center text-uppercase font-weight-bold mt-2">
@@ -42,10 +42,6 @@ export default class ProfileDetails extends React.Component {
           <div className="bg-white mb-4">
             <div className="p-1"><i className="fas fa-pencil-alt ml-2 fa-lg p-3"></i> {this.props.params.description}</div>
           </div>
-        </div>
-        <div className="profileControls">
-          <button type="button" className="profileButtonDelete" id={this.props.params.petId}>DELETE</button>
-          <button type="button" className="profileButtonUpdate" id={this.props.params.petId}>UPDATE</button>
         </div>
       </div>
     );
