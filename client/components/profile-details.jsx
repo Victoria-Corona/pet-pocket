@@ -27,7 +27,7 @@ export default class ProfileDetails extends React.Component {
             </li>
           </ul>
           <div>
-            <i className="fas fa-edit fa-2x d-flex justify-content-end" onClick={() => this.props.showVisits('edit')}></i>
+            <i className="fas fa-edit fa-2x d-flex justify-content-end" style={{ cursor: 'pointer' }} onClick={() => this.props.showVisits('edit')}></i>
             <img src={this.props.params.imgUrl} className="profilePictureDetail mx-auto d-block" alt="image of pet" />
           </div>
           <h5 className="text-center text-uppercase font-weight-bold mt-2">

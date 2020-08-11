@@ -231,6 +231,52 @@ app.get('/api/vetVisits/:vetVisitId', (req, res, next) => {
     });
 });
 
+// User can ADD a Vet Visit
+app.post('/api/vetVisits', (req, res, next) => {
+  const petId = req.body.petId;
+  const date = req.body.date;
+  const reason = req.body.reason;
+  const notes = req.body.notes;
+
+  if (!petId) {
+    return res.status(400).json({
+      error: `Must include a ${petId}`
+    });
+  }
+
+  if (!date) {
+    return res.status(400).json({
+      error: 'Vet Visit must include a date'
+    });
+  }
+
+  if (!reason) {
+    return res.status(400).json({
+      error: 'Must include a reason for Vet Visit'
+    });
+  }
+
+  const sql = `
+    insert into "vetVisits" ("petId","date","reason","notes")
+    values ($1, $2, $3, $4)
+    returning *
+    `;
+
+  const params = [petId, date, reason, notes];
+
+  db.query(sql, params)
+    .then(result => {
+      const visitInfo = result.rows[0];
+      res.status(201).json(visitInfo);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error occured'
+      });
+    });
+});
+
 // USER CAN ADD PROFILE
 app.post('/api/pets', (req, res, next) => {
 
@@ -342,13 +388,18 @@ app.put('/api/pets/:petId', express.urlencoded({ extended: true }), (req, res, n
       const imgUrl = req.file
         ? `/images/petImage/${req.file.originalname}`
         : null;
+      const medication = req.body.medication;
+      const allergies = req.body.allergies;
+      const specializedDiet = req.body.specializedDiet;
+      const vaccines = req.body.vaccines;
+      const bloodType = req.body.bloodType;
       const sql = `
       update "pets"
-      set "imgUrl" = coalesce($1, "imgUrl"), "name" = $2, "breed" = $3, "dateOfBirth" = $4, "description" = $5
-      where "petId" = $6
+      set "imgUrl" = coalesce($1, "imgUrl"), "name" = $2, "breed" = $3, "dateOfBirth" = $4, "description" = $5, "medication" = $6, "allergies" = $7, "specializedDiet" = $8, "vaccines" = $9, "bloodType" = $10
+      where "petId" = $11
       returning *
       `;
-      const params = [imgUrl, name, breed, dateOfBirth, description, petId];
+      const params = [imgUrl, name, breed, dateOfBirth, description, medication, allergies, specializedDiet, vaccines, bloodType, petId];
       db.query(sql, params)
         .then(result => {
           const profile = result.rows[0];
@@ -381,38 +432,6 @@ app.get('/api/todo', (req, res, next) => {
       });
     });
 });
-
-// User can ADD a Medical Page
-// app.post('/api/pets', (req, res) => {
-//   // const petReq = req.body;
-//   const vaccines = req.body.vaccines
-//   const bloodType = req.body.bloodType;
-//   const allergies = req.body.allergies;
-//   const medication = req.body.medication;
-//   const specializedDiet = req.body.specializedDiet;
-//   const userId = 1;
-//   const name = req.body.name;
-
-//   const sql = `
-//   insert into "pets" ("userId","name","bloodType","allergies","medication","vaccines","specializedDiet")
-//   values($1, $2, $3, $4, $5, $6, $7)
-//   returning *
-// `;
-//   const params = [userId, name, bloodType, allergies, medication, vaccines, specializedDiet];
-
-//   db.query(sql, params)
-//   .then(result => {
-//     const medical = result.rows[0];
-//     res.status(201).json(medical);
-//   })
-//   .catch(err => {
-//     console.error(err);
-//     res.status(500).json({
-//       error: 'An unexpected error occured'
-//     });
-//   });
-
-// });
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));

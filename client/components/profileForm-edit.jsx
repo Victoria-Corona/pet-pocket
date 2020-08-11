@@ -9,7 +9,13 @@ export default class ProfileFormEdit extends React.Component {
       dateOfBirth: this.props.petProfile.dateOfBirth,
       description: this.props.petProfile.description,
       imgFilePreview: this.props.petProfile.imgUrl,
-      image: null
+      image: null,
+      bloodType: this.props.petProfile.bloodType,
+      allergies: this.props.petProfile.allergies,
+      medication: this.props.petProfile.medication,
+      vaccines: this.props.petProfile.vaccines,
+      specializedDiet: this.props.petProfile.specializedDiet,
+      mode: 'basic'
 
     };
     this.handleChange = this.handleChange.bind(this);
@@ -17,6 +23,12 @@ export default class ProfileFormEdit extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleImgClick = this.handleImgClick.bind(this);
     this.imageFileInput = React.createRef();
+  }
+
+  handleButtonClick() {
+    this.setState({
+      mode: 'medical'
+    });
   }
 
   handleChange(event) {
@@ -48,6 +60,11 @@ export default class ProfileFormEdit extends React.Component {
     const dateOfBirth = this.state.dateOfBirth;
     const description = this.state.description;
     const image = this.state.image;
+    const bloodType = this.state.bloodType;
+    const allergies = this.state.allergies;
+    const vaccines = this.state.vaccines;
+    const specializedDiet = this.state.specializedDiet;
+
     if (name) {
       newProfile.append('name', name);
     }
@@ -67,6 +84,19 @@ export default class ProfileFormEdit extends React.Component {
     if (image) {
       newProfile.append('image', image);
     }
+    if (bloodType) {
+      newProfile.append('bloodType', bloodType);
+    }
+    if (allergies) {
+      newProfile.append('allergies', allergies);
+    }
+    if (vaccines) {
+      newProfile.append('vaccines', vaccines);
+    }
+    if (specializedDiet) {
+      specializedDiet.append('specializedDiet', specializedDiet);
+    }
+
     fetch(`/api/pets/${this.props.petProfile.petId}`, {
       method: 'PUT',
       body: newProfile
