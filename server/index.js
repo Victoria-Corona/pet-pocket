@@ -8,6 +8,8 @@ const sessionMiddleware = require('./session-middleware');
 const multer = require('multer');
 const app = express();
 
+const reminder = [];
+
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
 
@@ -38,6 +40,82 @@ app.get('/api/reminder', (req, res, next) => {
   db.query(sql)
     .then(result => res.json(result.rows))
     .catch(err => next(err));
+});
+
+// User can get reminder by petID
+app.get('/api/reminder/:petId', (req, res, next) => {
+  const id = parseInt(req.params.petId, 10);
+  if (!Number.isInteger(id) || id <= 0) {
+    return res.status(400).json({
+      error: '"id" must be a positive integer'
+    });
+  }
+
+  const sql = `
+  select *
+    from "reminder"
+    where "petId" = $1
+    `;
+
+  const params = [id];
+
+  db.query(sql, params)
+    .then(result => {
+      const reminder = result.rows[0];
+      if (!reminder) {
+        next(new ClientError(`Cannot find reminder with id of ${id}`, 404));
+      } else {
+        res.status(200).json(reminder);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error has occurred.'
+      });
+    });
+});
+
+// User can post new reminder
+app.post('/api/reminder', (req, res, next) => {
+  const result = req.body;
+  reminder.push(result);
+  res.status(201);
+  res.json(result);
+});
+
+// User can DELETE a pet profile! :(
+app.delete('/api/pets/:petId', (req, res, next) => {
+  const id = parseInt(req.params.petId, 10);
+  if (!Number.isInteger(id) || id <= 0) {
+    return res.status(400).json({
+      error: '"petId" must be a positive integer'
+    });
+  }
+
+  const sql = `
+  delete from "pets"
+  where "petId" = $1
+  returning *;
+  `;
+
+  const params = [id];
+
+  db.query(sql, params)
+    .then(result => {
+      const pets = result.rows[0];
+      if (!pets) {
+        next(new ClientError(`Cannot find pet with petId of ${id}`, 404));
+      } else {
+        res.status(204).json(pets);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error occured.'
+      });
+    });
 });
 
 // User can GET everything by pet:Id
