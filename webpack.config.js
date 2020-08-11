@@ -39,7 +39,7 @@ module.exports = {
     stats: 'minimal',
     watchContentBase: true,
     watchOptions: {
-      ignored: [path.join(publicPath, 'server/public/images/petImage')]
+      ignored: [path.join(publicPath, '/images/petImage')]
     }
   }
 };
