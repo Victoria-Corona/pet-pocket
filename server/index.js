@@ -231,6 +231,52 @@ app.get('/api/vetVisits/:vetVisitId', (req, res, next) => {
     });
 });
 
+// User can ADD a Vet Visit
+app.post('/api/vetVisits', (req, res, next) => {
+  const petId = req.body.petId;
+  const date = req.body.date;
+  const reason = req.body.reason;
+  const notes = req.body.notes;
+
+  if (!petId) {
+    return res.status(400).json({
+      error: `Must include a ${petId}`
+    });
+  }
+
+  if (!date) {
+    return res.status(400).json({
+      error: 'Vet Visit must include a date'
+    });
+  }
+
+  if (!reason) {
+    return res.status(400).json({
+      error: 'Must include a reason for Vet Visit'
+    });
+  }
+
+  const sql = `
+    insert into "vetVisits" ("petId","date","reason","notes")
+    values ($1, $2, $3, $4)
+    returning *
+    `;
+
+  const params = [petId, date, reason, notes];
+
+  db.query(sql, params)
+    .then(result => {
+      const visitInfo = result.rows[0];
+      res.status(201).json(visitInfo);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error occured'
+      });
+    });
+});
+
 // USER CAN ADD PROFILE
 app.post('/api/pets', (req, res, next) => {
 
