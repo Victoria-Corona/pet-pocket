@@ -58,16 +58,16 @@ export default class App extends React.Component {
         </>;
     } else if (view === 'todoList') {
       renderPage =
-        <>
-          <Header />
-          <TodoList />
-        </>;
+      <>
+        <Header/>
+        <TodoList/>
+      </>;
     } else if (view === 'reminderList') {
       renderPage =
-        <>
-          <Header />
-          <ReminderList setView={this.setView} />
-        </>;
+      <>
+        <Header />
+        <ReminderList setView={this.setView} />
+      </>;
     } else {
       renderPage =
         <>
