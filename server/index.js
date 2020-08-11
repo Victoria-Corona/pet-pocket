@@ -84,6 +84,40 @@ app.post('/api/reminder', (req, res, next) => {
   res.json(result);
 });
 
+// User can delete a reminder
+app.delete('/api/reminder/:petId', (req, res, next) => {
+  const id = parseInt(req.params.petId, 10);
+  if (!Number.isInteger(id) || id <= 0) {
+    return res.status(400).json({
+      error: '"petId" must be a positive integer'
+    });
+  }
+
+  const sql = `
+  delete from "reminder"
+  where "petId" = $1
+  returning *;
+  `;
+
+  const params = [id];
+
+  db.query(sql, params)
+    .then(result => {
+      const reminders = result.rows[0];
+      if (!reminders) {
+        next(new ClientError(`Cannot find reminder with petId of ${id}`, 404));
+      } else {
+        res.status(204).json(reminders);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error occurred.'
+      });
+    });
+});
+
 // User can DELETE a pet profile! :(
 app.delete('/api/pets/:petId', (req, res, next) => {
   const id = parseInt(req.params.petId, 10);
