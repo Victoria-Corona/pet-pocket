@@ -3,6 +3,7 @@ import Homepage from './homepage';
 import MainMenu from './mainMenu';
 import Header from './header';
 import Profile from './profile';
+import Reminder from './reminder';
 import ProfileList from './profile-list';
 import ReminderList from './reminder-list';
 import ProfileForm from './profileForm';
@@ -16,6 +17,7 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
+      profiles: [],
       view: {
         name: 'homepage',
         params: {}
@@ -25,6 +27,13 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    fetch('/api/pets')
+      .then(res => res.json())
+      .then(profiles =>
+        this.setState({
+          profiles: profiles
+        }))
+      .catch(err => console.error(err.message));
   }
 
   setView(name, params) {
@@ -72,12 +81,24 @@ export default class App extends React.Component {
         <ReminderList setView={this.setView} />
         <Footer setView={this.setView} />
       </>;
+    } else if (view === 'profileDetail') {
+      renderPage =
+      <>
+        <Header />
+        <ProfileDetails setView={this.setView} />
+      </>;
     } else if (view === 'reminderForm') {
       renderPage =
       <>
         <Header />
         <ReminderForm setView={this.setView} />
         <Footer setView={this.setView} />
+      </>;
+    } else if (view === 'reminderDetails') {
+      renderPage =
+      <>
+        <Header />
+        <Reminder params={this.state.view.params} />
       </>;
     } else {
       renderPage =
