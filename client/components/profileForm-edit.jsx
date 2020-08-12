@@ -132,13 +132,6 @@ export default class ProfileFormEdit extends React.Component {
     const birthdayDate = (new Intl.DateTimeFormat('en-US', options).format(date)).split('/');
     const dateOfBirth = `${birthdayDate[2]}-${birthdayDate[0]}-${birthdayDate[1]}`;
 
-    // let allergiesValue;
-    // if(!this.state.allergies) {
-    //   allergiesValue = ''
-    // } else {
-    //   allergiesValue= {this.state.allergies}
-    // }
-
     if (this.state.mode === 'medical') {
       return (
         <div>

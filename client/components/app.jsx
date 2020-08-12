@@ -4,15 +4,12 @@ import MainMenu from './mainMenu';
 import Header from './header';
 import Profile from './profile';
 import Reminder from './reminder';
-// import ProfileDetails from './profile-details';
-// import MedicalDetails from './medical-detail';
-// import ReminderDetails from './reminder-details';
 import ProfileList from './profile-list';
 import ReminderList from './reminder-list';
 import ProfileForm from './profileForm';
 import ReminderForm from './reminder-form';
 import TodoList from './todo-list';
-import ProfileDetails from './profile-details';
+import Footer from './footer';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -61,24 +58,28 @@ export default class App extends React.Component {
         <>
           <Header />
           <ProfileList setView={this.setView} />
+          <Footer setView={this.setView}/>
         </>;
     } else if (view === 'profileForm') {
       renderPage =
         <>
           <Header />
-          <ProfileForm profiles={this.state.profiles} setView={this.setView} />
+          <ProfileForm setView={this.setView} />
+          <Footer setView={this.setView} />
         </>;
     } else if (view === 'todoList') {
       renderPage =
       <>
         <Header/>
         <TodoList/>
+        <Footer setView={this.setView} />
       </>;
     } else if (view === 'reminderList') {
       renderPage =
       <>
         <Header />
         <ReminderList setView={this.setView} />
+        <Footer setView={this.setView} />
       </>;
     } else if (view === 'profileDetail') {
       renderPage =
@@ -91,6 +92,7 @@ export default class App extends React.Component {
       <>
         <Header />
         <ReminderForm setView={this.setView} />
+        <Footer setView={this.setView} />
       </>;
     } else if (view === 'reminderDetails') {
       renderPage =
@@ -103,6 +105,7 @@ export default class App extends React.Component {
         <>
           <Header />
           <Profile params={this.state.view.params} />
+          <Footer setView={this.setView} />
         </>;
     }
     return (
