@@ -25,10 +25,12 @@ export default class ReminderForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const newReminder = {};
     fetch('/api/reminder', {
-      method: 'POST'
+      method: 'POST',
+      body: newReminder
     }).then(res => res.json())
-      .then(reminders => this.setState({ reminder: this.props.reminder.concat(reminders) }))
+      .then(newReminder => this.setState({ reminder: this.props.reminder.concat(newReminder) }))
       .catch(error => console.error(error.message));
   }
 
@@ -44,7 +46,7 @@ export default class ReminderForm extends React.Component {
             <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Description</label>
             <input name="description" type="text" className="form-control" placeholder="Enter Description" onChange={this.handleChange} />
             <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Date</label>
-            <input name="date" type="date" className="form-control" placeholder="00/00/0000" onChange={this.handleChange} />
+            <input name="date" type="date" className="form-control" placeholder="mm/dd/yyyy" onChange={this.handleChange} />
             <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Time</label>
             <input name="time" type="time" className="form-control" placeholder="00:00:00" onChange={this.handleChange} />
             <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Repeat Reminder?</label>

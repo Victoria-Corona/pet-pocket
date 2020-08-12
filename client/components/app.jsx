@@ -100,6 +100,12 @@ export default class App extends React.Component {
         <Header />
         <Reminder params={this.state.view.params} />
       </>;
+    } else if (view === 'reminderDetails') {
+      renderPage =
+      <>
+        <Header />
+        <Reminder params={this.state.view.params} />
+      </>;
     } else {
       renderPage =
         <>
