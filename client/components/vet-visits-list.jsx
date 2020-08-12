@@ -1,12 +1,14 @@
 import React from 'react';
 import VetVisit from './vet-visits-list-item';
 import VetVisitDetail from './vet-visit-detail';
+import VetVisitForm from './vet-visit-form';
 
 class VetVisitsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       visits: [],
+      listView: false,
       view: {
         name: 'list',
         params: {}
@@ -14,6 +16,7 @@ class VetVisitsList extends React.Component {
     };
     this.getVisits = this.getVisits.bind(this);
     this.setView = this.setView.bind(this);
+    this.formView = this.formView.bind(this);
   }
 
   getVisits() {
@@ -33,11 +36,35 @@ class VetVisitsList extends React.Component {
     });
   }
 
+  formView() {
+    if (this.state.listView) {
+      this.setState({
+        listView: false
+      });
+    } else {
+      this.setState({
+        listView: true
+      });
+    }
+  }
+
+  renderVisitForm() {
+    return (
+      <VetVisitForm visits={this.state.visits} petId={this.props.params.petId}/>
+    );
+  }
+
   componentDidMount() {
     this.getVisits();
   }
 
   render() {
+
+    if (this.state.listView === true) {
+      return (
+        this.renderVisitForm()
+      );
+    }
 
     if (this.state.view.name === 'list') {
       const listOfVisits = this.state.visits.map(vet => {
@@ -62,6 +89,11 @@ class VetVisitsList extends React.Component {
               <span >Vet</span>
             </li>
           </ul>
+          <div className="p-2 mt-4">
+            <div className="d-flex justify-content-center">
+              <h5 className="font-weight-bold text-uppercase"><i className="fa fa-plus-circle mr-3" aria-hidden="true" onClick={this.formView}></i>Add a Vet Visit</h5>
+            </div>
+          </div>
           <div className="mt-4">
             <h6 className="font-weight-bold pl-3">Vet Visits</h6>
             <div className="d-flex justify-content-center flex-wrap">{listOfVisits}</div>

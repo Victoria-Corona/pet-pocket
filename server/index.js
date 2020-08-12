@@ -232,51 +232,46 @@ app.get('/api/vetVisits/:petId', (req, res, next) => {
 });
 
 // User can GET vetVisit by ID
-app.get('/api/vetVisits/:vetVisitId', (req, res, next) => {
-  const id = parseInt(req.params.petId, 10);
-  if (!Number.isInteger(id) || id <= 0) {
-    return res.status(400).json({
-      error: '"id" must be a positive integer'
-    });
-  }
+// app.get('/api/vetVisits/:vetVisitId', (req, res, next) => {
+//   const id = parseInt(req.params.petId, 10);
+//   if (!Number.isInteger(id) || id <= 0) {
+//     return res.status(400).json({
+//       error: '"id" must be a positive integer'
+//     });
+//   }
 
-  const sql = `
-  select *
-    from "vetVisits"
-    where "vetVisitId" = $1
-  `;
+//   const sql = `
+//   select *
+//     from "vetVisits"
+//     where "vetVisitId" = $1
+//   `;
 
-  const params = [id];
+//   const params = [id];
 
-  db.query(sql, params)
-    .then(result => {
-      const pets = result.rows[0];
-      if (!pets) {
-        next(new ClientError(`Cannot find pet with id of ${id}`, 404));
-      } else {
-        res.status(200).json(pets);
-      }
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({
-        error: 'An unexpected error occured.'
-      });
-    });
-});
+//   db.query(sql, params)
+//     .then(result => {
+//       const pets = result.rows[0];
+//       if (!pets) {
+//         next(new ClientError(`Cannot find pet with id of ${id}`, 404));
+//       } else {
+//         res.status(200).json(pets);
+//       }
+//     })
+//     .catch(err => {
+//       console.error(err);
+//       res.status(500).json({
+//         error: 'An unexpected error occured.'
+//       });
+//     });
+// });
 
 // User can ADD a Vet Visit
 app.post('/api/vetVisits', (req, res, next) => {
+
   const petId = req.body.petId;
   const date = req.body.date;
   const reason = req.body.reason;
   const notes = req.body.notes;
-
-  if (!petId) {
-    return res.status(400).json({
-      error: `Must include a ${petId}`
-    });
-  }
 
   if (!date) {
     return res.status(400).json({
@@ -306,7 +301,7 @@ app.post('/api/vetVisits', (req, res, next) => {
     .catch(err => {
       console.error(err);
       res.status(500).json({
-        error: 'An unexpected error occured'
+        error: 'An unexpected error occurred'
       });
     });
 });

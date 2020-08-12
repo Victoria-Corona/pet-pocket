@@ -74,7 +74,7 @@ export default class App extends React.Component {
       <>
         <Header />
         <ReminderForm setView={this.setView} />
-      </>
+      </>;
     } else {
       renderPage =
         <>
