@@ -273,12 +273,10 @@ COPY public."petProfile" ("petId", "userId", name, "imgUrl", breed, "dateOfBirth
 --
 
 COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", description, "bloodType", allergies, medication, vaccines, "specializedDiet") FROM stdin;
-
-35	1	Daisy	/images/petImage/daisy.jpg	Pomeranian	2018-01-30	snores	\N	\N	\N	\N	\N
-36	1	Dragon	/images/petImage/dragon.jpg	lizard	2020-08-06	very friendly	\N	\N	\N	\N	\N
-37	1	Belvedere	/images/petImage/belvedere.jpg	corgi	2020-02-04	a pup	A	Fleas	Aspirin	Bordatella	soft food
-38	1	Blue	/images/petImage/blue.jpg	bird	2020-07-01	sings well	\N	\N	\N	\N	\N
 34	1	Max	/images/petImage/max.jpg	Pomeranian	2020-07-29	very friendly	\N	\N	\N	\N	\N
+36	1	Dragon	/images/petImage/dragon.jpg	lizard	2020-08-06	very friendly	\N	\N	\N	\N	\N
+35	1	Daisy	/images/petImage/daisy.jpg	Pomeranian	2018-01-10	snores	\N	\N	\N	\N	\N
+38	1	Red	/images/petImage/blue.jpg	bird	2020-07-01	sings well	D	None	\N	\N	\N
 \.
 
 
@@ -312,16 +310,12 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 1	1	2019-10-10	Buddy ate a shoelace, the vet says to schedule another appointment in three days if he doesn't pass it. Urgh! So gross! True story!	Keep shoelaces and ribbons off the floor.
 2	2	2020-05-04	Had to bring CK in for stitches after getting into a fight with the neighborhood cats.	My boy won.
 3	3	2019-10-10	Twix had an ear infection.	Apply ointment and air out.
-4	37	2020-02-02	Routine checkup	
-5	37	2020-04-12	loss of appetite	add chicken and rice in meals, hand feed for three days and if condition does not change, schedule another appointment
-6	38	2020-04-15	routine checkup	
 \.
 
 
 --
 -- Name: pets_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
-
 
 SELECT pg_catalog.setval('public."pets_petId_seq"', 44, true);
 
@@ -344,7 +338,7 @@ SELECT pg_catalog.setval('public."todo_todoId_seq"', 1, false);
 -- Name: vetVisits_vetVisitId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 6, true);
+SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 1, false);
 
 
 --
