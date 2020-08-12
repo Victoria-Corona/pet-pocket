@@ -58,7 +58,6 @@ class MedicalForm extends React.Component {
             <input type="text" name="vaccines" className="form-control" placeholder="Enter Vaccines" onClick={this.handleInputChange}/>
             <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Specialized Diet</label>
             <input type="text" name="diet" className="form-control" placeholder="Optional" onClick={this.handleInputChange}/>
-            <div className="d-flex justify-content-center"><button type="submit" className="nextButton mt-3 text-uppercase" onSubmit={this.handleSubmit}>submit</button></div>
           </div>
         </form>
       </div>

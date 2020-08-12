@@ -87,6 +87,7 @@ export default class ProfileFormEdit extends React.Component {
     };
     const birthdayDate = (new Intl.DateTimeFormat('en-US', options).format(date)).split('/');
     const dateOfBirth = `${birthdayDate[2]}-${birthdayDate[0]}-${birthdayDate[1]}`;
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
