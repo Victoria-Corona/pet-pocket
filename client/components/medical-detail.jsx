@@ -17,7 +17,7 @@ class MedicalDetails extends React.Component {
             <span onClick={() => this.props.showVisits('visits')}>Vet</span>
           </li>
         </ul>
-        <div className="d-flex flex-wrap">
+        <div className="d-flex flex-wrap mb-2">
           <p className="ml-2 mb-1 font-weight-bold">Name of Pet:</p>
           <div className="mb-2 medicalListItem text-uppercase bg-white">
             <div className="d-flex flex-wrap p-1 pl-4">{this.props.params.name}</div>

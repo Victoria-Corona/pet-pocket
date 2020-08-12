@@ -4,14 +4,12 @@ import MainMenu from './mainMenu';
 import Header from './header';
 import Profile from './profile';
 import Reminder from './reminder';
-// import ProfileDetails from './profile-details';
-// import MedicalDetails from './medical-detail';
-// import ReminderDetails from './reminder-details';
 import ProfileList from './profile-list';
 import ReminderList from './reminder-list';
 import ProfileForm from './profileForm';
 import ReminderForm from './reminder-form';
 import TodoList from './todo-list';
+import Footer from './footer';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -19,6 +17,7 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
+      profiles: [],
       view: {
         name: 'homepage',
         params: {}
@@ -28,6 +27,13 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    fetch('/api/pets')
+      .then(res => res.json())
+      .then(profiles =>
+        this.setState({
+          profiles: profiles
+        }))
+      .catch(err => console.error(err.message));
   }
 
   setView(name, params) {
@@ -52,30 +58,47 @@ export default class App extends React.Component {
         <>
           <Header />
           <ProfileList setView={this.setView} />
+          <Footer setView={this.setView}/>
         </>;
     } else if (view === 'profileForm') {
       renderPage =
         <>
           <Header />
           <ProfileForm setView={this.setView} />
+          <Footer setView={this.setView} />
         </>;
     } else if (view === 'todoList') {
       renderPage =
       <>
         <Header/>
         <TodoList/>
+        <Footer setView={this.setView} />
       </>;
     } else if (view === 'reminderList') {
       renderPage =
       <>
         <Header />
         <ReminderList setView={this.setView} />
+        <Footer setView={this.setView} />
+      </>;
+    } else if (view === 'profileDetail') {
+      renderPage =
+      <>
+        <Header />
+        <ProfileDetails setView={this.setView} />
       </>;
     } else if (view === 'reminderForm') {
       renderPage =
       <>
         <Header />
         <ReminderForm setView={this.setView} />
+        <Footer setView={this.setView} />
+      </>;
+    } else if (view === 'reminderDetails') {
+      renderPage =
+      <>
+        <Header />
+        <Reminder params={this.state.view.params} />
       </>;
     } else if (view === 'reminderDetails') {
       renderPage =
@@ -88,6 +111,7 @@ export default class App extends React.Component {
         <>
           <Header />
           <Profile params={this.state.view.params} />
+          <Footer setView={this.setView} />
         </>;
     }
     return (

@@ -13,7 +13,7 @@ export default class ProfileDetails extends React.Component {
     const birthdayDate = (new Intl.DateTimeFormat('en-US', options).format(date));
 
     return (
-      <div>
+      <div className="mb-2">
         <div>
           <ul className="nav my-3 d-flex justify-content-between text-uppercase text-white text-center">
             <li className="navButton active p-2 ml-2">
@@ -42,10 +42,6 @@ export default class ProfileDetails extends React.Component {
           <div className="bg-white mb-4">
             <div className="p-1"><i className="fas fa-pencil-alt ml-2 fa-lg p-3"></i> {this.props.params.description}</div>
           </div>
-        </div>
-        <div className="profileControls">
-          <button type="button" className="profileButtonDelete" id={this.props.params.petId}>DELETE</button>
-          <button type="button" className="profileButtonUpdate" id={this.props.params.petId}>UPDATE</button>
         </div>
       </div>
     );

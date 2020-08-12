@@ -49,7 +49,7 @@ export default class ProfileList extends React.Component {
 
   renderNewProfile() {
     return (
-      <ProfileForm profiles={this.state.profiles}/>
+      <ProfileForm profiles={this.state.profiles} setView={this.props.setView}/>
     );
   }
 
@@ -60,7 +60,8 @@ export default class ProfileList extends React.Component {
         petId={profile.petId}
         img={profile.imgUrl}
         name={profile.name}
-        setView={this.props.setView}/>);
+        setView={this.props.setView}
+      />);
     return (
       <>
         <div className="p-2 mt-4">
