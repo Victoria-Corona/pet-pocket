@@ -66,7 +66,6 @@ export default class ProfileFormEdit extends React.Component {
     const vaccines = this.state.vaccines;
     const medication = this.state.medication;
     const specializedDiet = this.state.specializedDiet;
-    const medication = this.state.medication;
 
     if (name) {
       newProfile.append('name', name);
