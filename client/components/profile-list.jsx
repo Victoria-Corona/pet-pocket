@@ -49,7 +49,7 @@ export default class ProfileList extends React.Component {
 
   renderNewProfile() {
     return (
-      <ProfileForm profiles={this.state.profiles}/>
+      <ProfileForm profiles={this.state.profiles} setView={this.props.setView}/>
     );
   }
 

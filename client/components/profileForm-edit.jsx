@@ -16,7 +16,6 @@ export default class ProfileFormEdit extends React.Component {
       vaccines: this.props.petProfile.vaccines,
       specializedDiet: this.props.petProfile.specializedDiet,
       mode: 'basic'
-
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleImgChange = this.handleImgChange.bind(this);
@@ -65,6 +64,7 @@ export default class ProfileFormEdit extends React.Component {
     const bloodType = this.state.bloodType;
     const allergies = this.state.allergies;
     const vaccines = this.state.vaccines;
+    const medication = this.state.medication;
     const specializedDiet = this.state.specializedDiet;
 
     if (name) {
@@ -96,7 +96,10 @@ export default class ProfileFormEdit extends React.Component {
       newProfile.append('vaccines', vaccines);
     }
     if (specializedDiet) {
-      specializedDiet.append('specializedDiet', specializedDiet);
+      newProfile.append('specializedDiet', specializedDiet);
+    }
+    if (medication) {
+      newProfile.append('medication', medication);
     }
 
     fetch(`/api/pets/${this.props.petProfile.petId}`, {
@@ -104,7 +107,7 @@ export default class ProfileFormEdit extends React.Component {
       body: newProfile
     })
       .then(res => res.json())
-      .then(profile => this.setState({}))
+      .then(() => this.props.changeView('profileList'))
       .catch(error => console.error(error.message));
   }
 
@@ -112,14 +115,9 @@ export default class ProfileFormEdit extends React.Component {
     fetch(`/api/pets/${this.props.petProfile.petId}`, {
       method: 'DELETE'
     })
-      .then(res => {
-        const copyProfiles = this.props.profiles.slice();
-        const newProfiles = [];
-        const index = copyProfiles.findIndex(profiles => this.props.petProfile.petId === profiles.petId);
-        newProfiles.push(index);
-        this.setState({ profiles: newProfiles });
-      })
+      .then(this.props.changeView('profileList'))
       .catch(error => console.error(error.message));
+
   }
 
   render() {
@@ -139,16 +137,16 @@ export default class ProfileFormEdit extends React.Component {
           <form key={this.state.mode} onSubmit={this.handleSubmit} >
             <div className="form-group">
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Blood Type</label>
-              <input type="text" name="bloodType" className="form-control" placeholder="DEA-1.1" onChange={this.handleChange} />
+              <input type="text" name="bloodType" className="form-control" placeholder="DEA-1.1" value={this.state.bloodType || ''} onChange={this.handleChange} />
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Allergies</label>
-              <input type="text" name="allergies" className="form-control" placeholder="Optional" onChange={this.handleChange} />
+              <input type="text" name="allergies" className="form-control" placeholder="Optional" value={this.state.allergies || ''} onChange={this.handleChange} />
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Medication</label>
-              <input type="text" name="medication" className="form-control" placeholder="Optional" onChange={this.handleChange} />
+              <input type="text" name="medication" className="form-control" placeholder="Optional" value={this.state.medication || ''} onChange={this.handleChange} />
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Vaccines</label>
-              <input type="text" name="vaccines" className="form-control" placeholder="Enter Vaccines" onChange={this.handleChange} />
+              <input type="text" name="vaccines" className="form-control" placeholder="Enter Vaccines" value={this.state.vaccines || ''} onChange={this.handleChange} />
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Specialized Diet</label>
-              <input type="text" name="diet" className="form-control" placeholder="Optional" onChange={this.handleChange} />
-              <div className="d-flex justify-content-center mt-2"><button type="submit" className="profileButtonDelete mt-3 text-uppercase" onClick ={() => this.handleDelete()} >DELETE</button><button type="submit" className="profileButtonUpdate mt-3 text-uppercase" >UPDATE</button></div>
+              <input type="text" name="specializedDiet" className="form-control" placeholder="Optional" value ={this.state.specializedDiet || ''} onChange={this.handleChange} />
+              <div className="d-flex justify-content-center mt-2"><button type="button" className="profileButtonDelete mt-3 text-uppercase" onClick ={() => this.handleDelete()} >DELETE</button><button type="submit" className="profileButtonUpdate mt-3 text-uppercase" >UPDATE</button></div>
               <div className="profileControls">
               </div>
             </div>

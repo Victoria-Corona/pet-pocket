@@ -10,6 +10,7 @@ import ReminderList from './reminder-list';
 import ProfileForm from './profileForm';
 import ReminderForm from './reminder-form';
 import TodoList from './todo-list';
+import ProfileDetails from './profile-details';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -76,6 +77,12 @@ export default class App extends React.Component {
       <>
         <Header />
         <ReminderList setView={this.setView} />
+      </>;
+    } else if (view === 'profileDetail') {
+      renderPage =
+      <>
+        <Header />
+        <ProfileDetails setView={this.setView} />
       </>;
     } else if (view === 'reminderForm') {
       renderPage =

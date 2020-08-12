@@ -5,14 +5,14 @@ import ProfileFormEdit from './profileForm-edit';
 // import ProfileForm from './profileForm';
 
 import VetVisitsList from './vet-visits-list';
+import ProfileList from './profile-list';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       petInfo: null,
-      currentView: 'details',
-      profiles: []
+      currentView: 'details'
     };
     this.changeView = this.changeView.bind(this);
 
@@ -20,17 +20,6 @@ class Profile extends React.Component {
 
   componentDidMount() {
     this.getPetProfile();
-    this.getProfiles();
-  }
-
-  getProfiles() {
-    fetch('/api/pets')
-      .then(res => res.json())
-      .then(profiles =>
-        this.setState({
-          profiles: profiles
-        }))
-      .catch(err => console.error(err.message));
   }
 
   getPetProfile() {
@@ -52,9 +41,11 @@ class Profile extends React.Component {
     } else if (this.state.currentView === 'visits') {
       return <VetVisitsList showDetails={this.changeView} showMedical={this.changeView} params={this.state.petInfo} showHistory={this.changeView}/>;
     } else if (this.state.currentView === 'edit') {
-      return <ProfileFormEdit petProfile={this.state.petInfo} profiles={this.state.profiles} petId={this.props.params.petId}/>;
+      return <ProfileFormEdit petProfile={this.state.petInfo} changeView={this.changeView} petId={this.props.params.petId}/>;
     } else if (this.state.currentView === 'details') {
       return <ProfileDetails showMedical={this.changeView} showVisits={this.changeView} params={this.state.petInfo}/>;
+    } else if (this.state.currentView === 'profileList') {
+      return <ProfileList changeView = {this.changeView} petId={this.props.params.petId}/>;
     }
   }
 
