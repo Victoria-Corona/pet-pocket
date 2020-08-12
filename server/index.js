@@ -118,7 +118,7 @@ app.delete('/api/reminder/:petId', (req, res, next) => {
     });
 });
 
-// User can DELETE a pet profile! :(
+// User can DELETE a pet profile
 app.delete('/api/pets/:petId', (req, res, next) => {
   const id = parseInt(req.params.petId, 10);
   if (!Number.isInteger(id) || id <= 0) {

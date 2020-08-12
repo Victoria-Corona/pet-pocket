@@ -16,13 +16,13 @@ export default class ProfileFormEdit extends React.Component {
       vaccines: this.props.petProfile.vaccines,
       specializedDiet: this.props.petProfile.specializedDiet,
       mode: 'basic'
-
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleImgChange = this.handleImgChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleImgClick = this.handleImgClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.imageFileInput = React.createRef();
   }
 
@@ -64,6 +64,7 @@ export default class ProfileFormEdit extends React.Component {
     const bloodType = this.state.bloodType;
     const allergies = this.state.allergies;
     const vaccines = this.state.vaccines;
+    const medication = this.state.medication;
     const specializedDiet = this.state.specializedDiet;
     const medication = this.state.medication;
 
@@ -107,8 +108,17 @@ export default class ProfileFormEdit extends React.Component {
       body: newProfile
     })
       .then(res => res.json())
-      .then(profile => this.setState({}))
+      .then(() => this.props.changeView('profileList'))
       .catch(error => console.error(error.message));
+  }
+
+  handleDelete() {
+    fetch(`/api/pets/${this.props.petProfile.petId}`, {
+      method: 'DELETE'
+    })
+      .then(this.props.changeView('profileList'))
+      .catch(error => console.error(error.message));
+
   }
 
   render() {
@@ -143,8 +153,8 @@ export default class ProfileFormEdit extends React.Component {
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Vaccines</label>
               <input type="text" name="vaccines" className="form-control" placeholder="Enter Vaccines" value={this.state.vaccines || ''} onChange={this.handleChange} />
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Specialized Diet</label>
-              <input type="text" name="specializedDiet" className="form-control" placeholder="Optional" value={this.state.specializedDiet || ''} onChange={this.handleChange} />
-              <div className="d-flex justify-content-center mt-2"><button type="submit" className="profileButtonDelete mt-3 text-uppercase" >DELETE</button><button type="submit" className="profileButtonUpdate mt-3 text-uppercase" >UPDATE</button></div>
+              <input type="text" name="specializedDiet" className="form-control" placeholder="Optional" value ={this.state.specializedDiet || ''} onChange={this.handleChange} />
+              <div className="d-flex justify-content-center mt-2"><button type="button" className="profileButtonDelete mt-3 text-uppercase" onClick ={() => this.handleDelete()} >DELETE</button><button type="submit" className="profileButtonUpdate mt-3 text-uppercase" >UPDATE</button></div>
               <div className="profileControls">
               </div>
             </div>
@@ -154,7 +164,7 @@ export default class ProfileFormEdit extends React.Component {
     } else {
       return (
         <div>
-          <form onSubmit={this.handleSubmit}>
+          <form key={this.state.mode} onSubmit={this.handleSubmit}>
             <div className="form-group">
               <input name="image" type="file" accept="image/*" className="form-control-file ml-5 mt-3" ref={this.imageFileInput} onChange={this.handleImgChange} style={{ display: 'none' }} />
               <div className="img-container">

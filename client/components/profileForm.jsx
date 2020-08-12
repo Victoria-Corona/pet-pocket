@@ -1,4 +1,5 @@
 import React from 'react';
+
 // import MedicalForm from './medical-form';
 
 export default class ProfileForm extends React.Component {
@@ -64,6 +65,7 @@ export default class ProfileForm extends React.Component {
     const allergies = this.state.allergies;
     const vaccines = this.state.vaccines;
     const specializedDiet = this.state.specializedDiet;
+    const medication = this.state.medication;
 
     if (name) {
       newProfile.append('name', name);
@@ -90,13 +92,16 @@ export default class ProfileForm extends React.Component {
       newProfile.append('vaccines', vaccines);
     }
     if (specializedDiet) {
-      specializedDiet.append('specializedDiet', specializedDiet);
+      newProfile.append('specializedDiet', specializedDiet);
+    }
+    if (medication) {
+      newProfile.append('medication', medication);
     }
     fetch('api/pets', {
       method: 'POST',
       body: newProfile
     }).then(res => res.json())
-      .then(profile => this.setState({ profiles: this.props.profiles.concat(profile) }))
+      .then(() => this.props.setView('profileList', {}))
       .catch(error => console.error(error.message));
   }
 
@@ -115,7 +120,7 @@ export default class ProfileForm extends React.Component {
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Vaccines</label>
               <input type="text" name="vaccines" className="form-control" placeholder="Enter Vaccines" onChange={this.handleChange} />
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Specialized Diet</label>
-              <input type="text" name="diet" className="form-control" placeholder="Optional" onChange={this.handleChange} />
+              <input type="text" name="specializedDiet" className="form-control" placeholder="Optional" onChange={this.handleChange} />
               <div className="d-flex justify-content-center"><button type="submit" className="nextButton mt-3 text-uppercase" >submit</button></div>
             </div>
           </form>
@@ -144,6 +149,6 @@ export default class ProfileForm extends React.Component {
         </div>
       );
     }
-  }
 
+  }
 }
