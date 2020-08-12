@@ -43,10 +43,6 @@ export default class ProfileDetails extends React.Component {
             <div className="p-1"><i className="fas fa-pencil-alt ml-2 fa-lg p-3"></i> {this.props.params.description}</div>
           </div>
         </div>
-        <div className="profileControls">
-          <button type="button" className="profileButtonDelete" id={this.props.params.petId}>DELETE</button>
-          <button type="button" className="profileButtonUpdate" id={this.props.params.petId}>UPDATE</button>
-        </div>
       </div>
     );
   }

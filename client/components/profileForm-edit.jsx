@@ -23,6 +23,7 @@ export default class ProfileFormEdit extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleImgClick = this.handleImgClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.imageFileInput = React.createRef();
   }
 
@@ -107,6 +108,21 @@ export default class ProfileFormEdit extends React.Component {
       .catch(error => console.error(error.message));
   }
 
+  handleDelete() {
+    fetch(`/api/pets/${this.props.petProfile.petId}`, {
+      method: 'DELETE'
+    })
+      .then(res => res.json())
+      .then(res => {
+        const copyProfiles = this.state.profiles.slice();
+        const newProfiles = [];
+        const index = copyProfiles.findIndex(profiles => this.props.petProfile.petId === profiles.petId);
+        newProfiles.push(index);
+        this.setState({ profiles: newProfiles });
+      })
+      .catch(error => console.error(error.message));
+  }
+
   render() {
 
     const birthday = this.state.dateOfBirth;
@@ -133,7 +149,7 @@ export default class ProfileFormEdit extends React.Component {
               <input type="text" name="vaccines" className="form-control" placeholder="Enter Vaccines" onChange={this.handleChange} />
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Specialized Diet</label>
               <input type="text" name="diet" className="form-control" placeholder="Optional" onChange={this.handleChange} />
-              <div className="d-flex justify-content-center mt-2"><button type="submit" className="profileButtonDelete mt-3 text-uppercase" >DELETE</button><button type="submit" className="profileButtonUpdate mt-3 text-uppercase" >UPDATE</button></div>
+              <div className="d-flex justify-content-center mt-2"><button type="submit" className="profileButtonDelete mt-3 text-uppercase" onClick ={() => this.handleDelete()} >DELETE</button><button type="submit" className="profileButtonUpdate mt-3 text-uppercase" >UPDATE</button></div>
               <div className="profileControls">
               </div>
             </div>
