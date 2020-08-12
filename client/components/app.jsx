@@ -49,42 +49,42 @@ export default class App extends React.Component {
         <>
           <Header />
           <ProfileList setView={this.setView} />
-          <Footer/>
+          <Footer setView={this.setView}/>
         </>;
     } else if (view === 'profileForm') {
       renderPage =
         <>
           <Header />
           <ProfileForm setView={this.setView} />
-          <Footer />
+          <Footer setView={this.setView} />
         </>;
     } else if (view === 'todoList') {
       renderPage =
       <>
         <Header/>
         <TodoList/>
-        <Footer />
+        <Footer setView={this.setView} />
       </>;
     } else if (view === 'reminderList') {
       renderPage =
       <>
         <Header />
         <ReminderList setView={this.setView} />
-        <Footer />
+        <Footer setView={this.setView} />
       </>;
     } else if (view === 'reminderForm') {
       renderPage =
       <>
         <Header />
         <ReminderForm setView={this.setView} />
-        <Footer />
+        <Footer setView={this.setView} />
       </>;
     } else {
       renderPage =
         <>
           <Header />
           <Profile params={this.state.view.params} />
-          <Footer />
+          <Footer setView={this.setView} />
         </>;
     }
     return (
