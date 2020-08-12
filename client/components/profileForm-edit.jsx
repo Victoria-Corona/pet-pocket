@@ -112,9 +112,8 @@ export default class ProfileFormEdit extends React.Component {
     fetch(`/api/pets/${this.props.petProfile.petId}`, {
       method: 'DELETE'
     })
-      .then(res => res.json())
       .then(res => {
-        const copyProfiles = this.state.profiles.slice();
+        const copyProfiles = this.props.profiles.slice();
         const newProfiles = [];
         const index = copyProfiles.findIndex(profiles => this.props.petProfile.petId === profiles.petId);
         newProfiles.push(index);
@@ -159,7 +158,7 @@ export default class ProfileFormEdit extends React.Component {
     } else {
       return (
         <div>
-          <form onSubmit={this.handleSubmit}>
+          <form key={this.state.mode} onSubmit={this.handleSubmit}>
             <div className="form-group">
               <input name="image" type="file" accept="image/*" className="form-control-file ml-5 mt-3" ref={this.imageFileInput} onChange={this.handleImgChange} style={{ display: 'none' }} />
               <div className="img-container">

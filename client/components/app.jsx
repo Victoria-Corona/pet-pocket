@@ -17,6 +17,7 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
+      profiles: [],
       view: {
         name: 'homepage',
         params: {}
@@ -26,6 +27,13 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    fetch('/api/pets')
+      .then(res => res.json())
+      .then(profiles =>
+        this.setState({
+          profiles: profiles
+        }))
+      .catch(err => console.error(err.message));
   }
 
   setView(name, params) {
@@ -55,7 +63,7 @@ export default class App extends React.Component {
       renderPage =
         <>
           <Header />
-          <ProfileForm setView={this.setView} />
+          <ProfileForm profiles={this.state.profiles} setView={this.setView} />
         </>;
     } else if (view === 'todoList') {
       renderPage =

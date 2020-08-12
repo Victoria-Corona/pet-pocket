@@ -61,7 +61,7 @@ export default class ProfileList extends React.Component {
         img={profile.imgUrl}
         name={profile.name}
         setView={this.props.setView}
-        profile ={this.state.profiles}/>);
+      />);
     return (
       <>
         <div className="p-2 mt-4">
