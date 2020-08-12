@@ -247,10 +247,12 @@ box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.15);
 border: none;
 margin: 1rem;
 cursor: pointer;
+border: solid 1px #F25757;
 }
 
 .profileButtonUpdate {
   background: #6CA6C1;
+  border: solid 1px #6CA6C1;
 }
 
 .profileButtonDelete:focus,

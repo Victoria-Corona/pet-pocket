@@ -84,6 +84,40 @@ app.post('/api/reminder', (req, res, next) => {
   res.json(result);
 });
 
+// User can delete a reminder
+app.delete('/api/reminder/:petId', (req, res, next) => {
+  const id = parseInt(req.params.petId, 10);
+  if (!Number.isInteger(id) || id <= 0) {
+    return res.status(400).json({
+      error: '"petId" must be a positive integer'
+    });
+  }
+
+  const sql = `
+  delete from "reminder"
+  where "petId" = $1
+  returning *;
+  `;
+
+  const params = [id];
+
+  db.query(sql, params)
+    .then(result => {
+      const reminders = result.rows[0];
+      if (!reminders) {
+        next(new ClientError(`Cannot find reminder with petId of ${id}`, 404));
+      } else {
+        res.status(204).json(reminders);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error occurred.'
+      });
+    });
+});
+
 // User can DELETE a pet profile! :(
 app.delete('/api/pets/:petId', (req, res, next) => {
   const id = parseInt(req.params.petId, 10);
@@ -383,13 +417,18 @@ app.put('/api/pets/:petId', express.urlencoded({ extended: true }), (req, res, n
       const imgUrl = req.file
         ? `/images/petImage/${req.file.originalname}`
         : null;
+      const medication = req.body.medication;
+      const allergies = req.body.allergies;
+      const specializedDiet = req.body.specializedDiet;
+      const vaccines = req.body.vaccines;
+      const bloodType = req.body.bloodType;
       const sql = `
       update "pets"
-      set "imgUrl" = coalesce($1, "imgUrl"), "name" = $2, "breed" = $3, "dateOfBirth" = $4, "description" = $5
-      where "petId" = $6
+      set "imgUrl" = coalesce($1, "imgUrl"), "name" = $2, "breed" = $3, "dateOfBirth" = $4, "description" = $5, "medication" = $6, "allergies" = $7, "specializedDiet" = $8, "vaccines" = $9, "bloodType" = $10
+      where "petId" = $11
       returning *
       `;
-      const params = [imgUrl, name, breed, dateOfBirth, description, petId];
+      const params = [imgUrl, name, breed, dateOfBirth, description, medication, allergies, specializedDiet, vaccines, bloodType, petId];
       db.query(sql, params)
         .then(result => {
           const profile = result.rows[0];

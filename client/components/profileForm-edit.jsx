@@ -9,14 +9,27 @@ export default class ProfileFormEdit extends React.Component {
       dateOfBirth: this.props.petProfile.dateOfBirth,
       description: this.props.petProfile.description,
       imgFilePreview: this.props.petProfile.imgUrl,
-      image: null
+      image: null,
+      bloodType: this.props.petProfile.bloodType,
+      allergies: this.props.petProfile.allergies,
+      medication: this.props.petProfile.medication,
+      vaccines: this.props.petProfile.vaccines,
+      specializedDiet: this.props.petProfile.specializedDiet,
+      mode: 'basic'
 
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleImgChange = this.handleImgChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleImgClick = this.handleImgClick.bind(this);
+    this.handleButtonClick = this.handleButtonClick.bind(this);
     this.imageFileInput = React.createRef();
+  }
+
+  handleButtonClick() {
+    this.setState({
+      mode: 'medical'
+    });
   }
 
   handleChange(event) {
@@ -48,6 +61,11 @@ export default class ProfileFormEdit extends React.Component {
     const dateOfBirth = this.state.dateOfBirth;
     const description = this.state.description;
     const image = this.state.image;
+    const bloodType = this.state.bloodType;
+    const allergies = this.state.allergies;
+    const vaccines = this.state.vaccines;
+    const specializedDiet = this.state.specializedDiet;
+
     if (name) {
       newProfile.append('name', name);
     }
@@ -67,12 +85,25 @@ export default class ProfileFormEdit extends React.Component {
     if (image) {
       newProfile.append('image', image);
     }
+    if (bloodType) {
+      newProfile.append('bloodType', bloodType);
+    }
+    if (allergies) {
+      newProfile.append('allergies', allergies);
+    }
+    if (vaccines) {
+      newProfile.append('vaccines', vaccines);
+    }
+    if (specializedDiet) {
+      specializedDiet.append('specializedDiet', specializedDiet);
+    }
+
     fetch(`/api/pets/${this.props.petProfile.petId}`, {
       method: 'PUT',
       body: newProfile
     })
       .then(res => res.json())
-      .then(profile => this.setState({ }))
+      .then(profile => this.setState({}))
       .catch(error => console.error(error.message));
   }
 
@@ -87,27 +118,50 @@ export default class ProfileFormEdit extends React.Component {
     };
     const birthdayDate = (new Intl.DateTimeFormat('en-US', options).format(date)).split('/');
     const dateOfBirth = `${birthdayDate[2]}-${birthdayDate[0]}-${birthdayDate[1]}`;
-
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <input name="image" type="file" accept="image/*" className="form-control-file ml-5 mt-3" ref={this.imageFileInput} onChange={this.handleImgChange} style={{ display: 'none' }} />
-            <div className="img-container">
-              <img className="filledImage mx-auto d-block mt-3" onClick={this.handleImgClick} src={this.state.imgFilePreview} ></img>
-              <i className="fa fa-plus-circle fa-2x img-icon" aria-hidden="true"></i></div>
-            <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Name</label>
-            <input name="name" type="text" className="form-control" placeholder="Enter Name" value={this.state.name} onChange={this.handleChange} />
-            <label htmlFor="" style={{ fontWeight: 'bold' }} className="ml-2">Type of Breed</label>
-            <input name="breed" type="text" className="form-control" value={this.state.breed} onChange={this.handleChange} />
-            <label htmlFor="" style={{ fontWeight: 'bold' }} className="ml-2">Date of Birth</label>
-            <input name="dateOfBirth" type="date" className="form-control" placeholder="00/00/0000" value={dateOfBirth} onChange={this.handleChange} />
-            <label htmlFor="description" style={{ fontWeight: 'bold' }} className="ml-2">Description</label>
-            <input name="description" type="text" className="form-control" placeholder="very friendly, snores" value={this.state.description} onChange={this.handleChange} />
-            <div className="d-flex justify-content-center"><button type="submit" className="nextButton mt-3" >NEXT</button></div>
-          </div>
-        </form>
-      </div>
-    );
+    if (this.state.mode === 'medical') {
+      return (
+        <div>
+          <form key={this.state.mode} onSubmit={this.handleSubmit} >
+            <div className="form-group">
+              <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Blood Type</label>
+              <input type="text" name="bloodType" className="form-control" placeholder="DEA-1.1" onChange={this.handleChange} />
+              <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Allergies</label>
+              <input type="text" name="allergies" className="form-control" placeholder="Optional" onChange={this.handleChange} />
+              <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Medication</label>
+              <input type="text" name="medication" className="form-control" placeholder="Optional" onChange={this.handleChange} />
+              <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Vaccines</label>
+              <input type="text" name="vaccines" className="form-control" placeholder="Enter Vaccines" onChange={this.handleChange} />
+              <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Specialized Diet</label>
+              <input type="text" name="diet" className="form-control" placeholder="Optional" onChange={this.handleChange} />
+              <div className="d-flex justify-content-center mt-2"><button type="submit" className="profileButtonDelete mt-3 text-uppercase" >DELETE</button><button type="submit" className="profileButtonUpdate mt-3 text-uppercase" >UPDATE</button></div>
+              <div className="profileControls">
+              </div>
+            </div>
+          </form>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <input name="image" type="file" accept="image/*" className="form-control-file ml-5 mt-3" ref={this.imageFileInput} onChange={this.handleImgChange} style={{ display: 'none' }} />
+              <div className="img-container">
+                <img className="filledImage mx-auto d-block mt-3" onClick={this.handleImgClick} src={this.state.imgFilePreview} ></img>
+                <i className="fa fa-plus-circle fa-2x img-icon" aria-hidden="true"></i></div>
+              <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Name</label>
+              <input name="name" type="text" className="form-control" placeholder="Enter Name" value={this.state.name} onChange={this.handleChange} />
+              <label htmlFor="" style={{ fontWeight: 'bold' }} className="ml-2">Type of Breed</label>
+              <input name="breed" type="text" className="form-control" value={this.state.breed} onChange={this.handleChange} />
+              <label htmlFor="" style={{ fontWeight: 'bold' }} className="ml-2">Date of Birth</label>
+              <input name="dateOfBirth" type="date" className="form-control" placeholder="00/00/0000" value={dateOfBirth} onChange={this.handleChange} />
+              <label htmlFor="description" style={{ fontWeight: 'bold' }} className="ml-2">Description</label>
+              <input name="description" type="text" className="form-control" placeholder="very friendly, snores" value={this.state.description} onChange={this.handleChange} />
+              <div className="d-flex justify-content-center"><button type="button" className="nextButton mt-3" onClick={() => this.handleButtonClick()} >NEXT</button></div>
+            </div>
+          </form>
+        </div>
+      );
+    }
   }
 }
