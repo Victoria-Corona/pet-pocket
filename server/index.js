@@ -451,8 +451,8 @@ app.get('/api/todo', (req, res, next) => {
   `;
   db.query(sql)
     .then(result => {
-      const todo = result.rows;
-      res.status(200).json(todo);
+      const todos = result.rows;
+      res.status(200).json(todos);
     })
     .catch(error => {
       console.error(error);
@@ -461,7 +461,28 @@ app.get('/api/todo', (req, res, next) => {
       });
     });
 });
-
+// USER CAN ADD TODO
+app.post('/api/todo', (req, res, next) => {
+  const userId = 1;
+  const todo = req.body.todo;
+  const sql = `
+  insert into "todo" ("userId", "todo")
+  values($1, $2)
+  returning *
+  `;
+  const params = [userId, todo];
+  db.query(sql, params)
+    .then(result => {
+      const todo = result.rows[0];
+      res.status(201).json(todo);
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).json({
+        error: 'An unexpected error occured'
+      });
+    });
+});
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
