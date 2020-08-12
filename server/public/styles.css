@@ -233,12 +233,17 @@ body {
   border-radius: 50%;
 }
 
-.profileControls {
+.reminderDetails {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.profileControls, .reminderControls {
   width: 100%;
   margin-left: 2rem;
 }
 
-.profileButtonDelete, .profileButtonUpdate {
+.profileButtonDelete, .profileButtonUpdate , .reminderButtonDelete, .reminderButtonUpdate{
 width: 125px;
 height: 40px;
 background-color: #F25757;
@@ -250,13 +255,15 @@ cursor: pointer;
 border: solid 1px #F25757;
 }
 
-.profileButtonUpdate {
+.profileButtonUpdate, .reminderButtonUpdate {
   background: #6CA6C1;
   border: solid 1px #6CA6C1;
 }
 
 .profileButtonDelete:focus,
-.profileButtonUpdate:focus {
+.profileButtonUpdate:focus,
+.reminderButtonDelete:focus,
+.reminderButtonUpdate:focus {
   outline: none;
 }
 
