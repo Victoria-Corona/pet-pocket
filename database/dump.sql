@@ -273,10 +273,8 @@ COPY public."petProfile" ("petId", "userId", name, "imgUrl", breed, "dateOfBirth
 --
 
 COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", description, "bloodType", allergies, medication, vaccines, "specializedDiet") FROM stdin;
-34	1	Max	/images/petImage/max.jpg	Pomeranian	2020-07-29	very friendly	\N	\N	\N	\N	\N
-36	1	Dragon	/images/petImage/dragon.jpg	lizard	2020-08-06	very friendly	\N	\N	\N	\N	\N
-35	1	Daisy	/images/petImage/daisy.jpg	Pomeranian	2018-01-10	snores	\N	\N	\N	\N	\N
-38	1	Red	/images/petImage/blue.jpg	bird	2020-07-01	sings well	D	None	\N	\N	\N
+37	1	Belvedere	/images/petImage/belvedere.jpg	corgi	2020-02-04	a pup	A	Fleas	Aspirin	Bordatella	soft food
+38	1	Leilani	/images/petImage/Leilani.jpg	dobermann	2020-02-04	a tiny pup	A	Fleas	Aspirin	Bordatella	soft food
 \.
 
 
@@ -310,6 +308,15 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 1	1	2019-10-10	Buddy ate a shoelace, the vet says to schedule another appointment in three days if he doesn't pass it. Urgh! So gross! True story!	Keep shoelaces and ribbons off the floor.
 2	2	2020-05-04	Had to bring CK in for stitches after getting into a fight with the neighborhood cats.	My boy won.
 3	3	2019-10-10	Twix had an ear infection.	Apply ointment and air out.
+4	37	2020-02-02	Routine checkup	
+5	37	2020-04-12	loss of appetite	add chicken and rice in meals, hand feed for three days and if condition does not change, schedule another appointment
+6	38	2020-04-15	routine checkup	
+14	37	2020-02-02	routine checkup	
+15	37	2020-03-02	throwing up	
+17	37	2020-03-04	routine	
+18	37	2020-06-12	Routine check up	Buy chewable nutritional pills
+19	37	2020-06-12	Routine check up	Buy chewable nutritional pills
+20	38	2020-02-03	routine	
 \.
 
 
@@ -317,7 +324,7 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 -- Name: pets_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."pets_petId_seq"', 44, true);
+SELECT pg_catalog.setval('public."pets_petId_seq"', 39, true);
 
 
 --
@@ -338,7 +345,7 @@ SELECT pg_catalog.setval('public."todo_todoId_seq"', 1, false);
 -- Name: vetVisits_vetVisitId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 1, false);
+SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 20, true);
 
 
 --
