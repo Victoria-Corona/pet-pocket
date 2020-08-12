@@ -65,6 +65,7 @@ export default class ProfileFormEdit extends React.Component {
     const allergies = this.state.allergies;
     const vaccines = this.state.vaccines;
     const specializedDiet = this.state.specializedDiet;
+    const medication = this.state.medication;
 
     if (name) {
       newProfile.append('name', name);
@@ -95,7 +96,10 @@ export default class ProfileFormEdit extends React.Component {
       newProfile.append('vaccines', vaccines);
     }
     if (specializedDiet) {
-      specializedDiet.append('specializedDiet', specializedDiet);
+      newProfile.append('specializedDiet', specializedDiet);
+    }
+    if (medication) {
+      newProfile.append('medication', medication);
     }
 
     fetch(`/api/pets/${this.props.petProfile.petId}`, {
@@ -108,7 +112,6 @@ export default class ProfileFormEdit extends React.Component {
   }
 
   render() {
-
     const birthday = this.state.dateOfBirth;
     const date = new Date(birthday);
     const options = {
@@ -118,21 +121,29 @@ export default class ProfileFormEdit extends React.Component {
     };
     const birthdayDate = (new Intl.DateTimeFormat('en-US', options).format(date)).split('/');
     const dateOfBirth = `${birthdayDate[2]}-${birthdayDate[0]}-${birthdayDate[1]}`;
+
+    // let allergiesValue;
+    // if(!this.state.allergies) {
+    //   allergiesValue = ''
+    // } else {
+    //   allergiesValue= {this.state.allergies}
+    // }
+
     if (this.state.mode === 'medical') {
       return (
         <div>
           <form key={this.state.mode} onSubmit={this.handleSubmit} >
             <div className="form-group">
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Blood Type</label>
-              <input type="text" name="bloodType" className="form-control" placeholder="DEA-1.1" onChange={this.handleChange} />
+              <input type="text" name="bloodType" className="form-control" placeholder="DEA-1.1" value={this.state.bloodType || ''} onChange={this.handleChange} />
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Allergies</label>
-              <input type="text" name="allergies" className="form-control" placeholder="Optional" onChange={this.handleChange} />
+              <input type="text" name="allergies" className="form-control" placeholder="Optional" value={this.state.allergies || ''} onChange={this.handleChange} />
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Medication</label>
-              <input type="text" name="medication" className="form-control" placeholder="Optional" onChange={this.handleChange} />
+              <input type="text" name="medication" className="form-control" placeholder="Optional" value={this.state.medication || ''} onChange={this.handleChange} />
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Vaccines</label>
-              <input type="text" name="vaccines" className="form-control" placeholder="Enter Vaccines" onChange={this.handleChange} />
+              <input type="text" name="vaccines" className="form-control" placeholder="Enter Vaccines" value={this.state.vaccines || ''} onChange={this.handleChange} />
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Specialized Diet</label>
-              <input type="text" name="diet" className="form-control" placeholder="Optional" onChange={this.handleChange} />
+              <input type="text" name="specializedDiet" className="form-control" placeholder="Optional" value={this.state.specializedDiet || ''} onChange={this.handleChange} />
               <div className="d-flex justify-content-center mt-2"><button type="submit" className="profileButtonDelete mt-3 text-uppercase" >DELETE</button><button type="submit" className="profileButtonUpdate mt-3 text-uppercase" >UPDATE</button></div>
               <div className="profileControls">
               </div>
