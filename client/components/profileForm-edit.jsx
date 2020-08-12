@@ -66,6 +66,7 @@ export default class ProfileFormEdit extends React.Component {
     const vaccines = this.state.vaccines;
     const medication = this.state.medication;
     const specializedDiet = this.state.specializedDiet;
+    const medication = this.state.medication;
 
     if (name) {
       newProfile.append('name', name);
@@ -121,7 +122,6 @@ export default class ProfileFormEdit extends React.Component {
   }
 
   render() {
-
     const birthday = this.state.dateOfBirth;
     const date = new Date(birthday);
     const options = {
@@ -131,6 +131,14 @@ export default class ProfileFormEdit extends React.Component {
     };
     const birthdayDate = (new Intl.DateTimeFormat('en-US', options).format(date)).split('/');
     const dateOfBirth = `${birthdayDate[2]}-${birthdayDate[0]}-${birthdayDate[1]}`;
+
+    // let allergiesValue;
+    // if(!this.state.allergies) {
+    //   allergiesValue = ''
+    // } else {
+    //   allergiesValue= {this.state.allergies}
+    // }
+
     if (this.state.mode === 'medical') {
       return (
         <div>

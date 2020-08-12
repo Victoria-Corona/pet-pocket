@@ -3,8 +3,10 @@ import Homepage from './homepage';
 import MainMenu from './mainMenu';
 import Header from './header';
 import Profile from './profile';
+import Reminder from './reminder';
 // import ProfileDetails from './profile-details';
 // import MedicalDetails from './medical-detail';
+// import ReminderDetails from './reminder-details';
 import ProfileList from './profile-list';
 import ReminderList from './reminder-list';
 import ProfileForm from './profileForm';
@@ -89,6 +91,12 @@ export default class App extends React.Component {
       <>
         <Header />
         <ReminderForm setView={this.setView} />
+      </>;
+    } else if (view === 'reminderDetails') {
+      renderPage =
+      <>
+        <Header />
+        <Reminder params={this.state.view.params} />
       </>;
     } else {
       renderPage =
