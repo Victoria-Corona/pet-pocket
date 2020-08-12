@@ -96,7 +96,7 @@ class VetVisitsList extends React.Component {
           </div>
           <div className="mt-4">
             <h6 className="font-weight-bold pl-3">Vet Visits</h6>
-            <div className="d-flex justify-content-center flex-wrap">{listOfVisits}</div>
+            <div className="d-flex justify-content-center flex-wrap mb-5">{listOfVisits}</div>
           </div>
         </>
       );

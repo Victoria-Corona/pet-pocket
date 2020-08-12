@@ -3,13 +3,12 @@ import Homepage from './homepage';
 import MainMenu from './mainMenu';
 import Header from './header';
 import Profile from './profile';
-// import ProfileDetails from './profile-details';
-// import MedicalDetails from './medical-detail';
 import ProfileList from './profile-list';
 import ReminderList from './reminder-list';
 import ProfileForm from './profileForm';
 import ReminderForm from './reminder-form';
 import TodoList from './todo-list';
+import Footer from './footer';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -50,36 +49,42 @@ export default class App extends React.Component {
         <>
           <Header />
           <ProfileList setView={this.setView} />
+          <Footer/>
         </>;
     } else if (view === 'profileForm') {
       renderPage =
         <>
           <Header />
           <ProfileForm setView={this.setView} />
+          <Footer />
         </>;
     } else if (view === 'todoList') {
       renderPage =
       <>
         <Header/>
         <TodoList/>
+        <Footer />
       </>;
     } else if (view === 'reminderList') {
       renderPage =
       <>
         <Header />
         <ReminderList setView={this.setView} />
+        <Footer />
       </>;
     } else if (view === 'reminderForm') {
       renderPage =
       <>
         <Header />
         <ReminderForm setView={this.setView} />
+        <Footer />
       </>;
     } else {
       renderPage =
         <>
           <Header />
           <Profile params={this.state.view.params} />
+          <Footer />
         </>;
     }
     return (

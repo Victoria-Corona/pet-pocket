@@ -13,7 +13,7 @@ export default class ProfileDetails extends React.Component {
     const birthdayDate = (new Intl.DateTimeFormat('en-US', options).format(date));
 
     return (
-      <div>
+      <div className="mb-2">
         <div>
           <ul className="nav my-3 d-flex justify-content-between text-uppercase text-white text-center">
             <li className="navButton active p-2 ml-2">
