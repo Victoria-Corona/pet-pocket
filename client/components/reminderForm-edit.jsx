@@ -4,7 +4,7 @@ export default class ReminderFormEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      petId: this.props.reminder.petId,
+      reminderId: this.props.reminder.reminderId,
       name: this.props.reminder.name,
       type: this.props.reminder.type,
       description: this.props.reminder.description,
@@ -27,12 +27,12 @@ export default class ReminderFormEdit extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const newReminder = {};
-    fetch(`/api/pets/${this.props.reminder.petId}`, {
+    fetch(`/api/pets/${this.props.reminder.reminderId}`, {
       method: 'PUT',
       body: newReminder
     })
       .then(res => res.json())
-      .then(reminder => this.setState({}))
+      .then(reminder => this.setState({ reminderView: true }))
       .catch(error => console.error(error.message));
   }
 

@@ -14,7 +14,7 @@ export default class ReminderDetails extends React.Component {
   }
 
   getReminderDetails() {
-    fetch(`/api/reminder/${this.props.params.petId}`)
+    fetch(`/api/reminder/${this.props.params.reminderId}`)
       .then(res => res.json())
       .then(data => this.setState({ details: data }))
       .catch(err => console.error(err.message));
@@ -54,8 +54,8 @@ export default class ReminderDetails extends React.Component {
           </div>
 
           <div className="reminderControls">
-            <button type="button" className="reminderButtonDelete" id={this.state.details.petId}>DELETE</button>
-            <button type="button" className="reminderButtonUpdate" id={this.state.details.petId}>UPDATE</button>
+            <button type="button" className="reminderButtonDelete" id={this.state.details.reminderId}>DELETE</button>
+            <button type="button" className="reminderButtonUpdate" id={this.state.details.reminderId}>UPDATE</button>
           </div>
         </>
       );
