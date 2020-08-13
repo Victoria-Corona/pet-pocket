@@ -273,13 +273,11 @@ COPY public."petProfile" ("petId", "userId", name, "imgUrl", breed, "dateOfBirth
 --
 
 COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", description, "bloodType", allergies, medication, vaccines, "specializedDiet") FROM stdin;
-37	1	Belvedere	/images/petImage/belvedere.jpg	corgi	2020-02-04	a pup	A	Fleas	Aspirin	Bordatella	soft food
-38	1	Leilani	/images/petImage/Leilani.jpg	dobermann	2020-02-04	a tiny pupper	A	fleas	\N	Bordatella	hard food
 45	1	Draco	/images/petImage/draco.jpg	Bearded Dragon	2018-06-12	spikey	\N	grass	\N	\N	\N
-48	1	Hercules	/images/petImage/hercules.jpg	Rooster	2019-10-26	loud	\N	\N	\N	\N	\N
 50	1	King	/images/petImage/king.jpg	Pug	2019-02-03	love him so	\N	\N	\N	\N	\N
-51	1	Prince	/images/petImage/beagle.jpg	beagle	2019-05-26	semi blind	A+	\N	\N	\N	\N
 52	1	Jovian	/images/petImage/jovian.jpg	Lemur	1994-04-05	stared in a show	\N	\N	\N	\N	\N
+38	1	Leilani	/images/petImage/Leilani.jpg	dobermann	2020-02-04	a tiny pupper	A	fleas	\N	Bordatella	hard food
+53	1	logo	/images/petImage/petPocket.jpg	logo	2020-08-12	doesnt do much	\N	\N	\N	\N	\N
 \.
 
 
@@ -334,6 +332,24 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 30	45	2020-03-04	hang nail	
 31	45	2020-02-05	another hang nail	
 32	50	2020-02-03	routine	
+33	51	2020-03-05	routine	
+34	37	2020-05-05	rojuiafd	
+35	45	2020-01-01	asjdkf	
+36	45	2020-06-09	asdf	
+37	38	2020-06-09	adsf	
+38	38	2020-01-01	asdf	
+39	38	2020-01-01	asdasd	
+40	45	2020-10-10	asdf	
+41	50	2020-10-10	asdf	
+42	52	2020-10-10	asdf	
+43	45	2019-12-20	asdf	
+44	53	2020-10-10	asdf	
+45	53	2020-01-01	asdf	
+46	45	2020-02-02	adsf	
+47	53	2020-02-02	asdf	
+48	45	2020-02-20	asdf	
+49	45	2019-10-13	adsf	
+50	53	2019-02-02	adsf	
 \.
 
 
@@ -341,7 +357,7 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 -- Name: pets_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."pets_petId_seq"', 52, true);
+SELECT pg_catalog.setval('public."pets_petId_seq"', 54, true);
 
 
 --
@@ -362,7 +378,7 @@ SELECT pg_catalog.setval('public."todo_todoId_seq"', 1, false);
 -- Name: vetVisits_vetVisitId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 32, true);
+SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 50, true);
 
 
 --
