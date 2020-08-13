@@ -32,7 +32,10 @@ export default class TodoList extends React.Component {
       },
       body: JSON.stringify(todo)
     }).then(res => res.json())
-      .then(todo => this.setState({ todos: this.state.todos.concat(todo) }))
+      .then(todo => this.setState({
+        todos: this.state.todos.concat(todo),
+        todo: ''
+      }))
       .catch(error => console.error(error.message));
   }
 
@@ -46,12 +49,10 @@ export default class TodoList extends React.Component {
     fetch(`/api/todo/${todoId}`, {
       method: 'DELETE'
     })
-      .then(res => res.json())
       .then(todo => {
-        const copyTodos = this.state.todos.slice();
-        const newTodos = [];
-        const index = copyTodos.findIndex(todos => this.todos.todoId === todo.todoId);
-        newTodos.push(index);
+        const newTodos = this.state.todos.slice();
+        const index = newTodos.findIndex(todos => this.state.todos.todoId === todo.todoId);
+        newTodos.splice(index, 1);
         this.setState({ todos: newTodos });
       })
       .catch(error => console.error(error.message));
@@ -69,8 +70,8 @@ export default class TodoList extends React.Component {
         <div >
           <h5 style={{ fontWeight: 'bold' }}>ADD TO DO</h5>
           <form onSubmit={this.handleSubmit}>
-            <input className="form-control" name="todo" type="text" onChange={this.handleChange} />
-            <div className=""><button type="submit" className="nextButton mt-3">Add</button></div>
+            <input className="form-control" name="todo" type="text" value={this.state.todo} onChange={this.handleChange} />
+            <div className=""><button type="submit" className="nextButton mt-3" >Add</button></div>
           </form>
         </div>
         <div className="mt-4">
