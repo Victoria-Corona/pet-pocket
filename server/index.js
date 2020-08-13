@@ -519,6 +519,40 @@ app.post('/api/todo', (req, res, next) => {
       });
     });
 });
+// USER CAN DELETE TOOD
+app.delete('/api/todo/:todoId', (req, res, next) => {
+  const id = parseInt(req.params.todoId, 10);
+  if (!Number.isInteger(id) || id <= 0) {
+    return res.status(400).json({
+      error: '"todoId" must be a positive integer'
+    });
+  }
+
+  const sql = `
+  delete from "todo"
+  where "todoId" = $1
+  returning *;
+  `;
+
+  const params = [id];
+
+  db.query(sql, params)
+    .then(result => {
+      const todo = result.rows[0];
+      if (!todo) {
+        next(new ClientError(`Cannot find todo with todoId of ${id}`, 404));
+      } else {
+        res.status(204).json(todo);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error occured.'
+      });
+    });
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
