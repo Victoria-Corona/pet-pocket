@@ -22,15 +22,19 @@ ALTER TABLE ONLY public.reminder DROP CONSTRAINT reminder_pkey;
 ALTER TABLE ONLY public.pets DROP CONSTRAINT pets_pkey;
 ALTER TABLE ONLY public."petProfile" DROP CONSTRAINT "petProfile_pkey";
 ALTER TABLE public."vetVisits" ALTER COLUMN "vetVisitId" DROP DEFAULT;
+ALTER TABLE public.todo ALTER COLUMN "userId" DROP DEFAULT;
 ALTER TABLE public.todo ALTER COLUMN "todoId" DROP DEFAULT;
-ALTER TABLE public.reminder ALTER COLUMN "petId" DROP DEFAULT;
+ALTER TABLE public.reminder ALTER COLUMN "reminderId" DROP DEFAULT;
+ALTER TABLE public.pets ALTER COLUMN "userId" DROP DEFAULT;
 ALTER TABLE public.pets ALTER COLUMN "petId" DROP DEFAULT;
 DROP SEQUENCE public."vetVisits_vetVisitId_seq";
 DROP TABLE public."vetVisits";
+DROP SEQUENCE public."todo_userId_seq";
 DROP SEQUENCE public."todo_todoId_seq";
 DROP TABLE public.todo;
-DROP SEQUENCE public."reminder_petId_seq";
+DROP SEQUENCE public."reminder_reminderId_seq";
 DROP TABLE public.reminder;
+DROP SEQUENCE public."pets_userId_seq";
 DROP SEQUENCE public."pets_petId_seq";
 DROP TABLE public.pets;
 DROP TABLE public."petProfile";
@@ -103,8 +107,8 @@ CREATE TABLE public.pets (
     description text NOT NULL,
     "bloodType" text,
     allergies text,
-    medication text,
-    vaccines text,
+    medication text NOT NULL,
+    vaccines text NOT NULL,
     "specializedDiet" text
 );
 
@@ -130,11 +134,31 @@ ALTER SEQUENCE public."pets_petId_seq" OWNED BY public.pets."petId";
 
 
 --
+-- Name: pets_userId_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public."pets_userId_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pets_userId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public."pets_userId_seq" OWNED BY public.pets."userId";
+
+
+--
 -- Name: reminder; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.reminder (
-    "petId" integer NOT NULL,
+    "reminderId" integer NOT NULL,
     name text NOT NULL,
     type text NOT NULL,
     description text NOT NULL,
@@ -145,10 +169,10 @@ CREATE TABLE public.reminder (
 
 
 --
--- Name: reminder_petId_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: reminder_reminderId_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public."reminder_petId_seq"
+CREATE SEQUENCE public."reminder_reminderId_seq"
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -158,10 +182,10 @@ CREATE SEQUENCE public."reminder_petId_seq"
 
 
 --
--- Name: reminder_petId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: reminder_reminderId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public."reminder_petId_seq" OWNED BY public.reminder."petId";
+ALTER SEQUENCE public."reminder_reminderId_seq" OWNED BY public.reminder."reminderId";
 
 
 --
@@ -194,6 +218,26 @@ CREATE SEQUENCE public."todo_todoId_seq"
 --
 
 ALTER SEQUENCE public."todo_todoId_seq" OWNED BY public.todo."todoId";
+
+
+--
+-- Name: todo_userId_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public."todo_userId_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: todo_userId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public."todo_userId_seq" OWNED BY public.todo."userId";
 
 
 --
@@ -237,10 +281,17 @@ ALTER TABLE ONLY public.pets ALTER COLUMN "petId" SET DEFAULT nextval('public."p
 
 
 --
--- Name: reminder petId; Type: DEFAULT; Schema: public; Owner: -
+-- Name: pets userId; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.reminder ALTER COLUMN "petId" SET DEFAULT nextval('public."reminder_petId_seq"'::regclass);
+ALTER TABLE ONLY public.pets ALTER COLUMN "userId" SET DEFAULT nextval('public."pets_userId_seq"'::regclass);
+
+
+--
+-- Name: reminder reminderId; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.reminder ALTER COLUMN "reminderId" SET DEFAULT nextval('public."reminder_reminderId_seq"'::regclass);
 
 
 --
@@ -248,6 +299,13 @@ ALTER TABLE ONLY public.reminder ALTER COLUMN "petId" SET DEFAULT nextval('publi
 --
 
 ALTER TABLE ONLY public.todo ALTER COLUMN "todoId" SET DEFAULT nextval('public."todo_todoId_seq"'::regclass);
+
+
+--
+-- Name: todo userId; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.todo ALTER COLUMN "userId" SET DEFAULT nextval('public."todo_userId_seq"'::regclass);
 
 
 --
@@ -273,6 +331,11 @@ COPY public."petProfile" ("petId", "userId", name, "imgUrl", breed, "dateOfBirth
 --
 
 COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", description, "bloodType", allergies, medication, vaccines, "specializedDiet") FROM stdin;
+2	1	CK	/images/ck.jpg	Bombay	2018-11-20	picky eater, loves to cuddle, eats shoelaces	B-	N/A	N/A	FVRCP FELV FIP Rabies	Outdoor Forumla
+3	1	Twix	/images/twix.png	Maltese Poodle Mix	2015-09-01	loves friends and people	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	\N
+1	1	Buddy	/images/buddy.jpg	Pug	2016-01-04	very friendly, enjoys head pats, snores	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	Gluten Free
+37	1	Belvedere	/images/petImage/belvedere.jpg	corgi	2020-02-04	a pup	A	Fleas	Aspirin	Bordatella	soft food
+
 45	1	Draco	/images/petImage/draco.jpg	Bearded Dragon	2018-06-12	spikey	\N	grass	\N	\N	\N
 50	1	King	/images/petImage/king.jpg	Pug	2019-02-03	love him so	\N	\N	\N	\N	\N
 52	1	Jovian	/images/petImage/jovian.jpg	Lemur	1994-04-05	stared in a show	\N	\N	\N	\N	\N
@@ -285,10 +348,10 @@ COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", descr
 -- Data for Name: reminder; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.reminder ("petId", name, type, description, date, "time", repeat) FROM stdin;
-2	CK	Hygiene	Change litter box	2020-08-12	12:00:00	Tuesdays.
-3	Twix	Feeding	Feed three scoops of kibble & one scoop of chicken	2020-08-15	08:00:00	Daily.
-1	Buddy	Medication	1 tablet of Prednisone for allergies	2020-08-07	18:00:00	Daily.
+COPY public.reminder ("reminderId", name, type, description, date, "time", repeat) FROM stdin;
+1	 Buddy	Medication	1 tablet of Prednisone for allergies	2020-08-07	18:00:00	Daily
+2	 CK	Hygiene	Change litter box	2020-08-12	12:00:00	Tuesdays
+3	 Twix	Feeding	Feed three scoops of kibble & one scoop of chicken	2020-08-15	08:00:00	Daily
 \.
 
 
@@ -357,14 +420,23 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 -- Name: pets_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
+
 SELECT pg_catalog.setval('public."pets_petId_seq"', 54, true);
 
 
+
 --
--- Name: reminder_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: pets_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."reminder_petId_seq"', 1, false);
+SELECT pg_catalog.setval('public."pets_userId_seq"', 1, false);
+
+
+--
+-- Name: reminder_reminderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public."reminder_reminderId_seq"', 1, false);
 
 
 --
@@ -375,10 +447,18 @@ SELECT pg_catalog.setval('public."todo_todoId_seq"', 1, false);
 
 
 --
+-- Name: todo_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public."todo_userId_seq"', 1, false);
+
+
+--
 -- Name: vetVisits_vetVisitId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 50, true);
+
 
 
 --
@@ -402,7 +482,7 @@ ALTER TABLE ONLY public.pets
 --
 
 ALTER TABLE ONLY public.reminder
-    ADD CONSTRAINT reminder_pkey PRIMARY KEY ("petId");
+    ADD CONSTRAINT reminder_pkey PRIMARY KEY ("reminderId");
 
 
 --

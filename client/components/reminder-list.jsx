@@ -16,10 +16,7 @@ export default class Reminder extends React.Component {
   getReminder() {
     fetch('/api/reminder')
       .then(res => res.json())
-      .then(reminder =>
-        this.setState({
-          reminder: reminder
-        }))
+      .then(data => this.setState({ reminder: data }))
       .catch(err => console.error(err.message));
   }
 
@@ -56,8 +53,8 @@ export default class Reminder extends React.Component {
   renderReminderList() {
     const reminderList = this.state.reminder.map(reminder =>
       <ReminderListItem
-        key={reminder.petId}
-        petId={reminder.petId}
+        key={reminder.reminderId}
+        reminderId={reminder.reminderId}
         name={reminder.name}
         type={reminder.type}
         description={reminder.description}
