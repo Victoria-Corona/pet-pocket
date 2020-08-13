@@ -200,7 +200,7 @@ button:focus {
   background-color: #4E4E4E;
   border-radius: 5px;
   width: 100px;
-  height: 40px;
+  text-align: center;
 }
 
 .active {

@@ -63,6 +63,7 @@ export default class TodoList extends React.Component {
       <div className="todoListItem d-flex  mt-3 justify-content-between" key={todo.todoId}>
         <span className="p-2 ">{todo.todo}</span>
         <button type="button" className="todoDeleteButton d-flex " onClick={() => this.handleDelete(todo.todoId)}>DELETE</button>
+
       </div>
     );
     return (
@@ -70,8 +71,8 @@ export default class TodoList extends React.Component {
         <div >
           <h5 style={{ fontWeight: 'bold' }}>ADD TO DO</h5>
           <form onSubmit={this.handleSubmit}>
-            <input className="form-control" name="todo" type="text" value={this.state.todo} onChange={this.handleChange} />
-            <div className=""><button type="submit" className="nextButton mt-3" >Add</button></div>
+            <input className="form-control" name="todo" type="text" onChange={this.handleChange} />
+            <div className="d-flex flex-row-reverse"><button type="submit" className="nextButton mt-3">Add</button></div>
           </form>
         </div>
         <div className="mt-4">

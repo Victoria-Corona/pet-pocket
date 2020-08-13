@@ -16,7 +16,7 @@ export default class ProfileDetails extends React.Component {
       <div className="mb-2">
         <div>
           <ul className="nav my-3 d-flex justify-content-between text-uppercase text-white text-center">
-            <li className="navButton active p-2 ml-2">
+            <li className="align-middle navButton active p-2 ml-2">
               <span>Profile</span>
             </li>
             <li className="navButton p-2">
