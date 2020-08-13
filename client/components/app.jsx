@@ -11,7 +11,6 @@ import ReminderList from './reminder-list';
 import ReminderForm from './reminder-form';
 import TodoList from './todo-list';
 import Footer from './footer';
-import ProfileDetails from './profile-details';
 
 export default class App extends React.Component {
   constructor(props) {
