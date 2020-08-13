@@ -47,7 +47,7 @@ body{
 }
 
 
-.nextButton, .submitButton, .todoDeleteButton {
+.nextButton, .submitButton {
   background-color: #6CA6C1;
   border-radius: 50px;
   padding:0.3rem 2.3rem;
