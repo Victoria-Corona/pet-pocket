@@ -107,8 +107,8 @@ CREATE TABLE public.pets (
     description text NOT NULL,
     "bloodType" text,
     allergies text,
-    medication text NOT NULL,
-    vaccines text NOT NULL,
+    medication text,
+    vaccines text,
     "specializedDiet" text
 );
 
@@ -350,8 +350,8 @@ COPY public.reminder ("reminderId", name, type, description, date, "time", repea
 --
 
 COPY public.todo ("todoId", "userId", todo, "isCompleted") FROM stdin;
-5	1	fill water	\N
 6	1	change pee pad	\N
+7	1	fill water	\N
 \.
 
 
@@ -367,7 +367,9 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 -- Name: pets_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."pets_petId_seq"', 60, true);
+
+SELECT pg_catalog.setval('public."pets_petId_seq"', 61, true);
+
 
 
 --
@@ -388,7 +390,7 @@ SELECT pg_catalog.setval('public."reminder_reminderId_seq"', 1, false);
 -- Name: todo_todoId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."todo_todoId_seq"', 6, true);
+SELECT pg_catalog.setval('public."todo_todoId_seq"', 7, true);
 
 
 --
