@@ -10,6 +10,7 @@ export default class VetVisitForm extends React.Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCloseModel = this.handleCloseModel.bind(this);
   }
 
   handleInputChange(event) {
@@ -37,9 +38,13 @@ export default class VetVisitForm extends React.Component {
       },
       body: JSON.stringify(data)
     }).then(res => res.json())
-      .then(() => this.props.formView(false)
+      .then(() => this.setState({ visits: this.props.visits.concat(data) })
       )
       .catch(error => console.error(error.message));
+  }
+
+  handleCloseModel() {
+    this.props.setView('list', {});
   }
 
   render() {
@@ -49,7 +54,7 @@ export default class VetVisitForm extends React.Component {
           <div className="form-group">
             <div className="bg-white mt-3 p-3">
               <label htmlFor="" className="ml-2 font-weight-bold">Enter date of visit</label>
-              <input type="text" name="date" className="form-control" placeholder="00/00/0000" onChange={this.handleInputChange}/>
+              <input type="date" name="date" className="form-control" placeholder="00/00/0000" onChange={this.handleInputChange}/>
             </div>
             <div className="bg-white mt-3 p-3">
               <label htmlFor="" className="ml-2 font-weight-bold">Enter reason for Vet Visit</label>

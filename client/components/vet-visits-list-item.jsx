@@ -14,7 +14,7 @@ class VetVisit extends React.Component {
     const vetPastAppoint = (new Intl.DateTimeFormat('en-US', options).format(date));
 
     return (
-      <div className="vetVistListItem bg-white pl-3 mt-4" onClick={() => this.props.setView('vetDetails', { vetVisitId: this.props.vetVisitId })}>
+      <div className="vetVistListItem bg-white pl-3 mt-3" onClick={() => this.props.setView('vetDetails', { vetVisitId: this.props.vetVisitId })}>
         <span>{vetPastAppoint}</span>
       </div>
 

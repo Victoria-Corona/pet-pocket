@@ -2,8 +2,6 @@ import React from 'react';
 import MedicalDetails from './medical-detail';
 import ProfileDetails from './profile-details';
 import ProfileFormEdit from './profileForm-edit';
-// import ProfileForm from './profileForm';
-
 import VetVisitsList from './vet-visits-list';
 import ProfileList from './profile-list';
 
