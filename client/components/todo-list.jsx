@@ -61,7 +61,7 @@ export default class TodoList extends React.Component {
     const todos = this.state.todos.map(todo =>
       <div className="todoListItem d-flex  mt-3 justify-content-between" key={todo.todoId}>
         <span className="p-2 ">{todo.todo}</span>
-        <button type="button" className="todoDeleteButton d-flex " onClick={() => this.handleDelete(todo.todoId)}>Delete</button>
+        <button type="button" className="todoDeleteButton d-flex " onClick={() => this.handleDelete(todo.todoId)}>DELETE</button>
       </div>
     );
     return (
