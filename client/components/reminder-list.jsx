@@ -5,8 +5,7 @@ export default class Reminder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reminder: [],
-      view: null
+      reminder: []
     };
     this.getReminder = this.getReminder.bind(this);
   }
