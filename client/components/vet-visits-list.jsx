@@ -8,7 +8,6 @@ class VetVisitsList extends React.Component {
     super(props);
     this.state = {
       visits: [],
-      listView: false,
       view: {
         name: 'list',
         params: {}
@@ -16,7 +15,6 @@ class VetVisitsList extends React.Component {
     };
     this.getVisits = this.getVisits.bind(this);
     this.setView = this.setView.bind(this);
-    this.formView = this.formView.bind(this);
   }
 
   getVisits() {
@@ -36,35 +34,11 @@ class VetVisitsList extends React.Component {
     });
   }
 
-  formView() {
-    if (this.state.listView) {
-      this.setState({
-        listView: false
-      });
-    } else {
-      this.setState({
-        listView: true
-      });
-    }
-  }
-
-  renderVisitForm() {
-    return (
-      <VetVisitForm visits={this.state.visits} petId={this.props.params.petId} formView={this.formView}/>
-    );
-  }
-
   componentDidMount() {
     this.getVisits();
   }
 
   render() {
-
-    if (this.state.listView === true) {
-      return (
-        this.renderVisitForm()
-      );
-    }
 
     if (this.state.view.name === 'list') {
       const listOfVisits = this.state.visits.map(vet => {
@@ -91,7 +65,7 @@ class VetVisitsList extends React.Component {
           </ul>
           <div className="p-2 mt-4">
             <div className="d-flex justify-content-center">
-              <h5 className="font-weight-bold text-uppercase" onClick={this.formView}><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Add a Vet Visit</h5>
+              <h5 className="font-weight-bold text-uppercase" onClick={() => this.setView('form', {})}><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Add a Vet Visit</h5>
             </div>
           </div>
           <div className="mt-4">
@@ -100,12 +74,15 @@ class VetVisitsList extends React.Component {
           </div>
         </>
       );
-    } else {
+    } else if (this.state.view.name === 'vetDetails') {
       return (
-        <VetVisitDetail params={this.state.view.params}/>
+        <VetVisitDetail params={this.state.view.params} setView={this.setView}/>
+      );
+    } else if (this.state.view.name === 'form') {
+      return (
+        <VetVisitForm visits={this.state.visits} petId={this.props.params.petId} setView={this.setView}/>
       );
     }
-
   }
 }
 export default VetVisitsList;
