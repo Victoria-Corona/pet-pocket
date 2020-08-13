@@ -97,7 +97,7 @@ export default class App extends React.Component {
       renderPage =
       <>
         <Header setView={this.setView}/>
-        <ReminderForm setView={this.setView} />
+        <ReminderForm setView={this.setView}/>
         <Footer setView={this.setView} />
       </>;
     } else if (view === 'reminderDetails') {
