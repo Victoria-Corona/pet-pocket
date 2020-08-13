@@ -345,7 +345,6 @@ COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", descr
 52	1	Jovian	/images/petImage/jovian.jpg	Lemur	1994-04-05	stared in a show	\N	\N	\N	\N	\N
 38	1	Leilani	/images/petImage/Leilani.jpg	dobermann	2020-02-04	a tiny pupper	A	fleas	\N	Bordatella	hard food
 53	1	logo	/images/petImage/petPocket.jpg	logo	2020-08-12	doesnt do much	\N	\N	\N	\N	\N
-
 \.
 
 
@@ -429,7 +428,6 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 SELECT pg_catalog.setval('public."pets_petId_seq"', 60, true);
 
 
-
 --
 -- Name: pets_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -461,7 +459,6 @@ SELECT pg_catalog.setval('public."todo_userId_seq"', 1, false);
 --
 -- Name: vetVisits_vetVisitId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
-
 
 SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 33, true);
 

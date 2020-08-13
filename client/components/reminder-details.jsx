@@ -6,7 +6,8 @@ export default class ReminderDetails extends React.Component {
     this.state = {
       details: null
     };
-    this.ReminderDetails = this.getReminderDetails.bind(this);
+    this.getReminderDetails = this.getReminderDetails.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -18,6 +19,14 @@ export default class ReminderDetails extends React.Component {
       .then(res => res.json())
       .then(data => this.setState({ details: data }))
       .catch(err => console.error(err.message));
+  }
+
+  handleDelete() {
+    fetch(`/api/reminder/${this.props.params.reminderId}`, {
+      method: 'DELETE'
+    })
+      .then(this.props.setView('reminderList', {}))
+      .catch(error => console.error(error.message));
   }
 
   render() {
@@ -54,8 +63,8 @@ export default class ReminderDetails extends React.Component {
           </div>
 
           <div className="reminderControls">
-            <button type="button" className="reminderButtonDelete" id={this.state.details.reminderId}>DELETE</button>
-            <button type="button" className="reminderButtonUpdate" id={this.state.details.reminderId}>UPDATE</button>
+            <button type="button" className="reminderButtonDelete" id={this.state.details.reminderId} onClick={() => this.handleDelete()}>DELETE</button>
+            <button type="button" className="reminderButtonUpdate" id={this.state.details.reminderId} onClick={() => this.props.setView('reminderFormEdit', {})}>UPDATE</button>
           </div>
         </>
       );
