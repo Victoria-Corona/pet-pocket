@@ -32,7 +32,7 @@ export default class Reminder extends React.Component {
         date={reminder.date}
         time={reminder.time}
         repeat={reminder.repeat}
-        setView={this.props.setView}/>);
+        setView={this.props.setView} />);
     return (
       <>
         <div className="p-2 mt-4">

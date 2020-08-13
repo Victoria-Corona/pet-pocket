@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Homepage from './homepage';
 import MainMenu from './mainMenu';
@@ -56,70 +55,70 @@ export default class App extends React.Component {
       renderPage = <Homepage setView={this.setView} />;
     } else if (view === 'mainMenu') {
       renderPage =
-      <>
-        <Header setView={this.setView}/>
-        <MainMenu setView={this.setView} />
-      </>;
+        <>
+          <Header setView={this.setView} />
+          <MainMenu setView={this.setView} />
+        </>;
     } else if (view === 'profileList') {
       renderPage =
         <>
-          <Header setView={this.setView}/>
+          <Header setView={this.setView} />
           <ProfileList setView={this.setView} />
-          <Footer setView={this.setView}/>
+          <Footer setView={this.setView} />
         </>;
     } else if (view === 'profileForm') {
       renderPage =
         <>
-          <Header setView={this.setView}/>
+          <Header setView={this.setView} />
           <ProfileForm setView={this.setView} />
           <Footer setView={this.setView} />
         </>;
     } else if (view === 'todoList') {
       renderPage =
-      <>
-        <Header setView={this.setView}/>
-        <TodoList/>
-        <Footer setView={this.setView} />
-      </>;
+        <>
+          <Header setView={this.setView} />
+          <TodoList />
+          <Footer setView={this.setView} />
+        </>;
     } else if (view === 'reminderList') {
       renderPage =
-      <>
-        <Header setView={this.setView}/>
-        <ReminderList setView={this.setView} />
-        <Footer setView={this.setView} />
-      </>;
+        <>
+          <Header setView={this.setView} />
+          <ReminderList setView={this.setView} />
+          <Footer setView={this.setView} />
+        </>;
     } else if (view === 'profileDetail') {
       renderPage =
-      <>
-        <Header setView={this.setView}/>
-        <ProfileDetails setView={this.setView} />
-        <Footer setView={this.setView} />
-      </>;
+        <>
+          <Header setView={this.setView} />
+          <ProfileDetails setView={this.setView} />
+          <Footer setView={this.setView} />
+        </>;
     } else if (view === 'reminderForm') {
       renderPage =
-      <>
-        <Header setView={this.setView}/>
-        <ReminderForm setView={this.setView} />
-        <Footer setView={this.setView} />
-      </>;
+        <>
+          <Header setView={this.setView} />
+          <ReminderForm setView={this.setView} />
+          <Footer setView={this.setView} />
+        </>;
     } else if (view === 'reminderFormEdit') {
       renderPage =
-      <>
-        <Header setView={this.setView} />
-        <ReminderFormEdit setView={this.setView} params={this.state.view.params}/>
-        <Footer setView={this.setView} />
-      </>;
+        <>
+          <Header setView={this.setView} />
+          <ReminderFormEdit setView={this.setView} params={this.state.view.params} />
+          <Footer setView={this.setView} />
+        </>;
     } else if (view === 'reminderDetails') {
       renderPage =
         <>
           <Header setView={this.setView} />
-          <ReminderDetails setView={this.setView} params={this.state.view.params}/>
+          <ReminderDetails setView={this.setView} params={this.state.view.params} />
           <Footer setView={this.setView} />
         </>;
     } else {
       renderPage =
         <>
-          <Header setView={this.setView}/>
+          <Header setView={this.setView} />
           <Profile params={this.state.view.params} />
           <Footer setView={this.setView} />
         </>;
