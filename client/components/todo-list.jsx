@@ -5,12 +5,12 @@ export default class TodoList extends React.Component {
     super(props);
     this.state = {
       todos: [],
-      todo: '',
-      view: 'list'
+      todo: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -42,10 +42,26 @@ export default class TodoList extends React.Component {
     });
   }
 
+  handleDelete(todoId) {
+    fetch(`/api/todo/${todoId}`, {
+      method: 'DELETE'
+    })
+      .then(res => res.json())
+      .then(todo => {
+        const copyTodos = this.state.todos.slice();
+        const newTodos = [];
+        const index = copyTodos.findIndex(todos => this.todos.todoId === todo.todoId);
+        newTodos.push(index);
+        this.setState({ todos: newTodos });
+      })
+      .catch(error => console.error(error.message));
+  }
+
   render() {
     const todos = this.state.todos.map(todo =>
-      <div className="todoListItem mt-3" key={todo.todoId}>
-        <span className="p-2">{todo.todo}</span>
+      <div className="todoListItem d-flex  mt-3" key={todo.todoId}>
+        <span className="p-2 ">{todo.todo}</span>
+        <button type="button" className="todoDeleteButton d-flex justify-content-end" onClick={() => this.handleDelete(todo.todoId)}>Delete</button>
       </div>
     );
     return (
