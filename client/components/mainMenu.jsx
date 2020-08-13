@@ -44,7 +44,7 @@ export default class MainMenu extends React.Component {
             <div className="blueSquare">
               <i className="fas fa-exclamation-circle fa-2x"></i>
             </div>
-            <p className="control navName" onClick={() => setView('reminderList', {})}>ALERT ME</p>
+            <p className="control navName" onClick={() => setView('reminderList', {})}>REMINDERS</p>
           </div>
         </div>
 

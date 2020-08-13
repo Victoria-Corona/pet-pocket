@@ -8,8 +8,6 @@ const sessionMiddleware = require('./session-middleware');
 const multer = require('multer');
 const app = express();
 
-const reminder = [];
-
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
 
@@ -34,7 +32,7 @@ app.get('/api/pets', (req, res, next) => {
 // User can get a list of reminders
 app.get('/api/reminder', (req, res, next) => {
   const sql = `
-  select "petId", "name", "type", "description", "date", "time", "repeat"
+  select "reminderId", "name", "type", "description", "date", "time", "repeat"
   from "reminder"
   `;
   db.query(sql)
@@ -42,9 +40,9 @@ app.get('/api/reminder', (req, res, next) => {
     .catch(err => next(err));
 });
 
-// User can get reminder by petID
-app.get('/api/reminder/:petId', (req, res, next) => {
-  const id = parseInt(req.params.petId, 10);
+// User can get reminder by reminderId
+app.get('/api/reminder/:reminderId', (req, res, next) => {
+  const id = parseInt(req.params.reminderId, 10);
   if (!Number.isInteger(id) || id <= 0) {
     return res.status(400).json({
       error: '"id" must be a positive integer'
@@ -54,7 +52,7 @@ app.get('/api/reminder/:petId', (req, res, next) => {
   const sql = `
   select *
     from "reminder"
-    where "petId" = $1
+    where "reminderId" = $1
     `;
 
   const params = [id];
@@ -76,26 +74,51 @@ app.get('/api/reminder/:petId', (req, res, next) => {
     });
 });
 
+let nextId = 4;
 // User can post new reminder
 app.post('/api/reminder', (req, res, next) => {
-  const result = req.body;
-  reminder.push(result);
-  res.status(201);
-  res.json(result);
+  const reminderId = nextId;
+  const name = req.body.name;
+  const type = req.body.type;
+  const description = req.body.description;
+  const date = req.body.date;
+  const time = req.body.time;
+  const repeat = req.body.repeat;
+
+  const sql = `
+    insert into "reminder" ("reminderId","name","type","description","date","time","repeat")
+    values ($1, $2, $3, $4, $5, $6, $7)
+    returning *
+    `;
+
+  const params = [reminderId, name, type, description, date, time, repeat];
+
+  db.query(sql, params)
+    .then(result => {
+      const reminderInfo = result.rows[0];
+      res.status(201).json(reminderInfo);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error occurred'
+      });
+    });
+  nextId++;
 });
 
 // User can delete a reminder
-app.delete('/api/reminder/:petId', (req, res, next) => {
-  const id = parseInt(req.params.petId, 10);
+app.delete('/api/reminder/:reminderId', (req, res, next) => {
+  const id = parseInt(req.params.reminderId, 10);
   if (!Number.isInteger(id) || id <= 0) {
     return res.status(400).json({
-      error: '"petId" must be a positive integer'
+      error: '"reminderId" must be a positive integer'
     });
   }
 
   const sql = `
   delete from "reminder"
-  where "petId" = $1
+  where "reminderId" = $1
   returning *;
   `;
 
@@ -105,7 +128,7 @@ app.delete('/api/reminder/:petId', (req, res, next) => {
     .then(result => {
       const reminders = result.rows[0];
       if (!reminders) {
-        next(new ClientError(`Cannot find reminder with petId of ${id}`, 404));
+        next(new ClientError(`Cannot find reminder with reminderId of ${id}`, 404));
       } else {
         res.status(204).json(reminders);
       }
@@ -119,13 +142,14 @@ app.delete('/api/reminder/:petId', (req, res, next) => {
 });
 
 // User can update a reminder
-app.put('/api/reminder/:petId', (req, res, next) => {
-  const petId = Number(req.params.petId);
-  if (!Number.isInteger(petId) || petId <= 0) {
+app.put('/api/reminder/:reminderId', (req, res, next) => {
+  const id = Number(req.params.reminderId);
+  if (!Number.isInteger(id) || id <= 0) {
     return res.status(400).json({
       error: '"petId" must be a positive integer'
     });
   }
+  const reminderId = req.body.reminderId;
   const name = req.body.name;
   const type = req.body.type;
   const description = req.body.description;
@@ -136,11 +160,11 @@ app.put('/api/reminder/:petId', (req, res, next) => {
   const sql = `
   update "reminder"
   set "name" = $2, "type" = $3, "description" = $4, "date" = $5, "time" = $6, "repeat" = $7
-  where "petId" = $1
+  where "reminderId" = $1
   returning *
   `;
 
-  const params = [petId, name, type, description, date, time, repeat];
+  const params = [reminderId, name, type, description, date, time, repeat];
   db.query(sql, params)
     .then(result => {
       const reminder = result.rows[0];

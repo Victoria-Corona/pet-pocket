@@ -1,4 +1,4 @@
-petId,name,type,description,date,time,repeat
-1,"Buddy","Medication","1 tablet of Prednisone for allergies",08/07/2020,18:00:00,"Daily."
-2,"CK","Hygiene","Change litter box",08/12/2020,12:00:00,"Tuesdays."
-3,"Twix","Feeding","Feed three scoops of kibble & one scoop of chicken",08/15/2020,08:00:00,"Daily."
+reminderId, name,type,description,date,time,repeat
+1, "Buddy","Medication","1 tablet of Prednisone for allergies",08/07/2020,18:00:00,"Daily"
+2, "CK","Hygiene","Change litter box",08/12/2020,12:00:00,"Tuesdays"
+3, "Twix","Feeding","Feed three scoops of kibble & one scoop of chicken",08/15/2020,08:00:00,"Daily"
