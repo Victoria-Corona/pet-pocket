@@ -367,7 +367,9 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 -- Name: pets_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
+
 SELECT pg_catalog.setval('public."pets_petId_seq"', 61, true);
+
 
 
 --
