@@ -172,7 +172,7 @@ CREATE TABLE public.todo (
     "todoId" integer NOT NULL,
     "userId" integer NOT NULL,
     todo text NOT NULL,
-    "isCompleted" boolean NOT NULL
+    "isCompleted" boolean
 );
 
 
@@ -273,13 +273,8 @@ COPY public."petProfile" ("petId", "userId", name, "imgUrl", breed, "dateOfBirth
 --
 
 COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", description, "bloodType", allergies, medication, vaccines, "specializedDiet") FROM stdin;
-37	1	Belvedere	/images/petImage/belvedere.jpg	corgi	2020-02-04	a pup	A	Fleas	Aspirin	Bordatella	soft food
-38	1	Leilani	/images/petImage/Leilani.jpg	dobermann	2020-02-04	a tiny pupper	A	fleas	\N	Bordatella	hard food
-45	1	Draco	/images/petImage/draco.jpg	Bearded Dragon	2018-06-12	spikey	\N	grass	\N	\N	\N
-48	1	Hercules	/images/petImage/hercules.jpg	Rooster	2019-10-26	loud	\N	\N	\N	\N	\N
-50	1	King	/images/petImage/king.jpg	Pug	2019-02-03	love him so	\N	\N	\N	\N	\N
-51	1	Prince	/images/petImage/beagle.jpg	beagle	2019-05-26	semi blind	A+	\N	\N	\N	\N
-52	1	Jovian	/images/petImage/jovian.jpg	Lemur	1994-04-05	stared in a show	\N	\N	\N	\N	\N
+59	1	Max	/images/petImage/shrek.jpg	cat	2020-07-29	very friendly	\N	\N	\N	\N	\N
+60	1	blue	/images/petImage/blue.jpg	bird	2020-08-04	snores	\N	\N	\N	\N	\N
 \.
 
 
@@ -299,9 +294,8 @@ COPY public.reminder ("petId", name, type, description, date, "time", repeat) FR
 --
 
 COPY public.todo ("todoId", "userId", todo, "isCompleted") FROM stdin;
-1	1	Give medicine	f
-2	1	Chane litter box	f
-3	1	Fresh water for Daisy	t
+5	1	fill water	\N
+6	1	change pee pad	\N
 \.
 
 
@@ -334,6 +328,7 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 30	45	2020-03-04	hang nail	
 31	45	2020-02-05	another hang nail	
 32	50	2020-02-03	routine	
+33	37	2019-11-22	checkup	
 \.
 
 
@@ -341,7 +336,7 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 -- Name: pets_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."pets_petId_seq"', 52, true);
+SELECT pg_catalog.setval('public."pets_petId_seq"', 60, true);
 
 
 --
@@ -355,14 +350,14 @@ SELECT pg_catalog.setval('public."reminder_petId_seq"', 1, false);
 -- Name: todo_todoId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."todo_todoId_seq"', 1, false);
+SELECT pg_catalog.setval('public."todo_todoId_seq"', 6, true);
 
 
 --
 -- Name: vetVisits_vetVisitId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 32, true);
+SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 33, true);
 
 
 --
