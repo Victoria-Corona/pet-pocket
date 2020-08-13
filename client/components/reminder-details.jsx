@@ -64,7 +64,6 @@ export default class ReminderDetails extends React.Component {
 
           <div className="reminderControls">
             <button type="button" className="reminderButtonDelete" id={this.state.details.reminderId} onClick={() => this.handleDelete()}>DELETE</button>
-            <button type="button" className="reminderButtonUpdate" id={this.state.details.reminderId} onClick={() => this.props.setView('reminderFormEdit', {})}>UPDATE</button>
           </div>
         </>
       );

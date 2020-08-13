@@ -9,7 +9,6 @@ import ProfileDetails from './profile-details';
 import ReminderList from './reminder-list';
 import ReminderForm from './reminder-form';
 import ReminderDetails from './reminder-details';
-import ReminderFormEdit from './reminderForm-edit';
 import TodoList from './todo-list';
 import Footer from './footer';
 
@@ -96,18 +95,11 @@ export default class App extends React.Component {
         </>;
     } else if (view === 'reminderForm') {
       renderPage =
-        <>
-          <Header setView={this.setView} />
-          <ReminderForm setView={this.setView} />
-          <Footer setView={this.setView} />
-        </>;
-    } else if (view === 'reminderFormEdit') {
-      renderPage =
-        <>
-          <Header setView={this.setView} />
-          <ReminderFormEdit setView={this.setView} params={this.state.view.params} />
-          <Footer setView={this.setView} />
-        </>;
+      <>
+        <Header setView={this.setView}/>
+        <ReminderForm setView={this.setView}/>
+        <Footer setView={this.setView} />
+      </>;
     } else if (view === 'reminderDetails') {
       renderPage =
         <>

@@ -32,7 +32,10 @@ export default class TodoList extends React.Component {
       },
       body: JSON.stringify(todo)
     }).then(res => res.json())
-      .then(todo => this.setState({ todos: this.state.todos.concat(todo) }))
+      .then(todo => this.setState({
+        todos: this.state.todos.concat(todo),
+        todo: ''
+      }))
       .catch(error => console.error(error.message));
   }
 
@@ -46,12 +49,10 @@ export default class TodoList extends React.Component {
     fetch(`/api/todo/${todoId}`, {
       method: 'DELETE'
     })
-      .then(res => res.json())
       .then(todo => {
-        const copyTodos = this.state.todos.slice();
-        const newTodos = [];
-        const index = copyTodos.findIndex(todos => this.todos.todoId === todo.todoId);
-        newTodos.push(index);
+        const newTodos = this.state.todos.slice();
+        const index = newTodos.findIndex(todos => this.state.todos.todoId === todo.todoId);
+        newTodos.splice(index, 1);
         this.setState({ todos: newTodos });
       })
       .catch(error => console.error(error.message));
@@ -61,9 +62,8 @@ export default class TodoList extends React.Component {
     const todos = this.state.todos.map(todo =>
       <div className="todoListItem d-flex  mt-3 justify-content-between" key={todo.todoId}>
         <span className="p-2 ">{todo.todo}</span>
-        <div>
-          <button type="button" className="todoDeleteButton" onClick={() => this.handleDelete(todo.todoId)}>Delete</button>
-        </div>
+        <button type="button" className="todoDeleteButton d-flex " onClick={() => this.handleDelete(todo.todoId)}>DELETE</button>
+
       </div>
     );
     return (

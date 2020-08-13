@@ -121,7 +121,7 @@ export default class ProfileForm extends React.Component {
               <input type="text" name="vaccines" className="form-control" placeholder="Enter Vaccines" onChange={this.handleChange} />
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Specialized Diet</label>
               <input type="text" name="specializedDiet" className="form-control" placeholder="Optional" onChange={this.handleChange} />
-              <div className="d-flex justify-content-center"><button type="submit" className="nextButton mt-3 text-uppercase" >submit</button></div>
+              <div className="d-flex justify-content-center"><button type="submit" className="nextButton mt-3 text-uppercase" >Submit</button></div>
             </div>
           </form>
         </div>
