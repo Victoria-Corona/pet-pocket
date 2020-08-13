@@ -196,7 +196,7 @@ CREATE TABLE public.todo (
     "todoId" integer NOT NULL,
     "userId" integer NOT NULL,
     todo text NOT NULL,
-    "isCompleted" boolean NOT NULL
+    "isCompleted" boolean
 );
 
 
@@ -331,6 +331,10 @@ COPY public."petProfile" ("petId", "userId", name, "imgUrl", breed, "dateOfBirth
 --
 
 COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", description, "bloodType", allergies, medication, vaccines, "specializedDiet") FROM stdin;
+
+59	1	Max	/images/petImage/shrek.jpg	cat	2020-07-29	very friendly	\N	\N	\N	\N	\N
+60	1	blue	/images/petImage/blue.jpg	bird	2020-08-04	snores	\N	\N	\N	\N	\N
+
 2	1	CK	/images/ck.jpg	Bombay	2018-11-20	picky eater, loves to cuddle, eats shoelaces	B-	N/A	N/A	FVRCP FELV FIP Rabies	Outdoor Forumla
 3	1	Twix	/images/twix.png	Maltese Poodle Mix	2015-09-01	loves friends and people	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	\N
 1	1	Buddy	/images/buddy.jpg	Pug	2016-01-04	very friendly, enjoys head pats, snores	A+	Bees	Nexxguard	Bordatella Distemper Hepatitis Rabies	Gluten Free
@@ -341,6 +345,7 @@ COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", descr
 52	1	Jovian	/images/petImage/jovian.jpg	Lemur	1994-04-05	stared in a show	\N	\N	\N	\N	\N
 38	1	Leilani	/images/petImage/Leilani.jpg	dobermann	2020-02-04	a tiny pupper	A	fleas	\N	Bordatella	hard food
 53	1	logo	/images/petImage/petPocket.jpg	logo	2020-08-12	doesnt do much	\N	\N	\N	\N	\N
+
 \.
 
 
@@ -360,9 +365,8 @@ COPY public.reminder ("reminderId", name, type, description, date, "time", repea
 --
 
 COPY public.todo ("todoId", "userId", todo, "isCompleted") FROM stdin;
-1	1	Give medicine	f
-2	1	Chane litter box	f
-3	1	Fresh water for Daisy	t
+5	1	fill water	\N
+6	1	change pee pad	\N
 \.
 
 
@@ -395,7 +399,7 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 30	45	2020-03-04	hang nail	
 31	45	2020-02-05	another hang nail	
 32	50	2020-02-03	routine	
-33	51	2020-03-05	routine	
+33	37	2019-11-22	checkup	
 34	37	2020-05-05	rojuiafd	
 35	45	2020-01-01	asjdkf	
 36	45	2020-06-09	asdf	
@@ -413,6 +417,7 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 48	45	2020-02-20	asdf	
 49	45	2019-10-13	adsf	
 50	53	2019-02-02	adsf	
+
 \.
 
 
@@ -421,7 +426,7 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 --
 
 
-SELECT pg_catalog.setval('public."pets_petId_seq"', 54, true);
+SELECT pg_catalog.setval('public."pets_petId_seq"', 60, true);
 
 
 
@@ -443,7 +448,7 @@ SELECT pg_catalog.setval('public."reminder_reminderId_seq"', 1, false);
 -- Name: todo_todoId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."todo_todoId_seq"', 1, false);
+SELECT pg_catalog.setval('public."todo_todoId_seq"', 6, true);
 
 
 --
@@ -457,7 +462,8 @@ SELECT pg_catalog.setval('public."todo_userId_seq"', 1, false);
 -- Name: vetVisits_vetVisitId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 50, true);
+
+SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 33, true);
 
 
 
