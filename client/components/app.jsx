@@ -3,15 +3,14 @@ import Homepage from './homepage';
 import MainMenu from './mainMenu';
 import Header from './header';
 import Profile from './profile';
-import Reminder from './reminder';
 import ProfileList from './profile-list';
 import ProfileForm from './profileForm';
-import ProfileDetails from './reminder-details';
+import ProfileDetails from './profile-details';
+import Reminder from './reminder';
 import ReminderList from './reminder-list';
 import ReminderForm from './reminder-form';
 import TodoList from './todo-list';
 import Footer from './footer';
-import ProfileDetails from './profile-details';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -99,13 +98,6 @@ export default class App extends React.Component {
       <>
         <Header setView={this.setView}/>
         <ReminderForm setView={this.setView} />
-        <Footer setView={this.setView} />
-      </>;
-    } else if (view === 'reminderDetails') {
-      renderPage =
-      <>
-        <Header setView={this.setView}/>
-        <Reminder params={this.state.view.params} />
         <Footer setView={this.setView} />
       </>;
     } else if (view === 'reminderDetails') {
