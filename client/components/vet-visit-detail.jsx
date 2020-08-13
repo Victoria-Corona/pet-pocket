@@ -46,6 +46,9 @@ class VetVisitDetail extends React.Component {
             <p className="font-weight-bold text">Notes:</p>
             <p className="text">{this.state.visit.notes}</p>
           </div>
+          <div className="d-flex justify-content-center">
+            <button className="nextButton mt-3 text-uppercase" onClick={() => this.props.setView('list', { })}>back</button>
+          </div>
         </>
       );
     }

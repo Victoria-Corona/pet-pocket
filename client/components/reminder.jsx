@@ -15,7 +15,7 @@ class Reminder extends React.Component {
   }
 
   getReminder() {
-    fetch(`/api/reminder/${this.props.params.petId}`)
+    fetch(`/api/reminder/${this.props.params.reminderId}`)
       .then(res => res.json())
       .then(data => this.setState({ reminderDetailsView: data }))
       .catch(err => console.error(err.message));

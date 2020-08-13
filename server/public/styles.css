@@ -297,7 +297,8 @@ border: solid 1px #F25757;
 .profileButtonDelete:focus,
 .profileButtonUpdate:focus,
 .reminderButtonDelete:focus,
-.reminderButtonUpdate:focus {
+.reminderButtonUpdate:focus,
+.nextButton:focus{
   outline: none;
 }
 

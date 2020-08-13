@@ -16,28 +16,39 @@ export default class ReminderForm extends React.Component {
   }
 
   handleChange(event) {
-    const name = event.target.name;
-    const value = event.target.value;
+    const nameTarget = event.target.name;
+    const valueTarget = event.target.value;
     this.setState({
-      [name]: value
+      [nameTarget]: valueTarget
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const newReminder = {};
+
+    const data = {
+      name: this.state.name,
+      type: this.state.type,
+      description: this.state.description,
+      date: this.state.date,
+      time: this.state.time,
+      repeat: this.state.repeat
+    };
     fetch('/api/reminder', {
       method: 'POST',
-      body: newReminder
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
     }).then(res => res.json())
-      .then(newReminder => this.setState({ reminder: this.props.reminder.concat(newReminder) }))
+      .then(data => this.setState({ reminder: this.props.reminder.concat(data) }))
       .catch(error => console.error(error.message));
   }
 
   render() {
     return (
       <div>
-        <form action="api/reminder" method="post" encType="multipart/form-data">
+        <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Name</label>
             <input name="name" type="text" className="form-control" placeholder="Enter Name" onChange={this.handleChange} />
@@ -50,8 +61,8 @@ export default class ReminderForm extends React.Component {
             <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Time</label>
             <input name="time" type="time" className="form-control" placeholder="00:00:00" onChange={this.handleChange} />
             <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Repeat Reminder?</label>
-            <input name="name" type="text" className="form-control" placeholder="Enter Days to Repeat" onChange={this.handleChange} />
-            <div className="d-flex justify-content-center"><button type="submit" className="nextButton mt-3" onSubmit={this.handleSubmit}>SUBMIT</button></div>
+            <input name="repeat" type="text" className="form-control" placeholder="Enter Days to Repeat" onChange={this.handleChange} />
+            <div className="d-flex justify-content-center"><button type="submit" className="nextButton mt-3 text-uppercase submitButton">Submit</button></div>
           </div>
         </form>
       </div>
