@@ -50,7 +50,7 @@ class VetVisitsList extends React.Component {
 
   renderVisitForm() {
     return (
-      <VetVisitForm visits={this.state.visits} petId={this.props.params.petId}/>
+      <VetVisitForm visits={this.state.visits} petId={this.props.params.petId} formView={this.formView}/>
     );
   }
 

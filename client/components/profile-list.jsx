@@ -64,7 +64,7 @@ export default class ProfileList extends React.Component {
       />);
     return (
       <>
-        <div className="p-2 mt-4">
+        <div className="p-2 mt-4 mb-6">
           <div className="d-flex justify-content-center">
             <h5 style={{ fontWeight: 'bold' }} onClick={this.checkProfileView}><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>ADD PROFILE</h5>
           </div>
