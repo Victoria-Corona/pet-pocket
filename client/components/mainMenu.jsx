@@ -13,11 +13,11 @@ export default class MainMenu extends React.Component {
     return (
       <div>
 
-        <div className="p-4 header-background d-flex justify-content-between align-items-center">
-          <i className="fas fa-bars fa-2x"></i>
+        {/* <div className="p-4 header-background d-flex justify-content-between align-items-center">
+          <i className="fas fa-undo-alt fa-2x hidden"></i>
           <span className="title">PET POCKET</span>
           <i className="fas fa-undo-alt fa-2x" onClick={() => setView('homepage', {})}></i>
-        </div>
+        </div> */}
 
         <div>
           <div className="petProfiles" onClick={() => setView('profileList', {})}>

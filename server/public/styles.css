@@ -1,6 +1,21 @@
 body{
   margin: 0;
   height: 100vh;
+  position: relative;
+}
+
+.footer {
+  bottom: 0;
+}
+
+.header {
+  top: 0;
+  z-index: 1
+}
+
+.header, .footer {
+  position: absolute;
+  width: 100%;
 }
 
 .background-container{
@@ -17,9 +32,9 @@ body{
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  padding-bottom: 80px;
+  padding-top: 80px;
 }
-
-
 
 .filledImage {
   border-radius: 50%;
@@ -28,6 +43,7 @@ body{
   background-color: #c1c1c1;
   outline: none;
   border: transparent;
+  object-fit: cover;
 }
 
 

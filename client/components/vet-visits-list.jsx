@@ -50,7 +50,7 @@ class VetVisitsList extends React.Component {
 
   renderVisitForm() {
     return (
-      <VetVisitForm visits={this.state.visits} petId={this.props.params.petId}/>
+      <VetVisitForm visits={this.state.visits} petId={this.props.params.petId} formView={this.formView}/>
     );
   }
 
@@ -91,7 +91,7 @@ class VetVisitsList extends React.Component {
           </ul>
           <div className="p-2 mt-4">
             <div className="d-flex justify-content-center">
-              <h5 className="font-weight-bold text-uppercase"><i className="fa fa-plus-circle mr-3" aria-hidden="true" onClick={this.formView}></i>Add a Vet Visit</h5>
+              <h5 className="font-weight-bold text-uppercase" onClick={this.formView}><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Add a Vet Visit</h5>
             </div>
           </div>
           <div className="mt-4">

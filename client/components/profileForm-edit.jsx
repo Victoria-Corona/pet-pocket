@@ -146,8 +146,8 @@ export default class ProfileFormEdit extends React.Component {
               <input type="text" name="vaccines" className="form-control" placeholder="Enter Vaccines" value={this.state.vaccines || ''} onChange={this.handleChange} />
               <label htmlFor="" style={{ fontWeight: 'bold' }} className="mt-4 ml-2">Specialized Diet</label>
               <input type="text" name="specializedDiet" className="form-control" placeholder="Optional" value ={this.state.specializedDiet || ''} onChange={this.handleChange} />
-              <div className="d-flex justify-content-center mt-2"><button type="button" className="profileButtonDelete mt-3 text-uppercase" onClick ={() => this.handleDelete()} >DELETE</button><button type="submit" className="profileButtonUpdate mt-3 text-uppercase" >UPDATE</button></div>
-              <div className="profileControls">
+              <div>
+                <div className="d-flex justify-content-center mt-2"><button type="button" className="profileButtonDelete mt-3 text-uppercase" onClick={() => this.handleDelete()} >DELETE</button><button type="submit" className="profileButtonUpdate mt-3 text-uppercase" >UPDATE</button></div>
               </div>
             </div>
           </form>

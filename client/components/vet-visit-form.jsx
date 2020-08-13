@@ -37,7 +37,8 @@ export default class VetVisitForm extends React.Component {
       },
       body: JSON.stringify(data)
     }).then(res => res.json())
-      .then(data => this.setState({ visits: this.props.visits.concat(data) }))
+      .then(() => this.props.formView(false)
+      )
       .catch(error => console.error(error.message));
   }
 
