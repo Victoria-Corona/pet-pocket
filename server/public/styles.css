@@ -69,6 +69,10 @@ button:focus {
   border: solid 1px #6CA6C1;
 }
 
+.nextButton:focus {
+  outline: none;
+}
+
 .todoDeleteButton{
   background-color:#F25757;
   height: 40px;
@@ -122,7 +126,8 @@ button:focus {
   width: 175px;
 }
 
-.petProfiles, .todoList, .addAPet, .alertMe {
+.petProfiles, .todoList,
+.addAPet, .alertMe {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -169,7 +174,8 @@ button:focus {
   object-fit: cover;
 }
 
-.profileListItem, .reminderListItem, .todoListItem {
+.profileListItem, .reminderListItem,
+.todoListItem {
   background-color: white;
   border: solid 2px;
 }
