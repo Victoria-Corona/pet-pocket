@@ -16,7 +16,7 @@ export default class ProfileDetails extends React.Component {
       <div className="mb-2">
         <div>
           <ul className="nav my-3 d-flex justify-content-between text-uppercase text-white text-center">
-            <li className="align-middle navButton active p-2 ml-2">
+            <li className="navButton active p-2 ml-2">
               <span>Profile</span>
             </li>
             <li className="navButton p-2">
@@ -34,13 +34,13 @@ export default class ProfileDetails extends React.Component {
             {this.props.params.name}
           </h5>
           <div className="bg-white mt-3 mb-4 text-uppercase">
-            <div className="p-1"><i className="fas fa-paw ml-2 fa-lg p-3"></i> {this.props.params.breed}</div>
+            <div className="p-1"><i className="fas fa-paw ml-2 fa-lg p-2"></i> {this.props.params.breed}</div>
           </div>
           <div className="bg-white mb-4">
-            <div className="p-1"><i className="fas fa-birthday-cake ml-2 fa-lg p-3"></i> {birthdayDate}</div>
+            <div className="p-1"><i className="fas fa-birthday-cake ml-2 fa-lg p-2"></i> {birthdayDate}</div>
           </div>
           <div className="bg-white mb-4">
-            <div className="p-1"><i className="fas fa-pencil-alt ml-2 fa-lg p-3"></i> {this.props.params.description}</div>
+            <div className="p-1"><i className="fas fa-pencil-alt ml-2 fa-lg p-2"></i> {this.props.params.description}</div>
           </div>
         </div>
       </div>

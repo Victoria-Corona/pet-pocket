@@ -30,40 +30,61 @@ export default class ReminderDetails extends React.Component {
   }
 
   render() {
+
     if (!this.state.details) {
       return null;
     } else {
+
+      const reminderDate = this.state.details.date;
+      const date = new Date(reminderDate);
+      const options = {
+        year: 'numeric',
+        month: 'long',
+        day: '2-digit'
+      };
+      const reminderDateNew = (new Intl.DateTimeFormat('en-US', options).format(date));
+
+      const time = this.state.details.date;
+      const newTime = new Date(time);
+      const timeOpt = {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+      };
+      const timeFormat = newTime.toLocaleString('en-US', timeOpt);
+
       return (
         <>
           <div className="font-weight-bold pl-3 mt-3"> Reminder For {this.state.details.name}</div>
 
           <div className="reminderDetails">
-            <p className="petTitle">Type:</p>
+            <p className="font-weight-bold">Type:</p>
             <p className="reminderListItem">{this.state.details.type}</p>
           </div>
 
           <div className="reminderDetails">
-            <p className="petTitle">Description:</p>
+            <p className="font-weight-bold">Description:</p>
             <p className="reminderListItem">{this.state.details.description}</p>
           </div>
 
           <div className="reminderDetails">
-            <p className="petTitle">Date:</p>
-            <p className="reminderListItem">{this.state.details.date}</p>
+            <p className="font-weight-bold">Date:</p>
+            <p className="reminderListItem">{reminderDateNew}</p>
           </div>
 
           <div className="reminderDetails">
-            <p className="petTitle">Time:</p>
-            <p className="reminderListItem">{this.state.details.time}</p>
+            <p className="font-weight-bold">Time:</p>
+            <p className="reminderListItem">{timeFormat}</p>
           </div>
 
           <div className="reminderDetails">
-            <p className="petTitle">Repeat:</p>
+            <p className="font-weight-bold">Repeat:</p>
             <p className="reminderListItem">{this.state.details.repeat}</p>
           </div>
 
-          <div className="reminderControls">
-            <button type="button" className="reminderButtonDelete" id={this.state.details.reminderId} onClick={() => this.handleDelete()}>DELETE</button>
+          <div className="d-flex justify-content-center">
+            <button className="backButton text-uppercase" onClick={() => this.props.setView('reminderList', {})}>Back</button>
+            <button className="reminderButtonDelete text-uppercase" type="button" id={this.state.details.reminderId} onClick={() => this.handleDelete()}>Delete</button>
           </div>
         </>
       );
