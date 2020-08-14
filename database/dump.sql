@@ -331,6 +331,8 @@ COPY public."petProfile" ("petId", "userId", name, "imgUrl", breed, "dateOfBirth
 --
 
 COPY public.pets ("petId", "userId", name, "imgUrl", breed, "dateOfBirth", description, "bloodType", allergies, medication, vaccines, "specializedDiet") FROM stdin;
+63	1	Belvedere	/images/petImage/belvedere.jpg	corgi	2020-01-06	baby	DEA-1.1	pollen	supplements	distemper, bordetella 	soft food
+62	1	Draco	/images/petImage/draco.jpg	Bearded Dragon	2020-05-20	likes to run	\N	grass	calcium supplements	\N	bugs
 \.
 
 
@@ -350,8 +352,9 @@ COPY public.reminder ("reminderId", name, type, description, date, "time", repea
 --
 
 COPY public.todo ("todoId", "userId", todo, "isCompleted") FROM stdin;
-6	1	change pee pad	\N
-7	1	fill water	\N
+8	1	walk the lizard	\N
+9	1	clean tank	\N
+10	1	give bath to dog	\N
 \.
 
 
@@ -360,6 +363,8 @@ COPY public.todo ("todoId", "userId", todo, "isCompleted") FROM stdin;
 --
 
 COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
+45	62	2020-07-12	Routine	
+46	62	2020-08-01	Hang nail	Clip nails regularly
 \.
 
 
@@ -367,9 +372,7 @@ COPY public."vetVisits" ("vetVisitId", "petId", date, reason, notes) FROM stdin;
 -- Name: pets_petId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-
-SELECT pg_catalog.setval('public."pets_petId_seq"', 61, true);
-
+SELECT pg_catalog.setval('public."pets_petId_seq"', 65, true);
 
 
 --
@@ -390,7 +393,7 @@ SELECT pg_catalog.setval('public."reminder_reminderId_seq"', 1, false);
 -- Name: todo_todoId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."todo_todoId_seq"', 7, true);
+SELECT pg_catalog.setval('public."todo_todoId_seq"', 10, true);
 
 
 --
@@ -404,7 +407,7 @@ SELECT pg_catalog.setval('public."todo_userId_seq"', 1, false);
 -- Name: vetVisits_vetVisitId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 33, true);
+SELECT pg_catalog.setval('public."vetVisits_vetVisitId_seq"', 46, true);
 
 
 --
