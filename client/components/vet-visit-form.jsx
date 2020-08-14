@@ -23,7 +23,7 @@ export default class VetVisitForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.handleCloseModel();
+
     const data = {
       petId: this.props.petId,
       date: this.state.date,
@@ -64,7 +64,9 @@ export default class VetVisitForm extends React.Component {
               <label htmlFor="" className="ml-2 font-weight-bold ">Enter any notes:</label>
               <textarea type="text" name="notes" className="form-control" placeholder="optional" onChange={this.handleInputChange}></textarea>
             </div>
-            <div className="d-flex justify-content-center"><button type="submit" className="nextButton mt-3 text-uppercase submitButton">Submit</button></div>
+            <div className="d-flex justify-content-center">
+              <button type="submit" className="nextButton mt-3 text-uppercase submitButton">Submit</button>
+            </div>
           </div>
         </form>
       </div>

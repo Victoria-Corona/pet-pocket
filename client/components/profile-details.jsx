@@ -34,13 +34,13 @@ export default class ProfileDetails extends React.Component {
             {this.props.params.name}
           </h5>
           <div className="bg-white mt-3 mb-4 text-uppercase">
-            <div className="p-1"><i className="fas fa-paw ml-2 fa-lg p-3"></i> {this.props.params.breed}</div>
+            <div className="p-1"><i className="fas fa-paw ml-2 fa-lg p-2"></i> {this.props.params.breed}</div>
           </div>
           <div className="bg-white mb-4">
-            <div className="p-1"><i className="fas fa-birthday-cake ml-2 fa-lg p-3"></i> {birthdayDate}</div>
+            <div className="p-1"><i className="fas fa-birthday-cake ml-2 fa-lg p-2"></i> {birthdayDate}</div>
           </div>
           <div className="bg-white mb-4">
-            <div className="p-1"><i className="fas fa-pencil-alt ml-2 fa-lg p-3"></i> {this.props.params.description}</div>
+            <div className="p-1"><i className="fas fa-pencil-alt ml-2 fa-lg p-2"></i> {this.props.params.description}</div>
           </div>
         </div>
       </div>

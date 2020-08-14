@@ -68,6 +68,7 @@ button:focus {
   margin: 5px;
   border: solid 1px #6CA6C1;
 }
+
 .todoDeleteButton{
   background-color:#F25757;
   height: 40px;
@@ -155,7 +156,9 @@ button:focus {
   position: relative;
 }
 
-.profileListItem, .medicalListItem, .reminderListItem, .todoListItem {
+.profileListItem, .medicalListItem,
+.reminderListItem, .todoListItem,
+.vetVistListItem {
   width:100%;
 }
 
@@ -172,9 +175,7 @@ button:focus {
 }
 
 .vetVistListItem {
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-  width: 100%;
+  border: 2px solid black;
 }
 
 .reminderListItem{
@@ -183,7 +184,6 @@ button:focus {
 }
 
 .petTitle {
-  font-weight: bold;
   width: 98%;
 }
 
@@ -242,7 +242,8 @@ button:focus {
   margin-left: 2rem;
 }
 
-.profileButtonDelete, .profileButtonUpdate , .reminderButtonDelete{
+.profileButtonDelete, .profileButtonUpdate,
+.reminderButtonDelete, .backButton {
 width: 125px;
 height: 40px;
 background-color: #F25757;
@@ -254,13 +255,14 @@ cursor: pointer;
 border: solid 1px #F25757;
 }
 
+.backButton {
+background-color: #6CA6C1;
+border: solid 1px #6CA6C1;
+}
+
 .profileButtonUpdate {
   background: #6CA6C1;
   border: solid 1px #6CA6C1;
-}
-
-.reminderButtonDelete{
-  margin-left: 5rem;
 }
 
 .hidden {

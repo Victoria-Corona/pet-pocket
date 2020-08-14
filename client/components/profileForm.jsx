@@ -1,7 +1,5 @@
 import React from 'react';
 
-// import MedicalForm from './medical-form';
-
 export default class ProfileForm extends React.Component {
   constructor(props) {
     super(props);

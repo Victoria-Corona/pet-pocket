@@ -58,32 +58,33 @@ export default class ReminderDetails extends React.Component {
           <div className="font-weight-bold pl-3 mt-3"> Reminder For {this.state.details.name}</div>
 
           <div className="reminderDetails">
-            <p className="petTitle">Type:</p>
+            <p className="font-weight-bold">Type:</p>
             <p className="reminderListItem">{this.state.details.type}</p>
           </div>
 
           <div className="reminderDetails">
-            <p className="petTitle">Description:</p>
+            <p className="font-weight-bold">Description:</p>
             <p className="reminderListItem">{this.state.details.description}</p>
           </div>
 
           <div className="reminderDetails">
-            <p className="petTitle">Date:</p>
+            <p className="font-weight-bold">Date:</p>
             <p className="reminderListItem">{reminderDateNew}</p>
           </div>
 
           <div className="reminderDetails">
-            <p className="petTitle">Time:</p>
+            <p className="font-weight-bold">Time:</p>
             <p className="reminderListItem">{timeFormat}</p>
           </div>
 
           <div className="reminderDetails">
-            <p className="petTitle">Repeat:</p>
+            <p className="font-weight-bold">Repeat:</p>
             <p className="reminderListItem">{this.state.details.repeat}</p>
           </div>
 
-          <div className="reminderControls">
-            <button type="button" className="reminderButtonDelete" id={this.state.details.reminderId} onClick={() => this.handleDelete()}>DELETE</button>
+          <div className="d-flex justify-content-center">
+            <button className="backButton text-uppercase" onClick={() => this.props.setView('reminderList', {})}>Back</button>
+            <button className="reminderButtonDelete text-uppercase" type="button" id={this.state.details.reminderId} onClick={() => this.handleDelete()}>Delete</button>
           </div>
         </>
       );

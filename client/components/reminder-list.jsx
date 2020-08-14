@@ -40,8 +40,8 @@ export default class Reminder extends React.Component {
             <h5 style={{ fontWeight: 'bold' }}><i className="fa fa-plus-circle mr-3" aria-hidden="true" onClick={() => this.props.setView('reminderForm', {})}></i>ADD REMINDER</h5>
           </div>
           <div className="mt-4">
-            <h6 style={{ fontWeight: 'bold' }}>REMINDERS</h6>
-            <div className="d-flex justify-content-center flex-wrap">{reminderList}</div>
+            <h6 className="font-weight-bold">REMINDERS</h6>
+            <div>{reminderList}</div>
           </div>
         </div>
       </>
