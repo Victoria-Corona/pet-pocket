@@ -30,9 +30,29 @@ export default class ReminderDetails extends React.Component {
   }
 
   render() {
+
     if (!this.state.details) {
       return null;
     } else {
+
+      const reminderDate = this.state.details.date;
+      const date = new Date(reminderDate);
+      const options = {
+        year: 'numeric',
+        month: 'long',
+        day: '2-digit'
+      };
+      const reminderDateNew = (new Intl.DateTimeFormat('en-US', options).format(date));
+
+      const time = this.state.details.date;
+      const newTime = new Date(time);
+      const timeOpt = {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+      };
+      const timeFormat = newTime.toLocaleString('en-US', timeOpt);
+
       return (
         <>
           <div className="font-weight-bold pl-3 mt-3"> Reminder For {this.state.details.name}</div>
@@ -49,12 +69,12 @@ export default class ReminderDetails extends React.Component {
 
           <div className="reminderDetails">
             <p className="petTitle">Date:</p>
-            <p className="reminderListItem">{this.state.details.date}</p>
+            <p className="reminderListItem">{reminderDateNew}</p>
           </div>
 
           <div className="reminderDetails">
             <p className="petTitle">Time:</p>
-            <p className="reminderListItem">{this.state.details.time}</p>
+            <p className="reminderListItem">{timeFormat}</p>
           </div>
 
           <div className="reminderDetails">

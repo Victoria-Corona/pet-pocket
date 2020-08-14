@@ -23,7 +23,7 @@ export default class VetVisitForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
+    this.handleCloseModel();
     const data = {
       petId: this.props.petId,
       date: this.state.date,
