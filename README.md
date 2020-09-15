@@ -1,5 +1,5 @@
 # pet-pocket
-A web application for pet owners who want convenient access to their pet's health information
+A web application for pet owners who want convenient access to their pet's health information  
 _* Current version of Pet Pocket is for mobile/iPhone 6/7/8_
 
 ## Live Link
