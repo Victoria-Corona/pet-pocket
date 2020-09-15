@@ -27,13 +27,13 @@ _* Current version of Pet Pocket is for mobile/iPhone 6/7/8_
 + User can view the details of a single reminder
 
 ## Preview
-![PREVIEW ONE](server/public/images/preview_1.png)
-![PREVIEW TWO](server/public/images/preview_2.png)
-![PREVIEW THREE](server/public/images/preview_3.png)
-![PREVIEW FOUR](server/public/images/preview_4.png)
-![PREVIEW FIVE](server/public/images/preview_5.png)
-![PREVIEW SIX](server/public/images/preview_6.png)
-![PREVIEW SEVEN](server/public/images/preview_7.png)
+![PREVIEW ONE](server/public/images/preview_1.png)  
+![PREVIEW TWO](server/public/images/preview_2.png)  
+![PREVIEW THREE](server/public/images/preview_3.png)  
+![PREVIEW FOUR](server/public/images/preview_4.png)  
+![PREVIEW FIVE](server/public/images/preview_5.png)  
+![PREVIEW SIX](server/public/images/preview_6.png)  
+![PREVIEW SEVEN](server/public/images/preview_7.png)  
 
 ## Getting Started
 1. Clone the repository
